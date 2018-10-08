@@ -10,4 +10,5 @@ public class MBankingWsApplication {
 		SpringApplication.run(MBankingWsApplication.class, args);
 		//dlsmfmlsjdgmljsdglmjsd
 	}
+	
 }
