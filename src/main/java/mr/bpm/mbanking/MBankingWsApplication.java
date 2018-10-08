@@ -10,7 +10,10 @@ public class MBankingWsApplication {
 		SpringApplication.run(MBankingWsApplication.class, args);
 		///fgdfgfddsqdsqsd
 		//bnfghfghfgh
+<<<<<<< HEAD
 		//dsfsd
 		//sdfsdf
+=======
+>>>>>>> branch 'master' of //30.30.1.60/Public/Dir_Digital/logiciels/BMP/bpm.git
 	}
 }
