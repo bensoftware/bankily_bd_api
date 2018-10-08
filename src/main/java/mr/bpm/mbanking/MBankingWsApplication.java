@@ -10,5 +10,6 @@ public class MBankingWsApplication {
 		SpringApplication.run(MBankingWsApplication.class, args);
 		//fqfqsf
 		///bismillah
+		///push 1
 }
 }
