@@ -8,5 +8,6 @@ public class MBankingWsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MBankingWsApplication.class, args);
+		///fgdfgfd
 	}
 }
