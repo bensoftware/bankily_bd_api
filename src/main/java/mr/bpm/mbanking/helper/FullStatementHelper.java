@@ -8,7 +8,6 @@ import java.util.Map;
 
 import mr.bpm.mbanking.dot.FullStatementCursor;
 import mr.bpm.mbanking.dot.FullStatementOut;
-import oracle.sql.TIMESTAMP;
 
 public class FullStatementHelper {
 

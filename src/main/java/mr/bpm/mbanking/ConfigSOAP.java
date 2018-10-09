@@ -41,7 +41,7 @@ public class ConfigSOAP {
 	@Autowired
 	PApiCreateAccountWS apiCreateAccountWS;
 	
-	@Autowired
+/*	@Autowired
 	PApiCreateCifWS apiCreateCifWS;
 	
 	@Autowired
@@ -52,7 +52,7 @@ public class ConfigSOAP {
 	
 	@Autowired
 	PApiTransferEx3WS apiTransferEx3WS;
-	
+	*/
 	
 	@Bean
 	public Endpoint getServerFullstatement() {
@@ -78,7 +78,7 @@ public class ConfigSOAP {
 	
 	}
 	
-	@Bean
+/*	@Bean
 	public Endpoint getServerPapicreatecif() {
 		
 	 Endpoint endpoint=	Endpoint.publish("http://"+url+":"+port+"/ws/mbanking/papicreatecif", apiCreateCifWS);
@@ -109,7 +109,7 @@ public class ConfigSOAP {
 	 return endpoint;
 	
 	}
-	
+	*/
 	
 	
 	

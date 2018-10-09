@@ -5,20 +5,25 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mr.bpm.mbanking.dao.TransferEx3Dao;
 import mr.bpm.mbanking.dot.PApiTransferEx3In;
 import mr.bpm.mbanking.dot.PApiTransferEx3Out;
 
 
-@Component
+//@Component
 @WebService(name = "PApiTransferEx3WS")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class PApiTransferEx3WS {
 
+	@Autowired
+	TransferEx3Dao ex3Dao ;
+	
 	@WebMethod
 	public PApiTransferEx3Out pApiTransferEx3(@WebParam(name="papitransferex3") PApiTransferEx3In in) {
 
-		return null;
+		return ex3Dao.getTransferEx3(in);
 	}
 } 

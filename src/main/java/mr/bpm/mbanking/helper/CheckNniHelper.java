@@ -5,7 +5,6 @@ package mr.bpm.mbanking.helper;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import mr.bpm.mbanking.dot.FullStatementOut;
 import mr.bpm.mbanking.dot.PApiCheckNniOut;
 
 public class CheckNniHelper {

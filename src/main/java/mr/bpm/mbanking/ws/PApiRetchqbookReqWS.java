@@ -5,20 +5,25 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mr.bpm.mbanking.dao.RetCheckBookReqDao;
 import mr.bpm.mbanking.dot.PApiRetchqbookReqIn;
 import mr.bpm.mbanking.dot.PApiRetchqbookReqOut;
 
 
-@Component
+//@Component
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class PApiRetchqbookReqWS {
 
+	@Autowired
+	RetCheckBookReqDao bookReqDao ;
+	
 	@WebMethod
 	public PApiRetchqbookReqOut pApiRetchqbookReq(@WebParam(name="papiretchqbookreq") PApiRetchqbookReqIn in) {
 
-		return null;
+		return bookReqDao.getRetCheckBookReq(in);
 	}
 } 
