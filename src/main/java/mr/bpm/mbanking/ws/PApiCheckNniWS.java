@@ -11,7 +11,7 @@ import mr.bpm.mbanking.dot.PApiCheckNniIn;
 import mr.bpm.mbanking.dot.PApiCheckNniOut;
 
 
-//@Component
+@Component
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class PApiCheckNniWS {

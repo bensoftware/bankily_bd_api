@@ -23,7 +23,7 @@ public class FullStatementWS extends SpringBeanAutowiringSupport{
 	
 	@WebMethod
 	public FullStatementOut pApiFullStatement(@WebParam(name="fullstatement") FullStatementIn in) {
-//
+
 		return fullStatementDao.getFullStatement(in);
 	}
 

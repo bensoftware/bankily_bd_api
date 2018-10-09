@@ -11,7 +11,7 @@ import mr.bpm.mbanking.dot.PApiRetchqbookReqIn;
 import mr.bpm.mbanking.dot.PApiRetchqbookReqOut;
 
 
-//@Component
+@Component
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class PApiRetchqbookReqWS {
