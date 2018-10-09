@@ -5,5 +5,5 @@ import mr.bpm.mbanking.dot.PApiRetchqbookReqOut;
 
 public interface RetCheckBookReqDao {
 
-	PApiRetchqbookReqIn getRetCheckBookReq(PApiRetchqbookReqOut in);
+	PApiRetchqbookReqOut getRetCheckBookReq(PApiRetchqbookReqIn in);
 }
