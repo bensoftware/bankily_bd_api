@@ -22,7 +22,7 @@ import mr.bpm.mbanking.dot.PApiRetchqbookReqOut;
 import mr.bpm.mbanking.dot.PApiTransferEx3In;
 import mr.bpm.mbanking.dot.PApiTransferEx3Out;
 
-@Component
+//@Component
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class AllMbankingWS {
