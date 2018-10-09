@@ -1,0 +1,57 @@
+package mr.bpm.mbanking.dot;
+
+import java.math.BigDecimal;
+
+public class PApiCreateAccountIn {
+	public BigDecimal AL_CHANNEL_ID;
+	public String AS_USER_ID;
+	public String AS_MACHINE_NAME;
+	public BigDecimal AL_API_CODE;
+	public String ADT_DATE; 
+	public BigDecimal AL_COMP_CODE;
+	public BigDecimal AL_BRANCH_CODE;
+	public String AS_CURRENCY_CODE; 
+	public BigDecimal AL_GL_CODE;
+	public BigDecimal AL_CIF_SUB_NO;
+	public String AS_TELLER_ID;
+	public String AS_RENEW;
+	public BigDecimal AL_TRF_BR;
+	public BigDecimal AL_TRF_CY;
+	public BigDecimal AL_TRF_GL;
+	public BigDecimal AL_TRF_CIF;
+	public BigDecimal AL_TRF_SL;
+	public String AS_TRF_ADD_REF;
+	public String AS_PFT_POST_TO; 
+	public BigDecimal AL_PROFIT_BR;
+	public BigDecimal AL_PROFIT_CY;
+	public BigDecimal AL_PROFIT_GL;
+	public BigDecimal AL_PROFIT_CIF;
+	public BigDecimal AL_PROFIT_SL;
+	public String AS_PROFIT_ADD_REF;
+	public BigDecimal AL_MATURITY_GL;       
+	public String AS_EXT_TRF;  
+	public BigDecimal AL_OFF_BR;  
+	public BigDecimal AL_OFF_CY;  
+	public BigDecimal AL_OFF_GL;
+	public BigDecimal AL_OFF_CIF;
+	public BigDecimal AL_OFF_SL;
+	public String AS_OFF_ADD_REF;
+	public BigDecimal AL_TRANSFER_AM; 
+	public BigDecimal AL_DEBIT_BRANCH;
+	public BigDecimal AL_DEBIT_CURRENCY;
+	public BigDecimal AL_DEBIT_GL_CODE;
+	public BigDecimal AL_DEBIT_CIF_SUB_NO;
+	public BigDecimal AL_DEBIT_SL;
+	public String AS_DEBIT_ADD_REF;
+	public String AS_REMARKS;
+	public BigDecimal AL_DIV_CODE;
+	public BigDecimal AL_DEPT_CODE;
+	public String AS_REFERENCE;
+	public BigDecimal AL_POS;
+	public String AS_INST1;  
+	public String AS_INST2;  
+	public BigDecimal AL_TRXTYPE;
+	public String AS_STATUS;
+	public String AS_CREATED_TRX;
+	public String ADT_MATURITY_DATE;
+}
