@@ -2,90 +2,110 @@ package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlElement;
+
 public class PApiCreateCifIn {
-	public BigDecimal AL_CHANNEL_ID;
-	public	String AS_USER_ID;
-	public String AS_MACHINE_NAME;
-	public BigDecimal AL_API_CODE;
-	public BigDecimal AL_COMP_CODE;
-	public BigDecimal AL_BRANCH_CODE;
-	public BigDecimal AL_CIF_TYPE;
-	public BigDecimal AL_ID_TYPE;
-	public String  ADT_ESTAB_DATE;
-	public String AS_SHORT_NAME_ENG;
-	public String AS_SHORT_NAME_ARAB;
-	public String AS_LONG_NAME_ENG;
-	public String AS_LONG_NAME_ARAB;
-	public String AS_ID_NO;
-	public String AS_LANGUAGE;
-	public BigDecimal AL_NATION_CODE;
-	public BigDecimal AL_COUNTRY_CODE;
-	public BigDecimal AL_PRIORITY_CODE;
-	public String AS_RESIDENT;
-	public BigDecimal AL_CIVIL_CODE;
-	public String AS_CREATED_BY;
-	public BigDecimal AL_DEPT;
-	public BigDecimal AL_DIVISION;
-	public BigDecimal AL_ECO_SECTOR; 
-	public String AS_FIRST_NAME_ENG;
-	public String AS_LAST_NAME_ENG;
-	public String AS_TEL;
-	public String AS_FIRST_NAME_ARAB;
-	public String AS_SEC_NAME_ARAB;
-	public String AS_LAST_NAME_ARAB;  
-	public String AS_ADDRESS1_ENG;
-	public String AS_ADDRESS2_ENG;
-	public String AS_ADDRESS3_ENG;
-	public String AS_AUTH_ID;
-	public String AS_AUTH_NAME;
-	public String AS_SEC_NAME_ENG;
-	public String AS_REL_OFFICER;
-	public String ADT_DATE_CREATED;
-	public String ADT_DATE_MODIFIED;
-	public String AS_STATUS;
-	public String AS_TYPE;
-	public String AS_KYC_COMPLETED;
-	public String AS_MARITAL_STATUS;
-	public String AS_PC_IND;
-	public String AS_POPULATED;
-	public String AS_SHOW_SECRET_NO;
-	public BigDecimal AL_REL_OFF_ID;
-	public BigDecimal AL_MONTHLY_SALARY;
-	public BigDecimal AL_SUB_ECO_SECTOR;
-	public String AS_SEXE;
-	public String AS_ADD_REF;
-	public String AS_BILL_FLAG;
-	public String AS_IND;
-	public BigDecimal AL_TRX_TYPE;
-	public BigDecimal AL_CY;
-	public BigDecimal AL_ACC_BR;
-	public BigDecimal AL_ACC_CY;
-	public BigDecimal AL_ACC_GL;
-	public BigDecimal AL_ACC_CIF;
-	public BigDecimal AL_ACC_SL;
-	public String ADT_ADD_DATE1;
-	public String ADT_ADD_DATE2;
-	public String ADT_ADD_DATE3;
-	public String ADT_ADD_DATE4;
-	public String ADT_ADD_DATE5;
-	public BigDecimal AL_ADD_NUMBER1;
-	public BigDecimal AL_ADD_NUMBER2;
-	public BigDecimal AL_ADD_NUMBER3;
-	public BigDecimal AL_ADD_NUMBER4;
-	public BigDecimal AL_ADD_NUMBER5;
-	public String AS_ADD_STRING;
-	public String AS_ADD_STRING2;
-	public String AS_ADD_STRING3;
-	public String AS_ADD_STRING4;
-	public String AS_ADD_STRING5;
-	public String AS_ADD_STRING6;
-	public String AS_ADD_STRING7;
-	public String AS_ADD_STRING8;
-	public String AS_ADD_STRING9;
-	public String AS_ADD_STRING10;
-	public String AS_ADD_STRING11;
-	public String AS_ADD_STRING12;
-	public String AS_ADD_STRING13;
-	public String AS_ADD_STRING14;
-	public String AS_ADD_STRING15;
+	
+	@XmlElement (required = true)
+	public BigDecimal alChannelId;
+	
+	@XmlElement (required = true)
+	public	String asUserId;
+	
+	@XmlElement (required = true)
+	public String asMachineName;
+	
+	@XmlElement (required = true)
+	public BigDecimal alApiCode;
+	
+	@XmlElement (required = true)
+	public BigDecimal alCompCode;
+	
+	@XmlElement (required = true)
+	public BigDecimal alBranchCode;
+	
+	@XmlElement (required = true)
+	public BigDecimal alCifType;
+	
+	@XmlElement (required = true)
+	public BigDecimal alIdType;
+	
+	public String  adtEstabDate;
+	
+	public String asShortNameEng;
+	public String asShortNameArab;
+	public String asLongNameEng;
+	public String asLongNameArab;
+	public String asIdNo;
+	public String asLanguage;
+	public BigDecimal alNationCode;
+	public BigDecimal alCountryCode;
+	public BigDecimal alPriorityCode;
+	public String asResident;
+	public BigDecimal alCivilCode;
+	public String asCreatedBy;
+	public BigDecimal alDept;
+	public BigDecimal alDivision;
+	public BigDecimal alEcoSector; 
+	public String asFirstNameEng;
+	public String asLastNameEng;
+	public String asTel;
+	public String asFirstNameArab;
+	public String asSecNameArab;
+	public String asLastNameArab;  
+	public String asAddress1Eng;
+	public String asAddress2Eng;
+	public String asAddress3Eng;
+	public String asAuthId;
+	public String asAuthName;
+	public String asSecNameEng;
+	public String asRelOfficer;
+	public String adtDateCreated;
+	public String adtDateModified;
+	public String asStatus;
+	public String asType;
+	public String asKycCompleted;
+	public String asMaritalStatus;
+	public String asPcInd;
+	public String asPopulated;
+	public String asShowSecretNo;
+	public BigDecimal alRelOffId;
+	public BigDecimal alMonthlySalary;
+	public BigDecimal alSubEcoSector;
+	public String asSexe;
+	public String asAddRef;
+	public String asBillFlag;
+	public String asInd;
+	public BigDecimal alTrxType;
+	public BigDecimal alCy;
+	public BigDecimal alAccBr;
+	public BigDecimal alAccCy;
+	public BigDecimal alAccGl;
+	public BigDecimal alAccCif;
+	public BigDecimal alAccSl;
+	public String adtAddDate1;
+	public String adtAddDate2;
+	public String adtAddDate3;
+	public String adtAddDate4;
+	public String adtAddDate5;
+	public BigDecimal alAddNumber1;
+	public BigDecimal alAddNumber2;
+	public BigDecimal alAddNumber3;
+	public BigDecimal alAddNumber4;
+	public BigDecimal alAddNumber5;
+	public String asAddString;
+	public String asAddString2;
+	public String asAddString3;
+	public String asAddString4;
+	public String asAddString5;
+	public String asAddString6;
+	public String asAddString7;
+	public String asAddString8;
+	public String asAddString9;
+	public String asAddString10;
+	public String asAddString11;
+	public String asAddString12;
+	public String asAddString13;
+	public String asAddString14;
+	public String asAddString15;
 }

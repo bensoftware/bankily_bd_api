@@ -2,19 +2,46 @@ package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlElement;
+
 public class PApiCreateAccountIn {
+	
+	@XmlElement (required = true)
 	public BigDecimal alChannelId;
+	
+	@XmlElement (required = true)
 	public String asUserId;
+	
+	@XmlElement (required = true)
 	public String asMachineName;
+	
+	@XmlElement (required = true)
 	public BigDecimal alAPiCode;
+	
+	@XmlElement (required = true)
 	public String adtDate; 
+	
+	@XmlElement (required = true)
 	public BigDecimal alCompCode;
+	
+	@XmlElement (required = true)
 	public BigDecimal alBranchCode;
+	
+	@XmlElement (required = true)
 	public String asCurrencyCode; 
+	
+	@XmlElement (required = true)
 	public BigDecimal alGlCode;
+	
+	@XmlElement (required = true)
 	public BigDecimal alCifSubNo;
+	
+	@XmlElement (required = true)
 	public String asTellerId;
+	
+	@XmlElement (required = true)
 	public String asRenew;
+	
 	public BigDecimal alTrfBr;
 	public BigDecimal alTrfCy;
 	public BigDecimal alTrfGl;
@@ -36,7 +63,10 @@ public class PApiCreateAccountIn {
 	public BigDecimal aloffCIF;
 	public BigDecimal aloffSL;
 	public String asoffAddRef;
+	
+	@XmlElement (required = true)
 	public BigDecimal alTransfertAm; 
+	
 	public BigDecimal alDebitBranch;
 	public BigDecimal alDebitCurrency;
 	public BigDecimal alDebitGlCode;
@@ -44,14 +74,29 @@ public class PApiCreateAccountIn {
 	public BigDecimal alDebitSl;
 	public String asDebitAddRef;
 	public String asRemarks;
+	
+	@XmlElement (required = true)
 	public BigDecimal alDivCode;
+	
+	@XmlElement (required = true)
 	public BigDecimal alDeptCode;
+	
+	@XmlElement (required = true)
 	public String asReference;
+	
+	@XmlElement (required = true)
 	public BigDecimal alPos;
+	
 	public String asInst1;  
 	public String asInst2;  
+	
+	@XmlElement (required = true)
 	public BigDecimal alTrxType;
+	
 	public String asStatus;
+	
+	@XmlElement (required = true)
 	public String asCreatedTrx;
+	
 	public String adtMaturityDate;
 }
