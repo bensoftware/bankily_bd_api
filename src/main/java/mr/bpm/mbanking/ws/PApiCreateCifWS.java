@@ -13,7 +13,7 @@ import mr.bpm.mbanking.dot.PApiCreateCifIn;
 import mr.bpm.mbanking.dot.PApiCreateCifOut;
 
 
-//@Component
+@Component
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class PApiCreateCifWS {

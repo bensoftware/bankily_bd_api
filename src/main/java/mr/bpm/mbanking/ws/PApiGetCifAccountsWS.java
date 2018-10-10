@@ -13,7 +13,7 @@ import mr.bpm.mbanking.dot.PApiGetCifAccountsIn;
 import mr.bpm.mbanking.dot.PApiGetCifAccountsOut;
 
 
-//@Component
+@Component
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class PApiGetCifAccountsWS {

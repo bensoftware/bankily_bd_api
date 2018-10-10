@@ -13,7 +13,7 @@ import mr.bpm.mbanking.dot.PApiTransferEx3In;
 import mr.bpm.mbanking.dot.PApiTransferEx3Out;
 
 
-//@Component
+@Component
 @WebService(name = "PApiTransferEx3WS")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class PApiTransferEx3WS {
