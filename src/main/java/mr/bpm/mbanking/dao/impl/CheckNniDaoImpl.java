@@ -1,6 +1,5 @@
 package mr.bpm.mbanking.dao.impl;
 
-import static org.mockito.Mockito.after;
 
 import java.util.Map;
 
