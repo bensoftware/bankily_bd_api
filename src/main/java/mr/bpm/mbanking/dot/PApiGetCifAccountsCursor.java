@@ -14,14 +14,14 @@ public class PApiGetCifAccountsCursor {
 	public String osGlNameEng;
 	public String osGlNameArab;
 	public String osBriefNameEng;
-	public String osBriefNameArabe;
+	public String osBriefNameArab;
 	public String osLongNameEng;
-	public String osLongNameArabe;
+	public String osLongNameArab;
 	public BigDecimal odecFcBal;
 	public BigDecimal odecFcAvailBal;
 	public BigDecimal odecCvBal;
 	public BigDecimal odecCvAvailBal;
-	public String osStatut;
+	public String osStatus;
 	public String odOpenDate;
 	public String odMaturity;
 	public BigDecimal olCardNumber;
@@ -40,7 +40,7 @@ public class PApiGetCifAccountsCursor {
 	public BigDecimal olPtRate;
 	public BigDecimal olTrfCy;
 	public BigDecimal olTrfGl;
-	public BigDecimal olTrfCIF;
+	public BigDecimal olTrfCif;
 	public BigDecimal olTrfSl;
 	public String osModarabaType;
 	public BigDecimal olBankId;
@@ -50,6 +50,7 @@ public class PApiGetCifAccountsCursor {
 	public String osAdress3Eng;
 	public String osCityEng;
 	public BigDecimal olCountry;
+	public BigDecimal olDealNo;
 	public String osDealCustomNo;
 	public BigDecimal olStateCode;
 	public String osPostCode;

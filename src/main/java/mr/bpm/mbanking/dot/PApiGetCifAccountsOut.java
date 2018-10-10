@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PApiGetCifAccountsOut {
 	public List<PApiGetCifAccountsCursor> pCursor;
-	public BigDecimal OL_TRANSACTION_ID;
-	public BigDecimal OL_ERROR_CODE;   
-	public String OS_ERROR_DESC;
+	public BigDecimal OlTransactionId;
+	public BigDecimal OlErrorCode;   
+	public String OsErrorDesc;
 }
