@@ -34,25 +34,54 @@ public class PApiCreateCifIn {
 	
 	public String asShortNameEng;
 	public String asShortNameArab;
+	
+	@XmlElement (required = true)
 	public String asLongNameEng;
+	
+	@XmlElement (required = true)
 	public String asLongNameArab;
+	
+	@XmlElement (required = true)
 	public String asIdNo;
+	
 	public String asLanguage;
+	
+	@XmlElement (required = true)
 	public BigDecimal alNationCode;
+	
+	@XmlElement (required = true)
 	public BigDecimal alCountryCode;
+	
+	@XmlElement (required = true)
 	public BigDecimal alPriorityCode;
+	
 	public String asResident;
+	
+	@XmlElement (required = true)
 	public BigDecimal alCivilCode;
+	
 	public String asCreatedBy;
+	
+	@XmlElement (required = true)
 	public BigDecimal alDept;
+	
+	@XmlElement (required = true)
 	public BigDecimal alDivision;
+	
+	@XmlElement (required = true)
 	public BigDecimal alEcoSector; 
+	
 	public String asFirstNameEng;
 	public String asLastNameEng;
+	
+	@XmlElement (required = true)
 	public String asTel;
+	
 	public String asFirstNameArab;
 	public String asSecNameArab;
 	public String asLastNameArab;  
+	
+	@XmlElement (required = true)
 	public String asAddress1Eng;
 	public String asAddress2Eng;
 	public String asAddress3Eng;
@@ -62,8 +91,13 @@ public class PApiCreateCifIn {
 	public String asRelOfficer;
 	public String adtDateCreated;
 	public String adtDateModified;
+	
+	@XmlElement (required = true)
 	public String asStatus;
+	
+	@XmlElement (required = true)
 	public String asType;
+	
 	public String asKycCompleted;
 	public String asMaritalStatus;
 	public String asPcInd;
@@ -75,7 +109,10 @@ public class PApiCreateCifIn {
 	public String asSexe;
 	public String asAddRef;
 	public String asBillFlag;
+	
+	@XmlElement (required = true)
 	public String asInd;
+	
 	public BigDecimal alTrxType;
 	public BigDecimal alCy;
 	public BigDecimal alAccBr;
