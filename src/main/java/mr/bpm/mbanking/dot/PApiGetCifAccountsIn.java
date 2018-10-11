@@ -1,9 +1,10 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
-import java.util.Date;
+
 public class PApiGetCifAccountsIn {
 	
 	@XmlElement (required = true)
@@ -23,6 +24,9 @@ public class PApiGetCifAccountsIn {
 	
 	@XmlElement (required = true)
 	public BigDecimal alIndicator;	
+	
+	
+	
 	public BigDecimal  alCifNo;       	
 	public String asAddReference;    	
 	public Date adtDateCreated;     

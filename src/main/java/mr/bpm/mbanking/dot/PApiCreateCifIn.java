@@ -1,9 +1,9 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
+
 
 public class PApiCreateCifIn {
 	
@@ -31,7 +31,7 @@ public class PApiCreateCifIn {
 	@XmlElement (required = true)
 	public BigDecimal alIdType;
 	
-	public Date  adtEstabDate;
+	public String  adtEstabDate;
 	
 	public String asShortNameEng;
 	public String asShortNameArab;
@@ -90,8 +90,8 @@ public class PApiCreateCifIn {
 	public String asAuthName;
 	public String asSecNameEng;
 	public String asRelOfficer;
-	public Date adtDateCreated;
-	public Date adtDateModified;
+	public String adtDateCreated;
+	public String adtDateModified;
 	
 	@XmlElement (required = true)
 	public String asStatus;
@@ -121,11 +121,11 @@ public class PApiCreateCifIn {
 	public BigDecimal alAccGl;
 	public BigDecimal alAccCif;
 	public BigDecimal alAccSl;
-	public Date adtAddDate1;
-	public Date adtAddDate2;
-	public Date adtAddDate3;
-	public Date adtAddDate4;
-	public Date adtAddDate5;
+	public String adtAddDate1;
+	public String adtAddDate2;
+	public String adtAddDate3;
+	public String adtAddDate4;
+	public String adtAddDate5;
 	public BigDecimal alAddNumber1;
 	public BigDecimal alAddNumber2;
 	public BigDecimal alAddNumber3;
