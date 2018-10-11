@@ -2,6 +2,7 @@ package mr.bpm.mbanking.ws;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
@@ -22,8 +23,8 @@ public class PApiCreateAccountWS {
 	CreateAccountDao accountDao ;
 	
 	@WebMethod
-	public PApiCreateAccountOut pApiCreateAccount(@WebParam(name="papicreateaccount") PApiCreateAccountIn in) {
-
+	@WebResult(name = "pApiCreateAccountOut")
+	public PApiCreateAccountOut pApiCreateAccount(@WebParam(name="pApiCreateAccountIn") PApiCreateAccountIn in) {
 		return accountDao.getCreateAccount(in);
 	}
 } 

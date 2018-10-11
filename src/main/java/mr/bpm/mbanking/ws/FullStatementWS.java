@@ -2,6 +2,7 @@ package mr.bpm.mbanking.ws;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
@@ -22,8 +23,8 @@ public class FullStatementWS extends SpringBeanAutowiringSupport{
 	FullStatementDao fullStatementDao ;
 	
 	@WebMethod
-	public FullStatementOut pApiFullStatement(@WebParam(name="fullstatement") FullStatementIn in) {
-
+	@WebResult(name = "fullStatementOut")
+	public FullStatementOut pApiFullStatement(@WebParam(name="fullStatementIn") FullStatementIn in) {
 		return fullStatementDao.getFullStatement(in);
 	}
 

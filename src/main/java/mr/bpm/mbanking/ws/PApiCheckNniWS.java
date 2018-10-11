@@ -2,6 +2,7 @@ package mr.bpm.mbanking.ws;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
@@ -22,8 +23,9 @@ public class PApiCheckNniWS {
 	CheckNniDao checkNniDao ;
 
 	@WebMethod
-	public PApiCheckNniOut pApiCheckNni(@WebParam(name="papichecknni") PApiCheckNniIn in) {
-
+	@WebResult(name = "pApiCheckNniOut")
+	public PApiCheckNniOut pApiCheckNni(@WebParam(name="pApiCheckNniIn") PApiCheckNniIn in) {
 		return checkNniDao.getCheckNni(in);
+		
 	}
 } 

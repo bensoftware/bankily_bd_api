@@ -2,6 +2,7 @@ package mr.bpm.mbanking.ws;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
@@ -22,8 +23,8 @@ public class PApiGetCifAccountsWS {
 	GetCifAccountsDao accountsDao ;
 	
 	@WebMethod
-	public PApiGetCifAccountsOut pApiGetCifAccounts(@WebParam(name="papigetcifaccounts") PApiGetCifAccountsIn in) {
-
+	@WebResult(name="pApiGetCifAccountsOut")
+	public PApiGetCifAccountsOut pApiGetCifAccounts(@WebParam(name="pApiGetCifAccountsIn") PApiGetCifAccountsIn in) {
 		return accountsDao.getCifAccounts(in);
 	}
 } 

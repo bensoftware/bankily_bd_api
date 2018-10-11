@@ -2,6 +2,7 @@ package mr.bpm.mbanking.ws;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
@@ -22,8 +23,8 @@ public class PApiCreateCifWS {
 	CreateCifDao cifDao ;
 	
 	@WebMethod
-	public PApiCreateCifOut pApiCreateCif(@WebParam(name="papicreatecif") PApiCreateCifIn in) {
-
+	@WebResult(name="pApiCreateCifOut")
+	public PApiCreateCifOut pApiCreateCif(@WebParam(name="pApiCreateCifIn") PApiCreateCifIn in) {
 		return cifDao.getCif(in);
 	}
 } 
