@@ -7,43 +7,43 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class FullStatementIn {
 	@XmlElement (required = true)
-	public 	BigDecimal al_channel_id;
+	public 	BigDecimal alChannelId;
 	
 	@XmlElement (required = true)
-	public	String as_user_id;
+	public	String asUserId;
 	
 	@XmlElement (required = true)
-	public	String as_machine_name;
+	public	String asMachineName;
 	
 	@XmlElement (required = true)
-	public	BigDecimal al_api_code;
+	public	BigDecimal alApiCode;
 	
 	@XmlElement (required = true)
-	public	BigDecimal al_company;
+	public	BigDecimal alCompany;
 	
-	public	String as_account;
-	
-	@XmlElement (required = true)
-	public	Date  ad_from_date;
+	public	String asAccount;
 	
 	@XmlElement (required = true)
-	public	Date ad_to_date;
+	public	Date  adFromDate;
 	
 	@XmlElement (required = true)
-	public	String as_vt_flag;
+	public	Date adToDate;
 	
 	@XmlElement (required = true)
-	public	String as_card; 
-	
-	public	BigDecimal al_card_present;
+	public	String asVtFlag;
 	
 	@XmlElement (required = true)
-	public	BigDecimal al_last_n;
+	public	String asCard; 
 	
-	public	BigDecimal Al_dblink;
-	
-	public	String as_userid ;
+	public	BigDecimal alCardPresent;
 	
 	@XmlElement (required = true)
-	public	BigDecimal Al_rev_flag ;	
+	public	BigDecimal alLastIn;
+	
+	public	BigDecimal aldbLink;
+	
+	public	String asUserid ;
+	
+	@XmlElement (required = true)
+	public	BigDecimal alRevFlag;	
 }
