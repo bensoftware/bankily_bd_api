@@ -36,6 +36,7 @@ public class CreateAccountDaoImpl implements CreateAccountDao {
 				.addValue("AS_USER_ID", inCreateAccount.asUserId)
 				.addValue("AS_MACHINE_NAME", inCreateAccount.asMachineName)
 				.addValue("AL_API_CODE", inCreateAccount.alAPiCode)
+				.addValue("ADT_DATE", inCreateAccount.adtDate)
 				.addValue("AL_COMP_CODE", inCreateAccount.alCompCode)
 				.addValue("AL_BRANCH_CODE", inCreateAccount.alBranchCode)
 				.addValue("AS_CURRENCY_CODE", inCreateAccount.asCurrencyCode)
