@@ -1,6 +1,7 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -19,7 +20,7 @@ public class PApiCreateAccountIn {
 	public BigDecimal alAPiCode;
 	
 	@XmlElement (required = true)
-	public String adtDate; 
+	public Date adtDate; 
 	
 	@XmlElement (required = true)
 	public BigDecimal alCompCode;
@@ -98,5 +99,5 @@ public class PApiCreateAccountIn {
 	@XmlElement (required = true)
 	public String asCreatedTrx;
 	
-	public String adtMaturityDate;
+	public Date adtMaturityDate;
 }

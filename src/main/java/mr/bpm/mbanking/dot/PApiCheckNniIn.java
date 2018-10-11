@@ -1,6 +1,7 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -30,7 +31,7 @@ public class PApiCheckNniIn {
 	
 	public String asAddReference;
 	
-	public String adtDateCreated;
+	public Date adtDateCreated;
 	
 	public String asAccType;
 	

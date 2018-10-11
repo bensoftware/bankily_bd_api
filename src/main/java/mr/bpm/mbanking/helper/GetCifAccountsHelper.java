@@ -2,6 +2,7 @@ package mr.bpm.mbanking.helper;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -52,8 +53,8 @@ public class GetCifAccountsHelper {
 				fcursor.odecCvBal = (BigDecimal) cursorRow.get("ODEC_CV_BAL");
 				fcursor.odecCvAvailBal = (BigDecimal) cursorRow.get("ODEC_CV_AVAIL_BAL");
 				fcursor.osStatus = (String) cursorRow.get("OS_STATUS");
-				fcursor.odOpenDate = ((java.sql.Timestamp) cursorRow.get("OD_OPEN_DATE")).toGMTString();
-				fcursor.odMaturity = ((java.sql.Timestamp) cursorRow.get("OD_MATURITY")).toGMTString();
+				fcursor.odOpenDate = (Date) ( cursorRow.get("OD_OPEN_DATE"));
+				fcursor.odMaturity = (Date) ( cursorRow.get("OD_MATURITY"));
 				fcursor.olCardNumber = (BigDecimal) cursorRow.get("OL_CARD_NUMBER");
 				fcursor.osCardType = (String) cursorRow.get("OS_CARD_TYPE");
 				fcursor.odecHoldAmount = (BigDecimal) cursorRow.get("ODEC_HOLD_AMOUNT");
@@ -66,7 +67,7 @@ public class GetCifAccountsHelper {
 				fcursor.olMaturityDays = (BigDecimal) cursorRow.get("OL_MATURITY_DAYS");
 				fcursor.osPftTo = (String) cursorRow.get("OS_PFT_TO");
 				fcursor.osRenew = (String) cursorRow.get("OS_RENEW");
-				fcursor.odDate = ((java.sql.Timestamp) cursorRow.get("OD_DATE")).toGMTString();
+				fcursor.odDate = (Date) ( cursorRow.get("OD_DATE"));
 				fcursor.olPtRate = (BigDecimal) cursorRow.get("OL_PT_RATE");
 				fcursor.olTrfCy = (BigDecimal) cursorRow.get("OL_TRF_CY");
 				fcursor.olTrfGl = (BigDecimal) cursorRow.get("OL_TRF_GL");

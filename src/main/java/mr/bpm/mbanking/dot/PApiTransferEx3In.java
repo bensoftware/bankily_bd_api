@@ -1,6 +1,7 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -56,7 +57,7 @@ public class PApiTransferEx3In {
 	@XmlElement (required = true)
 	public String asCurrency;
 	@XmlElement (required = true)
-	public String asDateTime;
+	public Date asDateTime;
 	@XmlElement (required = true)
 	public String asReference;
 	@XmlElement (required = true)
@@ -66,7 +67,7 @@ public class PApiTransferEx3In {
 	
 	public String asDescArab;
 	
-	public String adtValueDate;
+	public Date adtValueDate;
 	
 	public String asBillerCode;
 	

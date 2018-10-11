@@ -1,6 +1,7 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class FullStatementCursor {	
 	public BigDecimal compCode;
@@ -11,8 +12,8 @@ public class FullStatementCursor {
 	public BigDecimal slNo;
 	public BigDecimal opNo;
 	public BigDecimal lineNo;
-	public String transDate;
-	public String valueDate;
+	public Date transDate;
+	public Date valueDate;
 	public BigDecimal cvAmount;
 	public BigDecimal fcAmount;
 	public BigDecimal balance;
@@ -25,7 +26,7 @@ public class FullStatementCursor {
 	public BigDecimal odecOpenningBal;
 	public BigDecimal odecClosingBal;
 	public BigDecimal ctsTrsNo;
-	public String addDate1;
+	public Date addDate1;
 	public String instruction1;
 	public String instruction2;
 	public String instruction3;

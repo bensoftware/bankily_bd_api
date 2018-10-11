@@ -2,6 +2,7 @@ package mr.bpm.mbanking.helper;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +41,8 @@ public class FullStatementHelper {
 				fcursor.slNo = (BigDecimal) cursorRow.get("GL_CODE");
 				fcursor.opNo = (BigDecimal) cursorRow.get("OP_NO");
 				fcursor.lineNo = (BigDecimal) cursorRow.get("LINE_NO");
-				fcursor.transDate = ((java.sql.Timestamp) cursorRow.get("TRANS_DATE")).toGMTString();
-				fcursor.valueDate = ((java.sql.Timestamp) cursorRow.get("VALUE_DATE")).toGMTString();
+				fcursor.transDate = (Date) ( cursorRow.get("TRANS_DATE"));
+				fcursor.valueDate = (Date) ( cursorRow.get("VALUE_DATE"));
 				fcursor.cvAmount = (BigDecimal) cursorRow.get("CV_AMOUNT");
 				fcursor.fcAmount = (BigDecimal) cursorRow.get("FC_AMOUNT");
 				fcursor.balance = (BigDecimal) cursorRow.get("BALANCE");
@@ -54,7 +55,7 @@ public class FullStatementHelper {
 				fcursor.odecOpenningBal = (BigDecimal) cursorRow.get("ODEC_OPENING_BAL");
 				fcursor.odecClosingBal = (BigDecimal) cursorRow.get("ODEC_CLOSING_BAL");
 				fcursor.ctsTrsNo = (BigDecimal) cursorRow.get("CTS_TRS_NO");
-				fcursor.addDate1 = ((java.sql.Timestamp) cursorRow.get("ADD_DATE1")).toGMTString();
+				fcursor.addDate1 = (Date) ( cursorRow.get("ADD_DATE1"));
 				
 				fcursor.instruction1 = (String) cursorRow.get("INSTRUCTION1");
 				fcursor.instruction2 = (String) cursorRow.get("INSTRUCTION2");

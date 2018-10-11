@@ -1,6 +1,7 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -23,10 +24,10 @@ public class FullStatementIn {
 	public	String as_account;
 	
 	@XmlElement (required = true)
-	public	String  ad_from_date;
+	public	Date  ad_from_date;
 	
 	@XmlElement (required = true)
-	public	String ad_to_date;
+	public	Date ad_to_date;
 	
 	@XmlElement (required = true)
 	public	String as_vt_flag;

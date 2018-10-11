@@ -1,6 +1,7 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -30,29 +31,58 @@ public class PApiCreateCifIn {
 	@XmlElement (required = true)
 	public BigDecimal alIdType;
 	
-	public String  adtEstabDate;
+	public Date  adtEstabDate;
 	
 	public String asShortNameEng;
 	public String asShortNameArab;
+	
+	@XmlElement (required = true)
 	public String asLongNameEng;
+	
+	@XmlElement (required = true)
 	public String asLongNameArab;
+	
+	@XmlElement (required = true)
 	public String asIdNo;
+	
 	public String asLanguage;
+	
+	@XmlElement (required = true)
 	public BigDecimal alNationCode;
+	
+	@XmlElement (required = true)
 	public BigDecimal alCountryCode;
+	
+	@XmlElement (required = true)
 	public BigDecimal alPriorityCode;
+	
 	public String asResident;
+	
+	@XmlElement (required = true)
 	public BigDecimal alCivilCode;
+	
 	public String asCreatedBy;
+	
+	@XmlElement (required = true)
 	public BigDecimal alDept;
+	
+	@XmlElement (required = true)
 	public BigDecimal alDivision;
+	
+	@XmlElement (required = true)
 	public BigDecimal alEcoSector; 
+	
 	public String asFirstNameEng;
 	public String asLastNameEng;
+	
+	@XmlElement (required = true)
 	public String asTel;
+	
 	public String asFirstNameArab;
 	public String asSecNameArab;
 	public String asLastNameArab;  
+	
+	@XmlElement (required = true)
 	public String asAddress1Eng;
 	public String asAddress2Eng;
 	public String asAddress3Eng;
@@ -60,10 +90,15 @@ public class PApiCreateCifIn {
 	public String asAuthName;
 	public String asSecNameEng;
 	public String asRelOfficer;
-	public String adtDateCreated;
-	public String adtDateModified;
+	public Date adtDateCreated;
+	public Date adtDateModified;
+	
+	@XmlElement (required = true)
 	public String asStatus;
+	
+	@XmlElement (required = true)
 	public String asType;
+	
 	public String asKycCompleted;
 	public String asMaritalStatus;
 	public String asPcInd;
@@ -75,7 +110,10 @@ public class PApiCreateCifIn {
 	public String asSexe;
 	public String asAddRef;
 	public String asBillFlag;
+	
+	@XmlElement (required = true)
 	public String asInd;
+	
 	public BigDecimal alTrxType;
 	public BigDecimal alCy;
 	public BigDecimal alAccBr;
@@ -83,11 +121,11 @@ public class PApiCreateCifIn {
 	public BigDecimal alAccGl;
 	public BigDecimal alAccCif;
 	public BigDecimal alAccSl;
-	public String adtAddDate1;
-	public String adtAddDate2;
-	public String adtAddDate3;
-	public String adtAddDate4;
-	public String adtAddDate5;
+	public Date adtAddDate1;
+	public Date adtAddDate2;
+	public Date adtAddDate3;
+	public Date adtAddDate4;
+	public Date adtAddDate5;
 	public BigDecimal alAddNumber1;
 	public BigDecimal alAddNumber2;
 	public BigDecimal alAddNumber3;

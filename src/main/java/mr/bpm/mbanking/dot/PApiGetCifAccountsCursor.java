@@ -1,6 +1,7 @@
 package mr.bpm.mbanking.dot;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class PApiGetCifAccountsCursor {
 	public BigDecimal olBranchCode;
@@ -22,8 +23,8 @@ public class PApiGetCifAccountsCursor {
 	public BigDecimal odecCvBal;
 	public BigDecimal odecCvAvailBal;
 	public String osStatus;
-	public String odOpenDate;
-	public String odMaturity;
+	public Date odOpenDate;
+	public Date odMaturity;
 	public BigDecimal olCardNumber;
 	public String osCardType;
 	public BigDecimal odecHoldAmount;
@@ -36,7 +37,7 @@ public class PApiGetCifAccountsCursor {
 	public BigDecimal olMaturityDays;
 	public String osPftTo;
 	public String osRenew;
-	public String odDate;
+	public Date odDate;
 	public BigDecimal olPtRate;
 	public BigDecimal olTrfCy;
 	public BigDecimal olTrfGl;

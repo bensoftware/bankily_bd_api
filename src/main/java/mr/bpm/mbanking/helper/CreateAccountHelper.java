@@ -1,6 +1,7 @@
 package mr.bpm.mbanking.helper;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 import mr.bpm.mbanking.dot.PApiCreateAccountOut;
@@ -14,7 +15,7 @@ public class CreateAccountHelper {
 			out.osAddRef = (String) params.get("OS_ADD_REF");
 			out.olTrsNo = (BigDecimal) params.get("OL_TRS_NO");
 			out.olPointRate = (BigDecimal) params.get("OL_POINT_RATE");
-			out.odtMateDate = ((java.sql.Timestamp) params.get("ODT_MATE_DATE")).toGMTString();
+			out.odtMateDate = (Date) ( params.get("ODT_MATE_DATE"));
 			out.olNewBal = (BigDecimal) params.get("OL_NEW_BAL");
 			out.osAccName = (String) params.get("OS_ACC_NAME");
 			out.olErrorCode = (BigDecimal) params.get("OL_ERROR_CODE");
