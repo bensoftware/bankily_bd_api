@@ -44,9 +44,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+			<dependency>
+			<groupId>oracle.driver</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>7.0.0</version>
+		</dependency>
 	</dependencies>
-
+	
 	<build>
+	    <finalName>MobileBankingWS</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
