@@ -11,6 +11,7 @@ import mr.bpm.mbanking.ws.FullStatementWS;
 import mr.bpm.mbanking.ws.PApiCheckNniWS;
 import mr.bpm.mbanking.ws.PApiCreateAccountWS;
 import mr.bpm.mbanking.ws.PApiCreateCifWS;
+import mr.bpm.mbanking.ws.PApiGetBalanceAmfWS;
 import mr.bpm.mbanking.ws.PApiGetCifAccountsWS;
 import mr.bpm.mbanking.ws.PApiRetchqbookReqWS;
 import mr.bpm.mbanking.ws.PApiTransferEx3WS;
@@ -52,7 +53,9 @@ public class ConfigSOAP {
 	
 	@Autowired
 	PApiTransferEx3WS apiTransferEx3WS;
-	
+		
+	@Autowired
+	PApiGetBalanceAmfWS apiGetBalanceAmf;
 	
 	@Bean
 	public Endpoint getServerFullstatement() {
@@ -110,5 +113,13 @@ public class ConfigSOAP {
 	
 	}
 	
+
+	@Bean
+	public Endpoint getServerPApiGetBalanceAmf() {
+		
+	 Endpoint endpoint=	Endpoint.publish("http://"+url+":"+port+"/ws/mbanking/papigetbalanceamf", apiGetBalanceAmf);
+	 return endpoint;
 	
+	}
+
 }
