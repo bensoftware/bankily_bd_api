@@ -30,9 +30,16 @@ public class MonetiqueClass implements Serializable {
 	double taux;
 	double codeAuth;
 	boolean verified=false;
+	boolean epoque=true;
 	
 
 	
+	public boolean isEpoque() {
+		return epoque;
+	}
+	public void setEpoque(boolean epoque) {
+		this.epoque = epoque;
+	}
 	public boolean isVerified() {
 		return verified;
 	}

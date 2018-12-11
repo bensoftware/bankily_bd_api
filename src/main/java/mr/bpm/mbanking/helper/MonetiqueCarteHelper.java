@@ -22,6 +22,17 @@ public class MonetiqueCarteHelper {
 			
 		
 		MonetiqueClass m=new MonetiqueClass();		
+		
+		m.setDate((Timestamp) p.get("AUT_REQU_SYST_TIME"));
+		m.setDeviseSS(Integer.parseInt(""+(String) p.get("AUT_BILL_CURR_F051")));
+
+		 m.setMontantTrans(Double.parseDouble(""+(BigDecimal) p.get("AUT_BILL_AMOU_F006")));
+		 try {
+			 m.setCommission(Double.parseDouble(""+(BigDecimal) p.get("AUT_COMM_AMOU")));
+			} catch (Exception e) {
+		        m.setCommission(0);
+			}
+
 		   try {
 				 m.setRefTrans(Double.parseDouble(""+(String) p.get("AUT_RETR_REF_NUMB_F037")));
 	        }catch (Exception e) {
@@ -32,12 +43,57 @@ public class MonetiqueCarteHelper {
 	        	cpt--;
 	        	
 			}
-		 m.setMontantTrans(Double.parseDouble(""+(BigDecimal) p.get("AUT_BILL_AMOU_F006")));
-		 try {
-			 m.setCommission(Double.parseDouble(""+(BigDecimal) p.get("AUT_COMM_AMOU")));
-			} catch (Exception e) {
-		        m.setCommission(0);
+		   
+			Date date = m.getDate();
+			int annee= date.getYear()+1900;
+			int mois= date.getMonth()+1;
+			int jour=date.getDate();
+			
+			int deviseM=978;
+			int deviseSS=m.getDeviseSS();
+			
+			if(annee==2017) {
+				if( (mois==11 && jour>=13) || (mois==12) ) {
+					deviseM=478;
+				}
+			}else if(annee>2017) {
+				deviseM=929;
 			}
+			System.out.println("deviseM "+deviseM+" deviseSS "+deviseSS+" date "+m.getDate().toGMTString());
+			if(deviseSS!=deviseM) {
+			
+					if(deviseM==978) {
+						if(deviseSS==478) {
+							m.setMontantTrans(m.getMontantTrans()/414);
+							m.setCommission(m.getCommission()/414);
+						}else if(deviseSS==929) {
+							m.setMontantTrans(m.getMontantTrans()/41.4);
+							m.setCommission(m.getCommission()/41.4);
+						}
+					}else if(deviseM==478) {
+						System.out.println("ici");
+                        if(deviseSS==978) {
+                        	m.setMontantTrans(m.getMontantTrans()*414);
+							m.setCommission(m.getCommission()*414);
+						}else if(deviseSS==929) {
+							m.setMontantTrans(m.getMontantTrans()*10);
+							m.setCommission(m.getCommission()*10);
+						}
+					}else if(deviseM==929) {
+                        if(deviseSS==978) {
+                        	m.setMontantTrans(m.getMontantTrans()*41.4);
+							m.setCommission(m.getCommission()*41.4);
+						}else if(deviseSS==478) {
+							m.setMontantTrans(m.getMontantTrans()/10);
+							m.setCommission(m.getCommission()/10);
+						}
+					}
+				m.setEpoque(false);
+			}
+			
+			m.setDeviseSS(deviseM);
+			
+
 			try {
 				 m.setTaux(Double.parseDouble(""+(BigDecimal) p.get("AUT_BILL_CONV_RATE_F010")));
 
@@ -62,8 +118,6 @@ public class MonetiqueCarteHelper {
 				} catch (Exception e) {
 			}
 			
-			m.setDate((Timestamp) p.get("AUT_REQU_SYST_TIME"));
-			m.setDeviseSS(Integer.parseInt(""+(String) p.get("AUT_BILL_CURR_F051")));
 			m.setType(1);
 			
 			out.add(m);
@@ -103,7 +157,7 @@ public class MonetiqueCarteHelper {
 			
 			int annee= procDate.getYear()+1900;
 			devise = Integer.parseInt(""+(String) p.get("VTR_BILL_CURR"));
-			if(devise==929 || annee>=2018) {
+			if(devise==929 && annee>=2018) {
 				m.setRechargeCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
 			}
 			m.setType(2);
@@ -119,7 +173,10 @@ public class MonetiqueCarteHelper {
 			 m.setDeviseOrigine(Integer.parseInt(""+(String) p.get("VTR_TRAN_CURR")));
 			
 			devise = Integer.parseInt(""+(String) p.get("VTR_BILL_CURR"));
-			if(devise==929) {
+			
+			int annee= procDate.getYear()+1900;
+			
+			if(devise==929 && annee>=2018) {
 				m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
 			}
 			 m.setTaux(Double.parseDouble(""+(BigDecimal) p.get("VTR_CHLD_ACC_CURR_RATE")));			
@@ -159,9 +216,10 @@ public class MonetiqueCarteHelper {
 		        m.setMontantCl(0);
 			}
 			
+			int annee= procDate.getYear()+1900;
 			
 			devise = Integer.parseInt(""+(String) p.get("VTR_BILL_CURR"));
-			if(devise==929) {
+			if(devise==929 && annee>=2018) {
 				m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
 			}
 			m.setTaux(Double.parseDouble(""+(BigDecimal) p.get("VTR_CHLD_ACC_CURR_RATE")));			
