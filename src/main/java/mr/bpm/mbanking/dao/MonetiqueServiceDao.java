@@ -11,4 +11,5 @@ public interface MonetiqueServiceDao {
 	public List<MonetiqueClass> getAuthByPan(String pan);
 	public List<MonetiqueClass> getClByPan(String pan);
 	public List<Historique> getHistByPan(String pan);
+	public List<Double> getAllCarte();
 }

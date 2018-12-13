@@ -23,8 +23,12 @@ public class MonetiqueCarteHelper {
 		
 		MonetiqueClass m=new MonetiqueClass();		
 		
-		m.setDate((Timestamp) p.get("AUT_REQU_SYST_TIME"));
-		m.setDeviseSS(Integer.parseInt(""+(String) p.get("AUT_BILL_CURR_F051")));
+		 try {
+			 m.setDate((Timestamp) p.get("AUT_REQU_SYST_TIME"));
+			m.setDeviseSS(Integer.parseInt(""+(String) p.get("AUT_BILL_CURR_F051")));
+			} catch (Exception e) {
+			}
+		
 
 		 m.setMontantTrans(Double.parseDouble(""+(BigDecimal) p.get("AUT_BILL_AMOU_F006")));
 		 try {
@@ -59,7 +63,6 @@ public class MonetiqueCarteHelper {
 			}else if(annee>2017) {
 				deviseM=929;
 			}
-			System.out.println("deviseM "+deviseM+" deviseSS "+deviseSS+" date "+m.getDate().toGMTString());
 			if(deviseSS!=deviseM) {
 			
 					if(deviseM==978) {
@@ -71,7 +74,6 @@ public class MonetiqueCarteHelper {
 							m.setCommission(m.getCommission()/41.4);
 						}
 					}else if(deviseM==478) {
-						System.out.println("ici");
                         if(deviseSS==978) {
                         	m.setMontantTrans(m.getMontantTrans()*414);
 							m.setCommission(m.getCommission()*414);
@@ -88,7 +90,7 @@ public class MonetiqueCarteHelper {
 							m.setCommission(m.getCommission()/10);
 						}
 					}
-				m.setEpoque(false);
+			//	m.setEpoque(false);
 			}
 			
 			m.setDeviseSS(deviseM);
@@ -129,6 +131,24 @@ public class MonetiqueCarteHelper {
 		return out;
 	}
 
+	private static int getDeviseByDate(Date d) {
+		Date date = d;
+		int annee= date.getYear()+1900;
+		int mois= date.getMonth()+1;
+		int jour=date.getDate();
+		
+		int deviseM=978;
+		
+		if(annee==2017) {
+			if( (mois==11 && jour>=13) || (mois==12) ) {
+				deviseM=478;
+			}
+		}else if(annee>2017) {
+			deviseM=929;
+		}
+		
+		return deviseM;
+	}
 
 
 	static public List<MonetiqueClass> toClOut(List<Map<String, Object>> params) {
@@ -146,40 +166,90 @@ public class MonetiqueCarteHelper {
 		
 		int code =Integer.parseInt(""+(String) p.get("VTR_TC_CODE"));
 		
-		int devise;
 		
+		int devise=0;
+		
+		 try {
+			 devise = Integer.parseInt(""+(String) p.get("VTR_BILL_CURR"));
+			}catch (Exception e) {
+				// TODO: handle exception
+				devise=getDeviseByDate(procDate);
+			}
+		// recharge Agence
 		if(code==19001) {
 			
-		    m.setRechargeCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU"))*10 );
-
+		    try {
+		    	 m.setRechargeCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU"))*10 );
+		    	 int annee= procDate.getYear()+1900;
+					if(devise==929 && annee>=2018) {
+						m.setRechargeCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
+					}
+				}catch (Exception e) {
+					
+				}
 			
 			m.setDate(purcDate);
 			
-			int annee= procDate.getYear()+1900;
-			devise = Integer.parseInt(""+(String) p.get("VTR_BILL_CURR"));
-			if(devise==929 && annee>=2018) {
-				m.setRechargeCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
-			}
+	
 			m.setType(2);
 			
 		}
+		// recharge GAB
+		else if(code==21031) {
+			
+		    try {
+		    	 m.setRechargeCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU"))*10 );
+		    	 int annee= procDate.getYear()+1900;
+					if(devise==929 && annee>=2018) {
+						m.setRechargeCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
+					}
+				}catch (Exception e) {
+					
+				}
+			
+			m.setDate(purcDate);
+			
+		
+			m.setType(2);
+			
+		}
+		// rembourssement
 		else if(code==6000) {
 			
 			m.setDate(procDate);
 			
-			m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU"))*10);
-			
 			 m.setMontantOrigine(Double.parseDouble(""+(BigDecimal) p.get("VTR_TRAN_AMOU")));
 			 m.setDeviseOrigine(Integer.parseInt(""+(String) p.get("VTR_TRAN_CURR")));
+			 
+			 
+			 Double taux=0.0;
+			 
+			 try {
+				 taux=Double.parseDouble(""+(BigDecimal) p.get("VTR_CHLD_ACC_CURR_RATE"));
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+			 
+			 m.setTaux(taux);			
+
 			
-			devise = Integer.parseInt(""+(String) p.get("VTR_BILL_CURR"));
-			
-			int annee= procDate.getYear()+1900;
-			
-			if(devise==929 && annee>=2018) {
-				m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
+			Double montantCl= 0.0;
+			try {
+				montantCl=Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU"))*10;
+				
+				int annee= procDate.getYear()+1900;
+				
+				if(devise==929 && annee>=2018) {
+					m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
+				}
+				
+			}catch (Exception e) {
+				// TODO: handle exception
 			}
-			 m.setTaux(Double.parseDouble(""+(BigDecimal) p.get("VTR_CHLD_ACC_CURR_RATE")));			
+			m.setMontantCl(montantCl);
+
+			
+			
     		m.setType(4);
 		}
 		// a rectifier apres
@@ -211,23 +281,37 @@ public class MonetiqueCarteHelper {
 			
 			try {
 				m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU"))*10);
+				
+				int annee= procDate.getYear()+1900;
+				
+				if(devise==929 && annee>=2018) {
+					m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
+				}
 
 			} catch (Exception e) {
 		        m.setMontantCl(0);
 			}
 			
-			int annee= procDate.getYear()+1900;
 			
-			devise = Integer.parseInt(""+(String) p.get("VTR_BILL_CURR"));
-			if(devise==929 && annee>=2018) {
-				m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
+			
+			try {
+				m.setTaux(Double.parseDouble(""+(BigDecimal) p.get("VTR_CHLD_ACC_CURR_RATE")));		
+
+			} catch (Exception e) {
+				m.setTaux(0);		
 			}
-			m.setTaux(Double.parseDouble(""+(BigDecimal) p.get("VTR_CHLD_ACC_CURR_RATE")));			
+			
+			
+			if(code==10128) {
+				m.setMontantCl(m.getMontantOrigine());
+				m.setDeviseCl(m.getDeviseOrigine());
+			}
+			
 			m.setType(3);
 		}
 		
 		m.setCode(code);
-	    m.setDeviseCl(Integer.parseInt(""+(String) p.get("VTR_BILL_CURR")));
+	    m.setDeviseCl(devise);
 
 			out.add(m);
 			
@@ -257,6 +341,23 @@ public class MonetiqueCarteHelper {
 		m.setHost(""+(String) p.get("HOST"));
 		
 			out.add(m);
+			
+		}
+		return out;
+	}
+	
+	
+static public List<Double> toCarteOut( List<Map<String, Object>> params) {
+		
+		List<Double> out =new ArrayList<>();
+				
+		for(Map<String, Object> p :params) {
+		
+		Double m=0.0;
+		
+        m=Double.parseDouble(""+(String) p.get("AUT_PRIM_ACCT_NUMB_F002"));		
+	
+        out.add(m);
 			
 		}
 		

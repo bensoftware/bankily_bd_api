@@ -58,7 +58,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		
 		out=MonetiqueCarteHelper.toAuthtOut(res);
 
-		System.out.println("ok");
+		//System.out.println("ok");
 		
 		return out;
 	}
@@ -96,7 +96,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		
 		out=MonetiqueCarteHelper.toClOut(res);
 
-		System.out.println("ok");
+		//System.out.println("ok");
 		
 		return out;
 	}
@@ -122,7 +122,36 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		
 		out=MonetiqueCarteHelper.toHistOut(res);
 
-		System.out.println("ok");
+	//	System.out.println("ok");
+		
+		return out;
+	}
+
+	@Override
+	public List<Double> getAllCarte() {
+	
+		List<Double> out=null;
+		
+		List<Map<String,Object>>  res=null;
+		
+		String sql =" select distinct z.aut_prim_acct_numb_f002 " + 
+				" from online_authorization z,daily_valid_trans d " + 
+				" where  vtr_aut_code = aut_code " + 
+				" and aut_prim_acct_numb_f002 like '530347%' " + 
+				" and  vtr_proc_date > to_date('01/01/2018','dd/mm/yyyy') " + 
+				" and aut_requ_syst_time < to_date('01/01/2018','dd/mm/yyyy') ";
+		
+		System.out.println(sql);
+		try {
+			res =  jdbcTemplate.queryForList(sql, new Object[] {  });
+
+		} catch (Exception e) {
+			//status = "ERREUR";
+		}
+		
+		out=MonetiqueCarteHelper.toCarteOut(res);
+
+		//System.out.println("ok");
 		
 		return out;
 	}

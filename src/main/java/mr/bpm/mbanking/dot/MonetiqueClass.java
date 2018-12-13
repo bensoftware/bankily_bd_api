@@ -30,7 +30,7 @@ public class MonetiqueClass implements Serializable {
 	double taux;
 	double codeAuth;
 	boolean verified=false;
-	boolean epoque=true;
+/*	boolean epoque=true;
 	
 
 	
@@ -39,7 +39,7 @@ public class MonetiqueClass implements Serializable {
 	}
 	public void setEpoque(boolean epoque) {
 		this.epoque = epoque;
-	}
+	}*/
 	public boolean isVerified() {
 		return verified;
 	}

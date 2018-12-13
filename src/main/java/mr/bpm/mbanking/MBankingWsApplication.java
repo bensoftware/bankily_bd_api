@@ -33,6 +33,8 @@ public class MBankingWsApplication implements CommandLineRunner {
 		
 		//monetiqueServiceDao.getHistByPan("5303471005144452");
 		
+	//	monetiqueServiceDao.getAllCarte();
+		
 	}
 	
 }
