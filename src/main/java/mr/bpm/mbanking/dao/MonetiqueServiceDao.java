@@ -8,8 +8,8 @@ import mr.bpm.mbanking.dot.MonetiqueClass;
 public interface MonetiqueServiceDao {
 
 	
-	public List<MonetiqueClass> getAuthByPan(String pan);
-	public List<MonetiqueClass> getClByPan(String pan);
-	public List<Historique> getHistByPan(String pan);
+	public List<MonetiqueClass> getAuthByPan(double pan);
+	public List<MonetiqueClass> getClByPan(double pan);
+	public List<Historique> getHistByPan(double pan);
 	public List<Double> getAllCarte();
 }

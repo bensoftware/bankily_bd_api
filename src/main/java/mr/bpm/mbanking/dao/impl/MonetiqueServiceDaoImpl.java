@@ -27,7 +27,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 	  }
 
 	@Override
-	public List<MonetiqueClass> getAuthByPan(String pan) {
+	public List<MonetiqueClass> getAuthByPan(double pan) {
 		// TODO Auto-generated method stub
 		
 		List<MonetiqueClass> out=null;
@@ -64,7 +64,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 	}
 
 	@Override
-	public List<MonetiqueClass> getClByPan(String pan) {
+	public List<MonetiqueClass> getClByPan(double pan) {
 		
 		List<MonetiqueClass> out=null;
 		
@@ -102,7 +102,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 	}
 
 	@Override
-	public List<Historique> getHistByPan(String pan) {
+	public List<Historique> getHistByPan(double pan) {
 	
 		List<Historique> out=null;
 		

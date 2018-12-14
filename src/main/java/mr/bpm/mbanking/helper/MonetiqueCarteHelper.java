@@ -239,14 +239,16 @@ public class MonetiqueCarteHelper {
 				
 				int annee= procDate.getYear()+1900;
 				
+				System.out.println("devise "+devise+" annee "+annee);
 				if(devise==929 && annee>=2018) {
+					System.out.println("remourssement");
 					m.setMontantCl(Double.parseDouble(""+(BigDecimal) p.get("VTR_BILL_AMOU")));
 				}
 				
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
-			m.setMontantCl(montantCl);
+			//m.setMontantCl(montantCl);
 
 			
 			
@@ -303,8 +305,44 @@ public class MonetiqueCarteHelper {
 			
 			
 			if(code==10128) {
-				m.setMontantCl(m.getMontantOrigine());
-				m.setDeviseCl(m.getDeviseOrigine());
+				
+				int deviseDate =getDeviseByDate(m.getDate());
+				int deviseO=m.getDeviseOrigine();
+
+				
+
+				if(deviseDate !=m.getDeviseOrigine()) {
+					double montantCl=0;
+					
+					if(deviseDate==978) {
+						if(deviseO==478) {
+							montantCl=m.getMontantOrigine()/414;
+						}else if(deviseO==929) {
+							montantCl=m.getMontantOrigine()/41.4;
+						}
+					}else if(deviseDate==478) {
+                        if(deviseO==978) {
+                        	montantCl=m.getMontantOrigine()*414;
+						}else if(deviseO==929) {
+							montantCl=m.getMontantOrigine()*10;
+						}
+					}else if(deviseDate==929) {
+                        if(deviseO==978) {
+                        	montantCl=m.getMontantOrigine()*41.4;
+						}else if(deviseO==478) {
+							montantCl=m.getMontantOrigine()/10;
+						}
+					}
+					
+					m.setMontantCl(montantCl);
+					m.setDeviseCl(deviseDate);
+					
+					
+				}else {
+					m.setMontantCl(m.getMontantOrigine());
+					m.setDeviseCl(m.getDeviseOrigine());
+				}
+			
 			}
 			
 			m.setType(3);
