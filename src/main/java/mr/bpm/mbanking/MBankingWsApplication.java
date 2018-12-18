@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import mr.bpm.mbanking.dao.MonetiqueServiceDao;
+import mr.bpm.mbanking.dot.SoldeCarte;
 
 @SpringBootApplication
 public class MBankingWsApplication implements CommandLineRunner {
@@ -33,8 +34,10 @@ public class MBankingWsApplication implements CommandLineRunner {
 		
 		//monetiqueServiceDao.getHistByPan("5303471005144452");
 		
-	//	monetiqueServiceDao.getAllCarte();
-		
+	// SoldeCarte m=	monetiqueServiceDao.getSoldeCarte(Double.parseDouble("5303471005144536"));
+	 
+	 //System.out.println(m);
+	 
 	}
 	
 }

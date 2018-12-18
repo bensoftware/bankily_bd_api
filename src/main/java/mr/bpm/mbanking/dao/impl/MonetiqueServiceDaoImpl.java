@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import mr.bpm.mbanking.dao.MonetiqueServiceDao;
 import mr.bpm.mbanking.dot.Historique;
 import mr.bpm.mbanking.dot.MonetiqueClass;
+import mr.bpm.mbanking.dot.SoldeCarte;
 import mr.bpm.mbanking.helper.MonetiqueCarteHelper;
 
 @Repository
@@ -81,9 +82,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 				" s.VTR_AUTH_CODE " + 
 				" from daily_valid_trans s " + 
 				" where " + 
-				" vtr_tc_code <> 10237 " + 
-				" and vtr_tc_code <> 21031 " + 
-				" and vtr_tc_code <> 10226 " + 
+				" vtr_tc_code <> 10226 " + 
 				" and vtr_card_numb= ? ";
 		
 		System.out.println(sql);
@@ -152,6 +151,29 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		out=MonetiqueCarteHelper.toCarteOut(res);
 
 		//System.out.println("ok");
+		
+		return out;
+	}
+
+	@Override
+	public SoldeCarte getSoldeCarte(double pan) {
+		SoldeCarte out=null;
+		
+		List<Map<String,Object>>  res=null;
+		String sql =" select ACC_AVAI_AMOU, ACC_AUTH_CUMU , ACC_USED_CUMU from account where acc_code in ( " + 
+		" select cro_acc_code from cardholder_routing where cro_pan = ?) ";
+		
+		System.out.println(sql);
+		try {
+			res =  jdbcTemplate.queryForList(sql, new Object[] { pan });
+
+		} catch (Exception e) {
+			//status = "ERREUR";
+		}
+		
+		out=MonetiqueCarteHelper.toSoldetOut(res);
+
+	//	System.out.println("ok");
 		
 		return out;
 	}

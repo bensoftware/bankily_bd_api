@@ -14,6 +14,7 @@ import mr.bpm.mbanking.dao.MonetiqueServiceDao;
 import mr.bpm.mbanking.dot.ListHistorique;
 import mr.bpm.mbanking.dot.ListMonetiqueCarte;
 import mr.bpm.mbanking.dot.ListPan;
+import mr.bpm.mbanking.dot.SoldeCarte;
 
 @Component
 @WebService
@@ -47,6 +48,12 @@ public class MonetiqueWS extends SpringBeanAutowiringSupport{
 	@WebResult(name = "PanOut")
 	public ListPan getPans() {
 		return  new ListPan(monetiqueServiceDao.getAllCarte());
+	}
+	
+	@WebMethod
+	@WebResult(name = "SoldeOut")
+	public SoldeCarte SoldeOut(@WebParam(name="pan") double pan) {
+		return  monetiqueServiceDao.getSoldeCarte(pan);
 	}
 
 } 

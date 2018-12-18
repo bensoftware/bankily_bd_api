@@ -9,6 +9,7 @@ import java.util.Map;
 
 import mr.bpm.mbanking.dot.Historique;
 import mr.bpm.mbanking.dot.MonetiqueClass;
+import mr.bpm.mbanking.dot.SoldeCarte;
 
 public class MonetiqueCarteHelper {
 
@@ -382,6 +383,24 @@ public class MonetiqueCarteHelper {
 			
 		}
 		return out;
+	}
+	
+	static public SoldeCarte toSoldetOut( List<Map<String, Object>> params) {
+
+		SoldeCarte m= new SoldeCarte();		
+		
+		for(Map<String, Object> p :params) {
+		
+	
+
+		
+		m.setRechargeCum(Double.parseDouble(""+(BigDecimal) p.get("ACC_AVAI_AMOU")));
+		m.setAuthCum(Double.parseDouble(""+(BigDecimal) p.get("ACC_AUTH_CUMU")));
+		m.setUsedCum(Double.parseDouble(""+(BigDecimal) p.get("ACC_USED_CUMU")));
+
+			
+		}
+		return m;
 	}
 	
 	
