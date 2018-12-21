@@ -14,6 +14,7 @@ import mr.bpm.mbanking.dao.MonetiqueServiceDao;
 import mr.bpm.mbanking.dot.Historique;
 import mr.bpm.mbanking.dot.MonetiqueClass;
 import mr.bpm.mbanking.dot.SoldeCarte;
+import mr.bpm.mbanking.dot.TraitementDto1;
 import mr.bpm.mbanking.helper.MonetiqueCarteHelper;
 
 @Repository
@@ -133,12 +134,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		
 		List<Map<String,Object>>  res=null;
 		
-		String sql =" select distinct z.aut_prim_acct_numb_f002 " + 
-				" from online_authorization z,daily_valid_trans d " + 
-				" where  vtr_aut_code = aut_code " + 
-				" and aut_prim_acct_numb_f002 like '530347%' " + 
-				" and  vtr_proc_date > to_date('01/01/2018','dd/mm/yyyy') " + 
-				" and aut_requ_syst_time < to_date('01/01/2018','dd/mm/yyyy') ";
+		String sql ="select CAR_NUMB from card where CAR_NUMB like '530347%' ";
 		
 		System.out.println(sql);
 		try {
@@ -171,9 +167,37 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 			//status = "ERREUR";
 		}
 		
-		out=MonetiqueCarteHelper.toSoldetOut(res);
+		out=MonetiqueCarteHelper.toSoldetOut(res,pan);
 
 	//	System.out.println("ok");
+		
+		return out;
+	}
+
+	@Override
+	public List<TraitementDto1> traitement1() {
+	List<TraitementDto1> out=null;
+		
+		List<Map<String,Object>>  res=null;
+		
+		String sql ="select s.vtr_purc_date,s.VTR_TRAN_AMOU,vtr_card_numb " + 
+				" from daily_valid_trans s " + 
+				" where vtr_tc_code = 19001 " + 
+				" and vtr_card_numb like '530347%' " + 
+				" order by s.vtr_purc_date";
+		
+		System.out.println(sql);
+		try {
+			res =  jdbcTemplate.queryForList(sql, new Object[] {  });
+
+		} catch (Exception e) {
+			//status = "ERREUR";
+		}
+		
+		//out=
+				MonetiqueCarteHelper.toTrait1Out(res);
+
+		//System.out.println("ok");
 		
 		return out;
 	}

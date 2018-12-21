@@ -37,6 +37,8 @@ public class MBankingWsApplication implements CommandLineRunner {
 	// SoldeCarte m=	monetiqueServiceDao.getSoldeCarte(Double.parseDouble("5303471005144536"));
 	 
 	 //System.out.println(m);
+		
+		//monetiqueServiceDao.traitement1();
 	 
 	}
 	
