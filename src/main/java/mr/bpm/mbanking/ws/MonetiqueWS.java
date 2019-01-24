@@ -1,5 +1,10 @@
 package mr.bpm.mbanking.ws;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -23,6 +28,9 @@ public class MonetiqueWS extends SpringBeanAutowiringSupport{
 
 	@Autowired
 	MonetiqueServiceDao monetiqueServiceDao ;
+	
+	
+	DateFormat df=new SimpleDateFormat("ddMMyyyy");
 	
 	@WebMethod
 	@WebResult(name = "AuthOut")
@@ -55,5 +63,22 @@ public class MonetiqueWS extends SpringBeanAutowiringSupport{
 	public SoldeCarte SoldeOut(@WebParam(name="pan") double pan) {
 		return  monetiqueServiceDao.getSoldeCarte(pan);
 	}
+	
+	@WebMethod
+	@WebResult(name = "SlSSOut")
+	public ListMonetiqueCarte SoldeSSOut(@WebParam(name="du") Date du , @WebParam(name="au") Date au)  {
+		
+		return   new ListMonetiqueCarte(monetiqueServiceDao.getDailyValidSSByDateIntervall(du, au));
+	}
+	
+	/*@WebMethod
+	@WebResult(name = "SlSSOut")
+	public ListMonetiqueCarte SoldeSSOut(@WebParam(name="du") String du , @WebParam(name="au") String au) throws ParseException {
+		
+		 Date ddu=df.parse(du);
+		 Date dau =df.parse(au);	
+		
+		return   new ListMonetiqueCarte(monetiqueServiceDao.getDailyValidSSByDateIntervall(ddu, dau));
+	}*/
 
 } 

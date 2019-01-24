@@ -1,11 +1,17 @@
 package mr.bpm.mbanking;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import mr.bpm.mbanking.dao.MonetiqueServiceDao;
+import mr.bpm.mbanking.dot.MonetiqueClass;
 import mr.bpm.mbanking.dot.SoldeCarte;
 
 @SpringBootApplication
@@ -39,7 +45,18 @@ public class MBankingWsApplication implements CommandLineRunner {
 	 //System.out.println(m);
 		
 		//monetiqueServiceDao.traitement1();
-	 
+		
+/*		String fdu="15012019";
+		String fau="15012019";		
+			    DateFormat df=new SimpleDateFormat("ddMMyyyy");
+
+			 Date du=df.parse(fdu);
+			 Date au =df.parse(fau);	
+			 
+		List<MonetiqueClass> list=monetiqueServiceDao.getDailyValidSSByDateIntervall(du, au);
+		
+		System.out.println("size "+list.size());
+	 */
 	}
 	
 }

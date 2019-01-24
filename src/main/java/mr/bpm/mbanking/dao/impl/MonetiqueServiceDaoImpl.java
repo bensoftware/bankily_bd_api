@@ -1,5 +1,6 @@
 package mr.bpm.mbanking.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 				" s.AUT_TRAN_CURR_F049 , " + 
 				" s.AUT_BILL_CONV_RATE_F010 , " + 
 				" s.aut_auth_id_resp_f038, " + 
-				" s.AUT_REVE_STAT " + 
+				" s.AUT_REVE_STAT, s.AUT_CARD_ACCP_NAME_LOC_F043 " + 
 				" from online_authorization s where aut_prim_acct_numb_f002 = ? " + 
 				" and s.aut_resp_code_f039_2 = 00 " + 
 				" and s.aut_tran_code <> 21011 " + 
@@ -84,6 +85,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 				" from daily_valid_trans s " + 
 				" where " + 
 				" vtr_tc_code <> 10226 " + 
+				" and vtr_tc_code <> 10107 " + 
 				" and vtr_card_numb= ? ";
 		
 		System.out.println(sql);
@@ -196,6 +198,35 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		
 		//out=
 				MonetiqueCarteHelper.toTrait1Out(res);
+
+		//System.out.println("ok");
+		
+		return out;
+	}
+
+	@Override
+	public List<MonetiqueClass> getDailyValidSSByDateIntervall(Date du, Date au) {
+List<MonetiqueClass> out=null;
+
+au.setDate(au.getDate()+1);
+		
+		List<Map<String,Object>>  res=null;
+		
+		String sql =" select s.vtr_issu_ban_code , s.vtr_acqu_ban_code , s.vtr_card_numb, s.vtr_proc_date, s.VTR_PURC_DATE,s.vtr_aut_retr_ref_numb,s.vtr_tc_code, " + 
+				" s.vtr_bill_amou,s.vtr_bill_curr, " + 
+				" s.vtr_tran_amou,s.vtr_tran_curr,s.vtr_auth_code " + 
+				" from daily_valid_trans s where s.vtr_proc_date >= ?  " + 
+				" and  s.vtr_proc_date < ? ";
+		
+		System.out.println(sql);
+		try {
+			res =  jdbcTemplate.queryForList(sql, new Object[] { du, au });
+
+		} catch (Exception e) {
+			//status = "ERREUR";
+		}
+		
+		out=MonetiqueCarteHelper.toClSSOut(res);
 
 		//System.out.println("ok");
 		

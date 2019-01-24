@@ -22,6 +22,7 @@ public class MonetiqueClass implements Serializable {
 	double utiliseCumule;
 	double clearing;
 	double solde;
+	String lieu;
     
 	int etat=0;
 	String refErone;
@@ -30,16 +31,14 @@ public class MonetiqueClass implements Serializable {
 	double taux;
 	double codeAuth;
 	boolean verified=false;
-/*	boolean epoque=true;
-	
 
 	
-	public boolean isEpoque() {
-		return epoque;
+	public String getLieu() {
+		return lieu;
 	}
-	public void setEpoque(boolean epoque) {
-		this.epoque = epoque;
-	}*/
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
+	}
 	public boolean isVerified() {
 		return verified;
 	}

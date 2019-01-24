@@ -1,5 +1,6 @@
 package mr.bpm.mbanking.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import mr.bpm.mbanking.dot.Historique;
@@ -18,4 +19,6 @@ public interface MonetiqueServiceDao {
 	
 	
 	public List<TraitementDto1> traitement1();
+	
+	public List<MonetiqueClass> getDailyValidSSByDateIntervall(Date du , Date au);
 }
