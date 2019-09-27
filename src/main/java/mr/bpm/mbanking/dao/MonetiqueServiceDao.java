@@ -16,7 +16,7 @@ public interface MonetiqueServiceDao {
 	public List<Historique> getHistByPan(double pan);
 	public List<Double> getAllCarte();
 	public SoldeCarte getSoldeCarte(double pan);
-	
+	public String getNomTitulaire(double pan);
 	
 	public List<TraitementDto1> traitement1();
 	
