@@ -65,6 +65,12 @@ public class MonetiqueWS extends SpringBeanAutowiringSupport{
 	}
 	
 	@WebMethod
+	@WebResult(name = "nomTitulaireOut")
+	public String nomTitulaireOut(@WebParam(name="pan") double pan) {
+		return  monetiqueServiceDao.getNomTitulaire(pan);
+	}
+	
+	@WebMethod
 	@WebResult(name = "SlSSOut")
 	public ListMonetiqueCarte SoldeSSOut(@WebParam(name="du") Date du , @WebParam(name="au") Date au)  {
 		

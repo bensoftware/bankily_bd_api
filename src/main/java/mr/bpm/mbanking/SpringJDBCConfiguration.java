@@ -15,7 +15,11 @@ public class SpringJDBCConfiguration {
         dataSource.setUrl("jdbc:oracle:thin:@30.30.1.90:1528:monprod");//change url
         dataSource.setUsername("mxp");//change userid
         dataSource.setPassword("MxpBpm2017");//change pwd
-        
+        /*
+        dataSource.setUrl("jdbc:oracle:thin:@30.30.1.80:1528:monuat");//change url
+        dataSource.setUsername("admin");//change userid
+        dataSource.setPassword("admin123");//change pwd
+        */
  
         return dataSource;
     }

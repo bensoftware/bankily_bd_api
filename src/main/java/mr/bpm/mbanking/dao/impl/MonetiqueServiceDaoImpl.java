@@ -227,8 +227,30 @@ au.setDate(au.getDate()+1);
 		}
 		
 		out=MonetiqueCarteHelper.toClSSOut(res);
-
+        
 		//System.out.println("ok");
+		
+		return out;
+	}
+
+	@Override
+	public String getNomTitulaire(double pan) {
+   String out=null;
+		
+		List<Map<String,Object>>  res=null;
+		String sql =" select car_chld_name from card where car_numb = ? ";
+		
+		System.out.println(sql);
+		try {
+			res =  jdbcTemplate.queryForList(sql, new Object[] { pan });
+
+		} catch (Exception e) {
+			//status = "ERREUR";
+		}
+		
+		out=   (String)res.get(0).get("CAR_CHLD_NAME");
+				
+	//	System.out.println("ok");
 		
 		return out;
 	}
