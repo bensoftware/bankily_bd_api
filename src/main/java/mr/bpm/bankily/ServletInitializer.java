@@ -1,4 +1,4 @@
-package mr.bpm.mbanking;
+package mr.bpm.bankily;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

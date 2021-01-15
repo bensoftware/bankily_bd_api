@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
  
-  <property name="LOG_PATH" value="C:/bpm/logs "/>
+   <property name="LOG_PATH" value="/home/microservice/log/bankilyBdApi"/>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
@@ -28,7 +28,7 @@
       <fileNamePattern>
         ${LOG_PATH}/archived/log.%d{dd-MM-yyyy}.log
       </fileNamePattern>
-      <maxHistory>10</maxHistory>
+      <maxHistory>100</maxHistory>
       <totalSizeCap>100MB</totalSizeCap>
     </rollingPolicy>
 
