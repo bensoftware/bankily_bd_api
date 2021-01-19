@@ -221,6 +221,13 @@ public class bankilyWSDigit {
 		return monetiqueServiceDao.getAllClientFullComplet();
 	}
 	
+	
+	@RequestMapping(value="/setEtatClient",method=RequestMethod.GET)
+    public @ResponseBody void setEtatClient( ListClientStatistique req
+   		) throws Exception {	
+		 monetiqueServiceDao.setEtatClient(req.getClients());
+	}
+	
 	@RequestMapping(value="/getAllClientLiaisonBpm",method=RequestMethod.GET)
     public @ResponseBody ListClientStatistique getAllClientLiaisonBpm(
    		) throws Exception {	

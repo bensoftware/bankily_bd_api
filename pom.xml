@@ -112,7 +112,7 @@
 			</plugin>	
 			
 		</plugins>
-		 <finalName>BankilyBdApi</finalName>
+		 <finalName>BankilyBdApiTest</finalName>
 	</build>
 
 </project>

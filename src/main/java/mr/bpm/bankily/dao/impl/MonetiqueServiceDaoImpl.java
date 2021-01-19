@@ -792,7 +792,36 @@ private String getTelephoneByPartyId(String party) {
 		}
 		
 		
+		private boolean setMayEtatClient(List<ClientStatistique> userIds,int debut,int fin, String remark,int etat) {
+			
+			 List<Map<String,Object>>  res=null;
+				
+			 
+				String sql ="update user_status set REMARKS = ?, status= ? where user_id  in ( ";
+
+				for(int i=debut;i<fin;i++) {
+					String userId=userIds.get(i).getUserId();;
+					if(i==fin-1) {
+						sql+="'"+userId+"'";	
+					}
+					else
+					sql+="'"+userId+"',";
+				}
+				
+				sql+=")";
+			 	System.out.println(sql);
+			 	
+			 	System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {remark,etat });
+                     return true;
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				
+				return false;
 		
+		}
 		
 		private List<ClientStatistique> getCreditClientByFragment(List<String> userIds){
 			
@@ -1649,6 +1678,50 @@ private List<ClientStatistique> getCompleteClientByFragment(List<String> userIds
 				ListClientStatistique out= new ListClientStatistique();
 				out.setClients(list);
 				return out;
+		}
+
+
+
+		@Override
+		public void setEtatClient(List<ClientStatistique> clients ) {
+			
+			
+			int debut=0;
+			int fin=0;
+			
+			int size= clients.size();
+			int reste=size;
+			int page=500;
+			
+			int fragment=size /page;
+			
+			if(size%page!=0) {
+				fragment++;
+			}
+			
+			int index=1;
+			
+			
+			while(index<=fragment) {
+				
+				debut=fin;
+	
+				if(reste>=page) {
+					fin=fin+page;
+				}
+				else {
+					fin=size;
+				}
+				
+				reste-=page;
+				
+				// appel
+				setMayEtatClient(clients, debut, fin, "Blocage incomplet", 5);
+				
+				index++;
+			}
+			
+			
 		}
 	  
 	  

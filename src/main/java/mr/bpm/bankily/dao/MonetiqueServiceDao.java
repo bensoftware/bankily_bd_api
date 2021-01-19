@@ -60,6 +60,8 @@ public interface MonetiqueServiceDao {
 	public ListClientStatistique getAllClientFullBpmActif();
 	public ListClientStatistique getAllClientLiaisonBpm();
 	public ListClientStatistique getAllClientFullIncomplet();
+
+	public void setEtatClient(List<ClientStatistique> clients);
 	
 	public ListClientStatistique getAllClientFullComplet();
 	
