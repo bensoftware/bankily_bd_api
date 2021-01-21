@@ -74,4 +74,6 @@ public interface MonetiqueServiceDao {
 	public ListClientStatistique getAllCifParty();
 	
 	public boolean deblocageUser(String userId);
+	
+	public void setEtatClient(List<ClientStatistique> clients );
 }

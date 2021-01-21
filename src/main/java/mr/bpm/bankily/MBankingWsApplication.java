@@ -1,19 +1,11 @@
 package mr.bpm.bankily;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import mr.bpm.bankily.dao.MonetiqueServiceDao;
-import mr.bpm.bankily.dot.BankilyResponse;
-import mr.bpm.bankily.dot.Client;
-import mr.bpm.bankily.dot.ClientStatistique;
-import mr.bpm.bankily.dot.ListClientStatistique;
-import mr.bpm.bankily.dot.TrsMobileBus;
 import mr.bpm.bankily.service.MajBankilyService;
 
 

@@ -233,4 +233,11 @@ public class bankilyWSDigit {
 		return monetiqueServiceDao.getAllCifParty();
 	}
 	
+	
+	@RequestMapping(value="/setEtatClient",method=RequestMethod.POST)
+    public @ResponseBody void setEtatClient(@RequestBody  ListClientStatistique req
+   		) throws Exception {	
+		 monetiqueServiceDao.setEtatClient(req.getClients());
+	}
+	
 }
