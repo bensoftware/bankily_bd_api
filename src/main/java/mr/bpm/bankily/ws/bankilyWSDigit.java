@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import mr.bpm.bankily.dao.MonetiqueServiceDao;
 import mr.bpm.bankily.dot.BankilyResponse;
 import mr.bpm.bankily.dot.Client;
+import mr.bpm.bankily.dot.ClientConsultation;
 import mr.bpm.bankily.dot.ListClientStatistique;
 import mr.bpm.bankily.dot.ListTrsMobile;
 import mr.bpm.bankily.dot.ListTrsMobileBus;
 import mr.bpm.bankily.dot.TrsMobileBus;
+import mr.bpm.bankily.service.ClientInfoService;
 import mr.bpm.bankily.service.MajBankilyService;
 
 @CrossOrigin("*")
@@ -30,6 +32,38 @@ public class bankilyWSDigit {
 	@Autowired
 	MajBankilyService bankilyService;
 
+	@Autowired
+	ClientInfoService clientInfoService;
+	
+	@RequestMapping(value="/getInfoClientByNni/{nni}",method=RequestMethod.GET)
+    public @ResponseBody ClientConsultation getInfoClientByNni(@PathVariable String nni
+   		) throws Exception {
+		
+		ClientConsultation res=	clientInfoService.getInfoClientByNni(nni);
+	
+		return res;
+
+	}
+	
+	@RequestMapping(value="/getInfoClientByCif/{cif}",method=RequestMethod.GET)
+    public @ResponseBody ClientConsultation getInfoClientByCif(@PathVariable String cif
+   		) throws Exception {
+		
+		ClientConsultation res=	clientInfoService.getInfoClientByCif(cif);
+			
+			return res;
+
+	}
+	
+	@RequestMapping(value="/getInfoClientByTel/{tel}",method=RequestMethod.GET)
+    public @ResponseBody ClientConsultation getInfoClientByTel(@PathVariable String tel
+   		) throws Exception {
+		
+		ClientConsultation res=	clientInfoService.getInfoClientByTel(tel);
+			
+			return res;
+
+	}
 	
 	@RequestMapping(value="/getCifByNni/{nni}",method=RequestMethod.GET)
      public @ResponseBody BankilyResponse getCifByNni(@PathVariable String nni

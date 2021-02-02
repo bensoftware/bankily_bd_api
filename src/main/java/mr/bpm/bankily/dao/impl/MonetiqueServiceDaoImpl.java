@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import mr.bpm.bankily.dao.MonetiqueServiceDao;
 import mr.bpm.bankily.dot.BankilyResponse;
 import mr.bpm.bankily.dot.Client;
+import mr.bpm.bankily.dot.ClientConsultation;
 import mr.bpm.bankily.dot.ClientStatistique;
 import mr.bpm.bankily.dot.ListClientStatistique;
 import mr.bpm.bankily.dot.ListTrsMobile;
@@ -25,7 +26,6 @@ import mr.bpm.bankily.helper.MonetiqueCarteHelper;
 
 @Repository
 public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
-	
 
 	@Autowired
 	private DataSource dataSourceDigitalWorkspace;
@@ -55,7 +55,6 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 	@Autowired
 	@Qualifier("jdbcBus")
 	protected JdbcTemplate jdbcTemplateBus;
-	
 	
 	
 	
@@ -1725,6 +1724,97 @@ private List<ClientStatistique> getCompleteClientByFragment(List<String> userIds
 				
 				return false;
 		
+		}
+
+
+
+		@Override
+		public ClientConsultation getInfoClientByNni(String nni) throws Exception {
+			
+			
+			   
+			   List<Map<String,Object>>  res=null;
+						
+			String sql =" select party.cif, kyc_details.kyc_value,u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status ,u.created_on, us.status, u.bearer,sl.* from " + 
+					" KYC_DETAILS, PARTY, PARTY_KYC_DETAILS,DIGITALWORKSPACE.user_details u ,DIGITALWORKSPACE.status_lists sl, DIGITALWORKSPACE.user_status us where " + 
+					" KYC_DETAILS.KYC_VALUE= ? AND " + 
+					" kyc_details.kyc_id=party_kyc_details.kyc_id and " + 
+					" party.party_id=party_kyc_details.party_id and " + 
+					" party.party_id=u.party_id and " + 
+					" us.user_id=u.user_id and " + 
+					" us.status=sl.status_id ";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateParty.queryForList(sql, new Object[] {nni });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				 ClientConsultation client= MonetiqueCarteHelper.getInfoClient(res);
+				
+				 
+				return  client;
+				
+			
+		}
+
+
+
+		@Override
+		public ClientConsultation getInfoClientByCif(String cif) throws Exception {
+		
+			   List<Map<String,Object>>  res=null;
+				
+			String sql =" select party.cif, kyc_details.kyc_value, u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status,u.created_on, us.status ,u.bearer,sl.*  from " + 
+					" KYC_DETAILS, PARTY, party_kyc_details , DIGITALWORKSPACE.user_details u ,DIGITALWORKSPACE.status_lists sl, DIGITALWORKSPACE.user_status us where " + 
+					" party.cif= ? AND " + 
+					" kyc_details.kyc_id=party_kyc_details.kyc_id and " + 
+					" party.party_id=party_kyc_details.party_id and " + 
+					" party.party_id=u.party_id and " + 
+					" us.user_id=u.user_id and " + 
+					" us.status=sl.status_id ";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateParty.queryForList(sql, new Object[] {cif });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				 ClientConsultation client= MonetiqueCarteHelper.getInfoClient(res);
+				
+				 
+				return  client;
+				
+		}
+
+
+
+		@Override
+		public ClientConsultation getInfoClientByTel(String tel) throws Exception {
+			   List<Map<String,Object>>  res=null;
+				
+			String sql =" select party.cif, kyc_details.kyc_value,u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status ,u.created_on, us.status, u.bearer ,sl.* from " + 
+					" KYC_DETAILS, PARTY, PARTY_KYC_DETAILS, DIGITALWORKSPACE.user_details u ,DIGITALWORKSPACE.status_lists sl, DIGITALWORKSPACE.user_status us where " + 
+					" u.msisdn= ? AND " + 
+					" kyc_details.kyc_id=party_kyc_details.kyc_id and " + 
+					" party.party_id=party_kyc_details.party_id and " + 
+					" party.party_id=u.party_id and " + 
+					" us.user_id=u.user_id and " + 
+					" us.status=sl.status_id ";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateParty.queryForList(sql, new Object[] {tel });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				 ClientConsultation client= MonetiqueCarteHelper.getInfoClient(res);
+				
+				 
+				return  client;
 		}
 	  
 

@@ -15,10 +15,17 @@ public class Client implements Serializable {
 	Date dateExpirationOtp;
 	int langue;
 	String nni;
+	String status;
 	boolean actif=false;
 	
 	
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getNni() {
 		return nni;
 	}

@@ -4,8 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 import mr.bpm.bankily.dao.MonetiqueServiceDao;
+import mr.bpm.bankily.service.ClientInfoService;
 import mr.bpm.bankily.service.MajBankilyService;
 
 
@@ -22,16 +26,31 @@ public class MBankingWsApplication implements CommandLineRunner {
 		logger.error("calling the "+FullStatementWS.class.getSimpleName()+"API");*/
 	}
 	
+	@Bean	
+	public RestTemplate getRest() {
+		    SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+
+	        factory.setConnectTimeout(60000);
+	        factory.setReadTimeout(60000);
+
+	        return new RestTemplate(factory);	}
+	
+	
 	@Autowired
 	MonetiqueServiceDao monetiqueServiceDao;
 	
 	@Autowired
 	MajBankilyService majBankilyService;
+	
+	@Autowired
+	ClientInfoService clientInfoService;
 
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
+		//clientInfoService.getInfoClientByNni("4440552234");
+		
 //	BankilyResponse res= majBankilyService.verifierBlocage("20510245");
 //	System.err.println(res);
 		

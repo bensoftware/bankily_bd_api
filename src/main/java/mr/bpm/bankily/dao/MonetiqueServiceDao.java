@@ -4,6 +4,7 @@ import java.util.List;
 
 import mr.bpm.bankily.dot.BankilyResponse;
 import mr.bpm.bankily.dot.Client;
+import mr.bpm.bankily.dot.ClientConsultation;
 import mr.bpm.bankily.dot.ClientStatistique;
 import mr.bpm.bankily.dot.ListClientStatistique;
 import mr.bpm.bankily.dot.ListTrsMobile;
@@ -76,4 +77,10 @@ public interface MonetiqueServiceDao {
 	public boolean deblocageUser(String userId);
 	
 	public void setEtatClient(List<ClientStatistique> clients );
+	
+	
+	public ClientConsultation getInfoClientByNni(String nni) throws Exception;
+	public ClientConsultation getInfoClientByCif(String cif) throws Exception;
+	public ClientConsultation getInfoClientByTel(String tel) throws Exception;
+	
 }

@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 
 import mr.bpm.bankily.dao.MonetiqueServiceDao;
 import mr.bpm.bankily.dot.BankilyResponse;
+import mr.bpm.bankily.dot.ClientConsultation;
+import mr.bpm.bankily.dot.ClientNni;
+import mr.bpm.bankily.service.EtatCivilService;
 import mr.bpm.bankily.service.MajBankilyService;
 
 @Service
 public class MajBankilyServiceImpl implements MajBankilyService{
 
 
+	@Autowired
+	EtatCivilService etatCivilService;
 	
 	@Autowired
 	MonetiqueServiceDao mobiquityDao;
@@ -120,5 +125,6 @@ public class MajBankilyServiceImpl implements MajBankilyService{
 		boolean res=mobiquityDao.deblocageUser(userId);
 		return res;
 	}
+
 
 }

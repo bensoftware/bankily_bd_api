@@ -8,6 +8,7 @@ import java.util.Map;
 
 import mr.bpm.bankily.dot.BankilyResponse;
 import mr.bpm.bankily.dot.Client;
+import mr.bpm.bankily.dot.ClientConsultation;
 import mr.bpm.bankily.dot.ClientStatistique;
 import mr.bpm.bankily.dot.TransImal;
 import mr.bpm.bankily.dot.TrsMobile;
@@ -1077,6 +1078,108 @@ static public boolean getStatusByIdParty( List<Map<String, Object>> params) {
 
 	return out;
 }
+
+
+
+
+
+static public ClientConsultation getInfoClient( List<Map<String, Object>> params) {	
+	
+		
+	ClientConsultation res= new ClientConsultation();
+	
+	if(params==null || params.size()==0)
+		return null;
+	
+	
+	for(Map<String, Object> p :params) {
+		
+		 try {		 
+			 res.setCif( ""+p.get("CIF"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setNni( ""+p.get("KYC_VALUE"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 try {		 
+			 res.setUserId( ""+p.get("USER_ID"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setTelephone( ""+p.get("MSISDN"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setFirstName( ""+p.get("FIRST_NAME"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setLastName( ""+p.get("LAST_NAME"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setPartyId( ""+p.get("PARTY_ID"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setKyc_label( ""+p.get("KYC_STATUS"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setKycStatusId( ""+p.get("KYC_STATUS"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setStatusLabel( ""+p.get("STATUS"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setBearer( ""+p.get("BEARER"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setStatusId(""+(BigDecimal)p.get("STATUS_ID"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
+		 try {		 
+			 res.setDate((Date)p.get("created_on"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+	
+	    return res;
+
+	}
+	
+	return null;
+		
+	}
+
 
 
 	

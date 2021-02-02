@@ -1,6 +1,7 @@
 package mr.bpm.bankily.service;
 
 import mr.bpm.bankily.dot.BankilyResponse;
+import mr.bpm.bankily.dot.ClientConsultation;
 
 public interface MajBankilyService {
 	
@@ -13,5 +14,6 @@ public interface MajBankilyService {
 	public BankilyResponse verifierBlocage(String telephone) throws Exception;
 	
 	public boolean deblocageUser(String userId) throws Exception;
+	
 
 }
