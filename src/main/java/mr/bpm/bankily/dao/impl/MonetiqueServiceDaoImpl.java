@@ -156,7 +156,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 				  jdbcTemplateDigit.queryForList(sql, new Object[] { telephone });
 
 			} catch (Exception e) {
-				throw new Exception(e.getMessage());
+				//throw new Exception(e.getMessage());
 			}
 		
 		}
@@ -1717,7 +1717,20 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 			
 		}
 
-
+		@Override
+		public boolean deblocageUserTel(String tel) {
+			// TODO Auto-generated method stub
+			String sql ="update user_details set invalid_password_count=0,attempts_expiry_time=null where msisdn= ? ";
+			System.out.println(sql);
+			try {
+				jdbcTemplateDigit.queryForList(sql,new Object[] {tel});//
+				return true;
+				
+			} catch (Exception e) {
+				return false;
+			}
+			
+		}
 
 		@Override
 		public ListClientStatistique getAllClientFullComplet() {
@@ -1840,7 +1853,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 			   
 			   List<Map<String,Object>>  res=null;
 						
-			String sql =" select party.cif, kyc_details.kyc_value,u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status ,u.created_on, us.status, u.bearer,sl.* from " + 
+			String sql =" select u.otp,u.login_id,u.invalid_password_count,u.attempts_expiry_time, party.cif, kyc_details.kyc_value,u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status ,u.created_on, us.status, u.bearer,sl.* from " + 
 					" KYC_DETAILS, PARTY, PARTY_KYC_DETAILS,DIGITALWORKSPACE.user_details u ,DIGITALWORKSPACE.status_lists sl, DIGITALWORKSPACE.user_status us where " + 
 					" KYC_DETAILS.KYC_VALUE= ? AND " + 
 					" kyc_details.kyc_id=party_kyc_details.kyc_id and " + 
@@ -1871,7 +1884,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 		
 			   List<Map<String,Object>>  res=null;
 				
-			String sql =" select party.cif, kyc_details.kyc_value, u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status,u.created_on, us.status ,u.bearer,sl.*  from " + 
+			String sql =" select u.otp,u.login_id,u.invalid_password_count,u.attempts_expiry_time, party.cif, kyc_details.kyc_value, u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status,u.created_on, us.status ,u.bearer,sl.*  from " + 
 					" KYC_DETAILS, PARTY, party_kyc_details , DIGITALWORKSPACE.user_details u ,DIGITALWORKSPACE.status_lists sl, DIGITALWORKSPACE.user_status us where " + 
 					" party.cif= ? AND " + 
 					" kyc_details.kyc_id=party_kyc_details.kyc_id and " + 
@@ -1900,7 +1913,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 		public ClientConsultation getInfoClientByTel(String tel) throws Exception {
 			   List<Map<String,Object>>  res=null;
 				
-			String sql =" select party.cif, kyc_details.kyc_value,u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status ,u.created_on, us.status, u.bearer ,sl.* from " + 
+			String sql =" select u.otp,u.login_id,u.invalid_password_count,u.attempts_expiry_time, party.cif, kyc_details.kyc_value,u.user_id, u.msisdn, u.first_name, u.last_name, u.party_id, u.KYC_Status ,u.created_on, us.status, u.bearer ,sl.* from " + 
 					" KYC_DETAILS, PARTY, PARTY_KYC_DETAILS, DIGITALWORKSPACE.user_details u ,DIGITALWORKSPACE.status_lists sl, DIGITALWORKSPACE.user_status us where " + 
 					" u.msisdn= ? AND " + 
 					" kyc_details.kyc_id=party_kyc_details.kyc_id and " + 

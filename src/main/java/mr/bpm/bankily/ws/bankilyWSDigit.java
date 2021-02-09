@@ -45,6 +45,9 @@ public class bankilyWSDigit {
 
 	}
 	
+
+	
+	
 	@RequestMapping(value="/getInfoClientByCif/{cif}",method=RequestMethod.GET)
     public @ResponseBody ClientConsultation getInfoClientByCif(@PathVariable String cif
    		) throws Exception {
@@ -118,6 +121,19 @@ public class bankilyWSDigit {
 	return res;
 
 	}
+	
+	
+	
+	@RequestMapping(value="/deblocageUserTel/{tel}",method=RequestMethod.GET)
+    public @ResponseBody void deblocageUserTel(@PathVariable String tel
+   		) throws Exception {
+		   	
+		 monetiqueServiceDao.deblocageUserTel(tel);
+   	
+	
+
+	}
+	
 	
 	@RequestMapping(value="/deblocageUser/{userId}",method=RequestMethod.GET)
     public @ResponseBody BankilyResponse deblocageUser(@PathVariable String userId

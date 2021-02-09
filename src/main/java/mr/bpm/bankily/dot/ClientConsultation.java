@@ -14,6 +14,9 @@ public class ClientConsultation implements Serializable {
 	Date date;
 	String cif;
 	String userId;
+	int nombreTentative;
+	Date dateExpirationBlocage;
+	String temporaire;
 	
 	private String firstName;
 	private String lastName;
@@ -25,6 +28,24 @@ public class ClientConsultation implements Serializable {
 	private String bearer ;
 	
 	
+	public String getTemporaire() {
+		return temporaire;
+	}
+	public void setTemporaire(String temporaire) {
+		this.temporaire = temporaire;
+	}
+	public int getNombreTentative() {
+		return nombreTentative;
+	}
+	public void setNombreTentative(int nombreTentative) {
+		this.nombreTentative = nombreTentative;
+	}
+	public Date getDateExpirationBlocage() {
+		return dateExpirationBlocage;
+	}
+	public void setDateExpirationBlocage(Date dateExpirationBlocage) {
+		this.dateExpirationBlocage = dateExpirationBlocage;
+	}
 	public String getUserId() {
 		return userId;
 	}

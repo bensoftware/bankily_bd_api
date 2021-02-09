@@ -40,9 +40,7 @@ public class MajBankilyServiceImpl implements MajBankilyService{
 		
 		
 		BankilyResponse res1=null;
-
 		String cif=null;
-
 
 		res1=mobiquityDao.getPartyIdByTelephone(telephone);
 		

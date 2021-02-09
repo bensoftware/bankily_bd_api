@@ -50,7 +50,6 @@ public class MBankingWsApplication implements CommandLineRunner {
 		// TODO Auto-generated method stub
 
 		//clientInfoService.getInfoClientByNni("4440552234");
-		
 //	BankilyResponse res= majBankilyService.verifierBlocage("20510245");
 //	System.err.println(res);
 		

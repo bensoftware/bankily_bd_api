@@ -1127,6 +1127,32 @@ static public ClientConsultation getInfoClient( List<Map<String, Object>> params
 	
 	
 	for(Map<String, Object> p :params) {
+		 try {
+
+			 res.setTemporaire(""+p.get("otp"));
+					} catch (Exception e) {
+						System.out.println(e);
+					}
+		 try {
+			 
+			 BigDecimal tentb=(BigDecimal)p.get("invalid_password_count");
+			 res.setNombreTentative(tentb.intValue());
+			
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
+		 try {		 
+			 res.setLogin( ""+p.get("login_id"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {		 
+			 res.setDateExpirationBlocage( (Date)p.get("attempts_expiry_time"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		
 		 try {		 
 			 res.setCif( ""+p.get("CIF"));
