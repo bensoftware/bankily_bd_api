@@ -278,6 +278,40 @@ return out;
 
 
 
+static public List<ClientStatistique> getUserIds( List<Map<String, Object>> params) {
+	
+	List<ClientStatistique> out= new ArrayList<>();
+	
+	
+	if(params==null || params.size()==0)
+		return null;
+		
+	
+	for(Map<String, Object> p :params) {
+	
+		ClientStatistique c= new ClientStatistique();
+	 try {
+			 
+		 c.setUserId(""+p.get("USER_ID"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+	 try {
+		 c.setNni(""+p.get("kyc_value"));
+	} catch (Exception e) {
+		System.out.println(e);
+	}
+	 
+	 out.add(c);
+         		
+	}
+	
+	
+
+	return out;
+}
+
+
 static public Client getTel( List<Map<String, Object>> params) {
 	
 	Client out =new  Client();

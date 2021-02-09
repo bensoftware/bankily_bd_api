@@ -25,6 +25,9 @@ public interface MonetiqueServiceDao {
 	
 	public BankilyResponse getPartyIdByTelephone(String telephone);
 	
+	public void debloquerClientBankily(String telephone) throws Exception;
+	
+	
 	public String getCifByPartyId(String partyId);
 	
 	public BankilyResponse getInfoPINTemp(String telephone);

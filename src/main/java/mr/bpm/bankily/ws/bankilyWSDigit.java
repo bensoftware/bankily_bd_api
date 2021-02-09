@@ -90,6 +90,15 @@ public class bankilyWSDigit {
 
 	}
 	
+	@RequestMapping(value="/debloquerClientBankily/{telephone}",method=RequestMethod.GET)
+    public @ResponseBody void debloquerClientBankily(@PathVariable String telephone
+   		) throws Exception {
+		   	
+          monetiqueServiceDao.debloquerClientBankily(telephone);
+   	
+
+	}
+	
 	@RequestMapping(value="/getTelephoneByUserId/{userId}",method=RequestMethod.GET)
     public @ResponseBody Client getTelephoneByUserId(@PathVariable String userId
    		) throws Exception {

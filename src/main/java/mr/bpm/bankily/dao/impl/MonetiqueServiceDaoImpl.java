@@ -143,6 +143,25 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		}
 
 
+	  
+	  
+	   @Override
+		public void debloquerClientBankily(String telephone) throws Exception {
+		
+					
+			String sql ="update  user_status set status=1 where user_id in (select user_id from user_details where msisdn= ? ) and status=5 ";
+			
+			System.out.println(sql);
+			try {
+				  jdbcTemplateDigit.queryForList(sql, new Object[] { telephone });
+
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		
+		}
+
+	  
 	  @Override
 		public Client getTelephoneByUserId(String userId) {
 		
@@ -791,6 +810,51 @@ private String getTelephoneByPartyId(String party) {
 		}
 		
 		
+		private List<ClientStatistique> getUserIdByNni(List<ClientStatistique> list){
+		
+			List<ClientStatistique> res= new ArrayList<>();
+			
+			int debut=0;
+			int fin=0;
+			
+			int size= list.size();
+			int reste=size;
+			int page=1000;
+			
+			int fragment=size /page;
+			
+			if(size%page!=0) {
+				fragment++;
+			}
+			
+			int index=1;
+			
+			
+			while(index<=fragment) {
+				
+				debut=fin;
+	
+				if(reste>=page) {
+					fin=fin+page;
+				}
+				else {
+					fin=size;
+				}
+				
+				reste-=page;
+				
+				// appel
+				List<ClientStatistique> listFrag=getUserIdByNniFragement(list, debut, fin);
+				
+				if(listFrag!=null)
+				res.addAll(listFrag);
+				index++;
+			}
+
+			return res;
+		}
+		
+		
 		
 		
 		private List<ClientStatistique> getCreditClientByFragment(List<String> userIds){
@@ -832,13 +896,11 @@ private String getTelephoneByPartyId(String party) {
 				res.addAll(listFrag);
 				index++;
 			}
-			
-			
-			
-			
+
 			return res;
 			
 		}
+		
 		
 private List<ClientStatistique> getDebitClientByFragment(List<String> userIds){
 			
@@ -935,6 +997,36 @@ private List<ClientStatistique> getCompleteClientByFragment(List<String> userIds
 	
 }
 		
+
+private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> userIds,int debut,int fin) {
+	
+	 List<Map<String,Object>>  res=null;
+		
+	 String sql ="select a.user_id,c.kyc_value from DIGITALWORKSPACE.user_details a, party_kyc_details b , kyc_details c where c.kyc_id=b.kyc_id and b.party_id=a.party_id and c.kyc_value in ( "; 		
+						
+		for(int i=debut;i<fin;i++) {
+			String userId= userIds.get(i).getNni();
+			
+			if(i==fin-1) {
+				sql+="'"+userId+"'";	
+			}
+			else
+			sql+="'"+userId+"',";
+		}
+		
+		sql+=" )";
+	 	System.out.println(sql);
+		try {
+			res =  jdbcTemplateParty.queryForList(sql, new Object[] {  });
+
+		} catch (Exception e) {
+			//status = "ERREUR";
+		}
+		
+		return MonetiqueCarteHelper.getUserIds(res);
+
+}
+
 		
 		private List<ClientStatistique> getCreditClient(List<String> userIds,int debut,int fin) {
 			
@@ -1057,19 +1149,32 @@ private List<ClientStatistique> getCompleteClientByFragment(List<String> userIds
 		
 		
 		
+		
 		@Override
 		public ListClientStatistique getAllEtatClient(List<ClientStatistique> list){
 
 			List<ClientStatistique> out= new ArrayList<>();
 									
 			// recuperation des UserId pour recherche des actifs
-			List<String> userIds= new ArrayList<>();
+			/*List<String> userIds= new ArrayList<>();
 			
 			for(ClientStatistique x : list) {
 				String userId= getUserIdByNni(x.getNni());
 				userIds.add(userId);
 				System.out.println(userId);
 			}
+			*/
+			// 
+			list=getUserIdByNni(list);
+			
+			List<String> userIds=new ArrayList<>();
+			
+			for(ClientStatistique x : list) {
+				userIds.add(x.getUserId());
+			}
+		
+			//	List<String> userIds = getUserIdByNni(list);
+			
 			
 			// recherche et ajout / aux transactions credit
 			List<ClientStatistique> actifs=getCreditClientByFragment(userIds);
