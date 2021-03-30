@@ -79,7 +79,7 @@ public class SpringJDBCConfiguration {
 	  
 	  // ////////////////////////////////////
 	  
-	  @Bean   
+	    @Bean   
 	    @ConfigurationProperties(prefix="spring.digitalworkspace")
 	    public DataSource dataSourceDigitalWorkspace() {
 	        DriverManagerDataSource dataSource = new DriverManagerDataSource();

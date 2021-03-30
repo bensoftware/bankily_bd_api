@@ -17,6 +17,8 @@ import mr.bpm.bankily.dot.Client;
 import mr.bpm.bankily.dot.ListClientStatistique;
 import mr.bpm.bankily.dot.ListTrsMobile;
 import mr.bpm.bankily.dot.ListTrsMobileBus;
+import mr.bpm.bankily.dot.RequestDto;
+import mr.bpm.bankily.dot.ResponseDto;
 import mr.bpm.bankily.dot.TrsMobileBus;
 import mr.bpm.bankily.service.MajBankilyService;
 
@@ -239,5 +241,28 @@ public class bankilyWSDigit {
    		) throws Exception {	
 		return monetiqueServiceDao.getAllCifParty();
 	}
+	
+	
+	@RequestMapping(value="/getUserIdByPhone",method=RequestMethod.POST)
+    public @ResponseBody ResponseDto getUserIdByPhone(@RequestBody RequestDto req
+   		) throws Exception {	
+		return monetiqueServiceDao.getUserIdByPhone(req);
+	}
+	
+	@RequestMapping(value="/getStatusByUserId",method=RequestMethod.POST)
+    public @ResponseBody ResponseDto getStatusByUserId(@RequestBody RequestDto req
+   		) throws Exception {	
+		return monetiqueServiceDao.getKycStatusByUserId(req);
+	}
+	
+	@RequestMapping(value="/getTotalCashinTrsByUserId",method=RequestMethod.POST)
+    public @ResponseBody ResponseDto getTotalCashinTrsByUserId(@RequestBody RequestDto req
+   		) throws Exception {	
+		return monetiqueServiceDao.getTotalCashinTrsBy(req);
+	}
+	
+	
+	
+	
 	
 }

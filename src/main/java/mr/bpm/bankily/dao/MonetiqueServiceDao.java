@@ -8,6 +8,8 @@ import mr.bpm.bankily.dot.ClientStatistique;
 import mr.bpm.bankily.dot.ListClientStatistique;
 import mr.bpm.bankily.dot.ListTrsMobile;
 import mr.bpm.bankily.dot.ListTrsMobileBus;
+import mr.bpm.bankily.dot.RequestDto;
+import mr.bpm.bankily.dot.ResponseDto;
 import mr.bpm.bankily.dot.TrsMobileBus;
 
 public interface MonetiqueServiceDao {
@@ -76,4 +78,13 @@ public interface MonetiqueServiceDao {
 	public ListClientStatistique getAllCifParty();
 	
 	public boolean deblocageUser(String userId);
+	
+	
+	public ResponseDto getUserIdByPhone(RequestDto d) throws Exception;
+	public ResponseDto getKycStatusByUserId(RequestDto d) throws Exception;
+	public ResponseDto getTotalCashinTrsBy(RequestDto d) throws Exception;
+	
+	
+
+
 }
