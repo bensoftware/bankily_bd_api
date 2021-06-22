@@ -10,6 +10,8 @@ import mr.bpm.bankily.dot.BankilyResponse;
 import mr.bpm.bankily.dot.Client;
 import mr.bpm.bankily.dot.ClientConsultation;
 import mr.bpm.bankily.dot.ClientStatistique;
+import mr.bpm.bankily.dot.Merchant;
+import mr.bpm.bankily.dot.PaiementMerchant;
 import mr.bpm.bankily.dot.TransImal;
 import mr.bpm.bankily.dot.TrsMobile;
 import mr.bpm.bankily.dot.TrsMobileBus;
@@ -1241,6 +1243,161 @@ static public ClientConsultation getInfoClient( List<Map<String, Object>> params
 	}
 
 
+
+
+
+
+static public List<Merchant> getMerchant( List<Map<String, Object>> params) {	
+	
+	List<Merchant> res=new ArrayList<>();
+			
+	if(params==null || params.size()==0)
+		return null;
+	
+	
+	for(Map<String, Object> p :params) {
+		
+		Merchant m= new Merchant();
+		
+		 try {
+
+			 m.setUserId(""+p.get("user_id"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
+		 try {
+
+			 m.setParentId(""+p.get("parent_id"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {
+
+			 m.setCaisse(""+p.get("user_name"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {
+
+			 m.setCommercant(""+p.get("last_name"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 
+		 try {
+
+			 m.setTelephone(""+p.get("msisdn"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 
+		 try {
+
+			 m.setCategorie(""+p.get("category_code"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
+		 
+	   res.add(m);
+	   
+
+	}
+	
+	 return res;
+		
+	}
+
+
+
+
+static public TrsMobile getTrsMobileAddRef( List<Map<String, Object>> params) {	
+	
+			
+	if(params==null || params.size()==0)
+		return null;
+	
+	
+	for(Map<String, Object> p :params) {
+		
+		TrsMobile m= new TrsMobile();
+		
+		 try {
+
+			 m.setAdditionalReference(""+p.get("account_no"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
+		
+		 
+	   return m;
+
+	}
+	
+	 return null;
+		
+	}
+
+
+
+static public List<PaiementMerchant> getPaiementMerchant( List<Map<String, Object>> params) {	
+	
+	List<PaiementMerchant> res=new ArrayList<>();
+			
+	if(params==null || params.size()==0)
+		return null;
+	
+	
+	for(Map<String, Object> p :params) {
+		
+		PaiementMerchant m= new PaiementMerchant();
+		
+		 try {
+
+			 m.setTransactionId(""+p.get("transfer_id"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
+		 try {
+
+			 m.setMontant(((BigDecimal)p.get("montant")).doubleValue());
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 
+		 try {
+
+			 m.setDatePaiement((Date)p.get("transfer_on"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {
+
+			 m.setCaisse(""+p.get("caisse"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 
+		
+		 
+	   res.add(m);
+	   
+
+	}
+	
+	 return res;
+		
+	}
 
 	
 	

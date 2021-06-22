@@ -21,7 +21,7 @@ public class SpringJDBCConfiguration {
 
 	PooledPBEStringEncryptor encryptor=null;
 
-	String host,pwdDigit,usernameDigit,pwdParty,usernameParty,pwdInstr,usernameInstr,usernameBus,pwdBus;
+	String host,pwdDigit,usernameDigit,pwdParty,usernameParty,pwdInstr,usernameInstr,usernameBus,pwdBus,usernameMobiq,pwdMobiq;
 	
 	
 	public SpringJDBCConfiguration(
@@ -33,7 +33,10 @@ public class SpringJDBCConfiguration {
 			@Value("${pwd.db.instrumentmgmt}") String pwdInstr,
 			@Value("${username.db.instrumentmgmt}") String usernameInstr,
 			@Value("${pwd.db.bus}") String pwdBus,
-			@Value("${username.db.bus}") String usernameBus
+			@Value("${username.db.bus}") String usernameBus,
+			@Value("${username.db.mobiq}") String usernameMobiq,
+			@Value("${pwd.db.mobiq}") String pwdMobiq
+			
 			) {
 
 		
@@ -51,7 +54,9 @@ public class SpringJDBCConfiguration {
 		this.pwdInstr=decrypte(pwdInstr);
 		this.usernameInstr=usernameInstr;
 		this.usernameBus=usernameBus;
-		this.pwdBus=decrypte(pwdBus);;
+		this.pwdBus=decrypte(pwdBus);
+		this.usernameMobiq=usernameMobiq;
+		this.pwdMobiq=decrypte(pwdMobiq);
 		
 	}
 	
@@ -157,6 +162,26 @@ public class SpringJDBCConfiguration {
 	        return new JdbcTemplate(dataSourceBus);
 	    }
 	    
+	    
+	    
+	    @Bean
+	    @ConfigurationProperties(prefix="spring.mobiq")
+	    public DataSource dataSourceMobiq() {
+	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	        //MySQL database we are using
+	        dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+	        dataSource.setUrl("jdbc:oracle:thin:@"+host);//change url
+	        dataSource.setUsername(usernameMobiq);//change userid
+	        dataSource.setPassword(pwdMobiq);//change pwd
+	        return dataSource;
+	    }
+	    
+	    @Bean("jdbcMobiq")
+	    public JdbcTemplate createJdbcTemplate5(@Autowired @Qualifier("dataSourceMobiq") DataSource dataSourceMobiq){
+	        return new JdbcTemplate(dataSourceMobiq);
+	    }
+	    
+	
 	
 	  
 }

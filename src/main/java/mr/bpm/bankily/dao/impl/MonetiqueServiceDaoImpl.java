@@ -1,6 +1,7 @@
 package mr.bpm.bankily.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import mr.bpm.bankily.dot.ClientStatistique;
 import mr.bpm.bankily.dot.ListClientStatistique;
 import mr.bpm.bankily.dot.ListTrsMobile;
 import mr.bpm.bankily.dot.ListTrsMobileBus;
+import mr.bpm.bankily.dot.Merchant;
+import mr.bpm.bankily.dot.PaiementMerchant;
 import mr.bpm.bankily.dot.TrsMobile;
 import mr.bpm.bankily.dot.TrsMobileBus;
 import mr.bpm.bankily.helper.MonetiqueCarteHelper;
@@ -40,6 +43,9 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 	private DataSource dataSourceBus;
 	
 	@Autowired
+	private DataSource dataSourceMobiq;
+	
+	@Autowired
 	@Qualifier("jdbcDigitalworkspace")
 	protected JdbcTemplate jdbcTemplateDigit;
 	
@@ -56,6 +62,9 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 	@Qualifier("jdbcBus")
 	protected JdbcTemplate jdbcTemplateBus;
 	
+	@Autowired
+	@Qualifier("jdbcMobiq")
+	protected JdbcTemplate jdbcTemplateMobiq;
 	
 	
 	  @PostConstruct
@@ -64,6 +73,7 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 	      jdbcTemplateParty = new JdbcTemplate(dataSourceParty);
 	      jdbcTemplateInstr = new JdbcTemplate(dataSourceInstrumentMgmt);
 	      jdbcTemplateBus = new JdbcTemplate(dataSourceBus);
+	      jdbcTemplateMobiq = new JdbcTemplate(dataSourceMobiq);
 	  }
 
 	  
@@ -1934,7 +1944,182 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 				 
 				return  client;
 		}
+
+
+
+		@Override
+		public List<Merchant> getAllMerchant() throws Exception {
+			   List<Map<String,Object>>  res=null;
+				
+			String sql ="select user_id,user_name,last_name,msisdn,category_code,parent_id from users where category_code in ('HMER')";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateMobiq.queryForList(sql, new Object[] { });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				  return MonetiqueCarteHelper.getMerchant(res);
+				
+				 
+		}
 	  
 
+		@Override
+		public List<Merchant> getChildrenMerchant(String userId) throws Exception {
+			  
+			List<Map<String,Object>>  res=null;
+			
+			String ref= "'"+userId+"'";
+				
+			String sql ="select user_id,user_name,last_name,msisdn,category_code,parent_id from users where parent_id in ("+ref+") and (category_code in ('HMER','MER') or category_code like 'PSEUDO%') ";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateMobiq.queryForList(sql, new Object[] { });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				  return MonetiqueCarteHelper.getMerchant(res);
+				
+				 
+		}
+
+
+
+		@Override
+		public List<PaiementMerchant> getPaiementMerchantByIntervallDate(List<String> userIds, Date debut, Date fin)
+				throws Exception {
+	       
+			List<Map<String,Object>>  res=null;
+			
+			
+			if(userIds==null || userIds.size()==0)
+				return null;
+			
+			String r="";
+			String ref=null;
+			for(String x : userIds) {
+				ref= "'"+x+"'";
+	
+				if(r.equals(""))
+					r+=ref;
+				else
+					r+=","+ref;
+			}
+			
+			
+				
+			String sql =" select transfer_id, transfer_on,transfer_value/100 as montant,attr_5_value as caisse from mtx_transaction_header s where service_type='MERPAYDIG' and transfer_status='TS' " + 
+					" and transfer_on >= ? and transfer_on < ? " + 
+					" and payee_user_id in ("+r+") order by transfer_on asc";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateMobiq.queryForList(sql, new Object[] {debut, fin });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				  return MonetiqueCarteHelper.getPaiementMerchant(res);
+		}
+
+
+
+		@Override
+		public List<PaiementMerchant> getPaiementMerchantByTelAndIntervallDate(List<String> userIds, Date debut,
+				Date fin) throws Exception {
+	List<Map<String,Object>>  res=null;
+			
+			
+			if(userIds==null || userIds.size()==0)
+				return null;
+			
+			String r="";
+			String ref=null;
+			for(String x : userIds) {
+				ref= "'"+x+"'";
+	
+				if(r.equals(""))
+					r+=ref;
+				else
+					r+=","+ref;
+			}
+			
+			
+				
+			String sql =" select transfer_id, transfer_on,transfer_value/100 as montant,attr_5_value as caisse from mtx_transaction_header s where service_type='MERPAYDIG' and transfer_status='TS' " + 
+					" and transfer_on >= ? and transfer_on < ? " + 
+					" and attr_5_value in ("+r+") order by transfer_on asc";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateMobiq.queryForList(sql, new Object[] {debut, fin });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				  return MonetiqueCarteHelper.getPaiementMerchant(res);
+		}
+
+
+
+		@Override
+		public List<PaiementMerchant> getAutoSweepMerchantByIntervallDate(List<String> userIds, Date debut, Date fin)
+				throws Exception {
+		List<Map<String,Object>>  res=null;
+			
+			
+			if(userIds==null || userIds.size()==0)
+				return null;
+			
+			String r="";
+			String ref=null;
+			for(String x : userIds) {
+				ref= "'"+x+"'";
+	
+				if(r.equals(""))
+					r+=ref;
+				else
+					r+=","+ref;
+			}
+			
+			
+				
+			String sql =" select transfer_id, transfer_on,transfer_value/100 as montant,attr_5_value as caisse from mtx_transaction_header where transfer_status='TS' and service_type='CWBREQ' and request_source='WEB' " + 
+					" and transfer_on >= ? and transfer_on < ? " + 
+					" and payee_user_id in ("+r+") order by transfer_on asc";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateMobiq.queryForList(sql, new Object[] {debut, fin });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				  return MonetiqueCarteHelper.getPaiementMerchant(res);
+		}
+
+
+
+		@Override
+		public TrsMobile getAdditionalReference(String userId) throws Exception {
+			  
+					List<Map<String,Object>>  res=null;
+
+						
+					String sql ="select account_no from cust_accounts where  user_id  = ?";
+					   
+						System.out.println(sql);
+						try {
+							res =  jdbcTemplateInstr.queryForList(sql, new Object[] {userId });
+
+						} catch (Exception e) {
+							//status = "ERREUR";
+						}
+						  return MonetiqueCarteHelper.getTrsMobileAddRef(res);
+		}
 	
 }

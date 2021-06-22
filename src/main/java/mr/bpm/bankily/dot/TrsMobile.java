@@ -8,15 +8,22 @@ public class TrsMobile implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	String transactionId;
-	String correction;
-	
+	String correction;	
 	String telephone;
 	Date date; 
 	
 	String status;
+	String additionalReference;
 	
 	
 	
+	
+	public String getAdditionalReference() {
+		return additionalReference;
+	}
+	public void setAdditionalReference(String additionalReference) {
+		this.additionalReference = additionalReference;
+	}
 	public String getTransactionId() {
 		return transactionId;
 	}

@@ -1,5 +1,6 @@
 package mr.bpm.bankily.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import mr.bpm.bankily.dot.BankilyResponse;
@@ -9,6 +10,9 @@ import mr.bpm.bankily.dot.ClientStatistique;
 import mr.bpm.bankily.dot.ListClientStatistique;
 import mr.bpm.bankily.dot.ListTrsMobile;
 import mr.bpm.bankily.dot.ListTrsMobileBus;
+import mr.bpm.bankily.dot.Merchant;
+import mr.bpm.bankily.dot.PaiementMerchant;
+import mr.bpm.bankily.dot.TrsMobile;
 import mr.bpm.bankily.dot.TrsMobileBus;
 
 public interface MonetiqueServiceDao {
@@ -83,8 +87,20 @@ public interface MonetiqueServiceDao {
 	public void setEtatClient(List<ClientStatistique> clients );
 	
 	
+	public List<Merchant> getAllMerchant() throws Exception;
+	public List<Merchant> getChildrenMerchant(String userId) throws Exception;
+	public List<PaiementMerchant> getPaiementMerchantByIntervallDate(List<String> userIds,Date debut,Date fin) throws Exception;
+	public List<PaiementMerchant> getPaiementMerchantByTelAndIntervallDate(List<String> userIds,Date debut,Date fin) throws Exception;
+
+	public List<PaiementMerchant> getAutoSweepMerchantByIntervallDate(List<String> userIds,Date debut,Date fin) throws Exception;
+
+	
+	
 	public ClientConsultation getInfoClientByNni(String nni) throws Exception;
 	public ClientConsultation getInfoClientByCif(String cif) throws Exception;
 	public ClientConsultation getInfoClientByTel(String tel) throws Exception;
+	
+	public TrsMobile getAdditionalReference(String userId) throws Exception;
+
 	
 }

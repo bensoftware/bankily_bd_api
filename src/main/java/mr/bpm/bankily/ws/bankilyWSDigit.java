@@ -1,5 +1,7 @@
 package mr.bpm.bankily.ws;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,11 @@ import mr.bpm.bankily.dot.ClientConsultation;
 import mr.bpm.bankily.dot.ListClientStatistique;
 import mr.bpm.bankily.dot.ListTrsMobile;
 import mr.bpm.bankily.dot.ListTrsMobileBus;
+import mr.bpm.bankily.dot.Merchant;
+import mr.bpm.bankily.dot.PaiementMerchant;
+import mr.bpm.bankily.dot.RequestMerchant;
+import mr.bpm.bankily.dot.ResponseMerchant;
+import mr.bpm.bankily.dot.TrsMobile;
 import mr.bpm.bankily.dot.TrsMobileBus;
 import mr.bpm.bankily.service.ClientInfoService;
 import mr.bpm.bankily.service.MajBankilyService;
@@ -32,6 +39,86 @@ public class bankilyWSDigit {
 
 	@Autowired
 	ClientInfoService clientInfoService;
+	
+	
+	
+	@RequestMapping(value="/getAllMerchant",method=RequestMethod.GET)
+    public @ResponseBody ResponseMerchant  getAllMerchant(
+   		) throws Exception {
+		
+	 List<Merchant> list=monetiqueServiceDao.getAllMerchant();
+	
+	 ResponseMerchant res=new ResponseMerchant();
+	 res.setMerchants(list);
+	 
+		return res;
+
+	}
+	
+	
+	@RequestMapping(value="/getAdditionalReference/{userId}",method=RequestMethod.GET)
+    public @ResponseBody TrsMobile  getAdditionalReference(@PathVariable String userId) throws Exception {
+		
+		TrsMobile trs=monetiqueServiceDao.getAdditionalReference(userId);
+
+	 
+		return trs;
+
+	}
+	
+	@RequestMapping(value="/getMerchant/{userId}",method=RequestMethod.GET)
+    public @ResponseBody ResponseMerchant  getMerchant(@PathVariable String userId) throws Exception {
+		
+	 List<Merchant> list=monetiqueServiceDao.getChildrenMerchant(userId);
+	
+	 ResponseMerchant res=new ResponseMerchant();
+	 res.setMerchants(list);
+	 
+		return res;
+
+	}
+	
+	
+	@RequestMapping(value="/getPaiementMerchant",method=RequestMethod.POST)
+    public @ResponseBody ResponseMerchant  getMerchant(@RequestBody RequestMerchant req) throws Exception {
+		
+	 List<PaiementMerchant> list=monetiqueServiceDao.getPaiementMerchantByIntervallDate(req.getUserIds(), req.getDebut(), req.getFin());
+	
+	 ResponseMerchant res=new ResponseMerchant();
+	 res.setPaiementMerchants(list);
+	 
+		return res;
+
+	}
+	
+	@RequestMapping(value="/getAutoSweepMerchantByIntervallDate",method=RequestMethod.POST)
+    public @ResponseBody ResponseMerchant  getAutoSweepMerchantByIntervallDate(@RequestBody RequestMerchant req) throws Exception {
+		
+	 List<PaiementMerchant> list=monetiqueServiceDao.getAutoSweepMerchantByIntervallDate(req.getUserIds(), req.getDebut(), req.getFin());
+	
+	 ResponseMerchant res=new ResponseMerchant();
+	 res.setPaiementMerchants(list);
+	 
+		return res;
+
+	}
+	
+	
+	
+	@RequestMapping(value="/getPaiementMerchantBytelephone",method=RequestMethod.POST)
+    public @ResponseBody ResponseMerchant  getPaiementMerchantBytelephone(@RequestBody RequestMerchant req) throws Exception {
+		
+	 List<PaiementMerchant> list=monetiqueServiceDao.getPaiementMerchantByTelAndIntervallDate(req.getUserIds(), req.getDebut(), req.getFin());
+	
+	 ResponseMerchant res=new ResponseMerchant();
+	 res.setPaiementMerchants(list);
+	 
+		return res;
+
+	}
+	
+	
+	
 	
 	@RequestMapping(value="/getInfoClientByNni/{nni}",method=RequestMethod.GET)
     public @ResponseBody ClientConsultation getInfoClientByNni(@PathVariable String nni
