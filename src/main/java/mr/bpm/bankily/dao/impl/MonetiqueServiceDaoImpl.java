@@ -23,6 +23,8 @@ import mr.bpm.bankily.dot.ListTrsMobile;
 import mr.bpm.bankily.dot.ListTrsMobileBus;
 import mr.bpm.bankily.dot.Merchant;
 import mr.bpm.bankily.dot.PaiementMerchant;
+import mr.bpm.bankily.dot.RequestDto;
+import mr.bpm.bankily.dot.ResponseDto;
 import mr.bpm.bankily.dot.TrsMobile;
 import mr.bpm.bankily.dot.TrsMobileBus;
 import mr.bpm.bankily.helper.MonetiqueCarteHelper;
@@ -819,7 +821,7 @@ private String getTelephoneByPartyId(String party) {
 		
 		}
 		
-		
+
 		private List<ClientStatistique> getUserIdByNni(List<ClientStatistique> list){
 		
 			List<ClientStatistique> res= new ArrayList<>();
@@ -864,9 +866,8 @@ private String getTelephoneByPartyId(String party) {
 			return res;
 		}
 		
-		
-		
-		
+
+	
 		private List<ClientStatistique> getCreditClientByFragment(List<String> userIds){
 			
 			List<ClientStatistique> res= new ArrayList<>();
@@ -1780,8 +1781,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 
 
 
-
-	    @Override
+		@Override
 		public void setEtatClient(List<ClientStatistique> clients ) {
 			
 			
@@ -1856,6 +1856,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 
 
 
+
 		@Override
 		public ClientConsultation getInfoClientByNni(String nni) throws Exception {
 			
@@ -1916,6 +1917,29 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 				return  client;
 				
 		}
+		
+		public ResponseDto getUserIdByPhone(RequestDto d) throws Exception {
+	
+			   List<Map<String,Object>>  res=null;
+						
+				String sql ="select user_id from user_details where msisdn = ?";
+				
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateDigit.queryForList(sql, new Object[] { d.getPhone() });
+	
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				
+				String userId =MonetiqueCarteHelper.getUserId(res);
+			
+				ResponseDto resDto= new ResponseDto();
+				resDto.setUserId(userId);
+				
+				return resDto;
+
+		}
 
 
 
@@ -1944,6 +1968,23 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 				 
 				return  client;
 		}
+		
+		public ResponseDto getKycStatusByUserId(RequestDto d) throws Exception {
+		    	List<Map<String,Object>>  res=null;
+				
+				String sql ="select u.KYC_STATUS, s.status from user_details u, user_status s where u.user_id=s.user_id and   u.user_id = ? ";
+				
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateDigit.queryForList(sql, new Object[] { d.getUserId() });
+	
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				
+				ResponseDto resDto= MonetiqueCarteHelper.getKycStatus(res);
+				return resDto;
+		}
 
 
 
@@ -1964,6 +2005,14 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 				
 				 
 		}
+		public ResponseDto getTotalCashinTrsBy(RequestDto d) throws Exception {
+			 
+			ResponseDto resDto= new ResponseDto();
+			resDto.setTotalTrs(5);
+			
+			return resDto;
+		}
+	  
 	  
 
 		@Override

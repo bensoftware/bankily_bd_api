@@ -12,6 +12,7 @@ import mr.bpm.bankily.dot.ClientConsultation;
 import mr.bpm.bankily.dot.ClientStatistique;
 import mr.bpm.bankily.dot.Merchant;
 import mr.bpm.bankily.dot.PaiementMerchant;
+import mr.bpm.bankily.dot.ResponseDto;
 import mr.bpm.bankily.dot.TransImal;
 import mr.bpm.bankily.dot.TrsMobile;
 import mr.bpm.bankily.dot.TrsMobileBus;
@@ -277,6 +278,53 @@ return out;
 	return out;
 }
 
+
+
+static public String getUserId( List<Map<String, Object>> params) {
+		
+	for(Map<String, Object> p :params) {
+				
+     
+		 try {
+			 
+			String res=""+p.get("user_id");
+            return res;			
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
+	}
+
+	return null;
+}
+
+
+static public ResponseDto getKycStatus( List<Map<String, Object>> params) {
+	
+	for(Map<String, Object> p :params) {
+
+		ResponseDto res=new ResponseDto();
+
+		try {
+			 
+			String kyc=""+p.get("KYC_STATUS");
+			res.setKycStatus(kyc);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {
+			 int status= Integer.parseInt(""+p.get("status"));
+			 res.setStatus(status);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+
+		 return res;
+	}
+
+	return null;
+}
 
 
 

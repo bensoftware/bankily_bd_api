@@ -1,9 +1,5 @@
 package mr.bpm.bankily;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -55,14 +51,6 @@ public class MBankingWsApplication implements CommandLineRunner {
 
 
 
-		
-	//	List<PaiementMerchant> list= monetiqueServiceDao.getPaiementMerchantByIntervallDate(userIds, debut, fin);
-	//    System.out.println(list);
-		//	List<Merchant> list= monetiqueServiceDao.getChildrenMerchant("PT191126.1459.016219");
-	//	monetiqueServiceDao.setFullKyc("4053224735");
-	//	List<Merchant> list = monetiqueServiceDao.getChildrenMerchant("");
-	//	System.out.println(list);
-		//clientInfoService.getInfoClientByNni("4440552234");
 //	BankilyResponse res= majBankilyService.verifierBlocage("20510245");
 //	System.err.println(res);
 		

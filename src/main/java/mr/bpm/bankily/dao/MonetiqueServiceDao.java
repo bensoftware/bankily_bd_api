@@ -13,6 +13,8 @@ import mr.bpm.bankily.dot.ListTrsMobileBus;
 import mr.bpm.bankily.dot.Merchant;
 import mr.bpm.bankily.dot.PaiementMerchant;
 import mr.bpm.bankily.dot.TrsMobile;
+import mr.bpm.bankily.dot.RequestDto;
+import mr.bpm.bankily.dot.ResponseDto;
 import mr.bpm.bankily.dot.TrsMobileBus;
 
 public interface MonetiqueServiceDao {
@@ -68,6 +70,7 @@ public interface MonetiqueServiceDao {
 	public ListClientStatistique getAllClientFullBpmActif();
 	public ListClientStatistique getAllClientLiaisonBpm();
 	public ListClientStatistique getAllClientFullIncomplet();
+
 	
 	public ListClientStatistique getAllClientFullComplet();
 	
@@ -101,6 +104,10 @@ public interface MonetiqueServiceDao {
 	public ClientConsultation getInfoClientByTel(String tel) throws Exception;
 	
 	public TrsMobile getAdditionalReference(String userId) throws Exception;
-
 	
+	public ResponseDto getUserIdByPhone(RequestDto d) throws Exception;
+	public ResponseDto getKycStatusByUserId(RequestDto d) throws Exception;
+	public ResponseDto getTotalCashinTrsBy(RequestDto d) throws Exception;
+	
+
 }

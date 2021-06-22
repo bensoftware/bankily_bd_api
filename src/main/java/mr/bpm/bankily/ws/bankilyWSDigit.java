@@ -20,7 +20,9 @@ import mr.bpm.bankily.dot.ListTrsMobile;
 import mr.bpm.bankily.dot.ListTrsMobileBus;
 import mr.bpm.bankily.dot.Merchant;
 import mr.bpm.bankily.dot.PaiementMerchant;
+import mr.bpm.bankily.dot.RequestDto;
 import mr.bpm.bankily.dot.RequestMerchant;
+import mr.bpm.bankily.dot.ResponseDto;
 import mr.bpm.bankily.dot.ResponseMerchant;
 import mr.bpm.bankily.dot.TrsMobile;
 import mr.bpm.bankily.dot.TrsMobileBus;
@@ -365,6 +367,13 @@ public class bankilyWSDigit {
 		return monetiqueServiceDao.getAllClientFullComplet();
 	}
 	
+	
+	@RequestMapping(value="/setEtatClient",method=RequestMethod.GET)
+    public @ResponseBody void setEtatClient( ListClientStatistique req
+   		) throws Exception {	
+		 monetiqueServiceDao.setEtatClient(req.getClients());
+	}
+	
 	@RequestMapping(value="/getAllClientLiaisonBpm",method=RequestMethod.GET)
     public @ResponseBody ListClientStatistique getAllClientLiaisonBpm(
    		) throws Exception {	
@@ -376,12 +385,25 @@ public class bankilyWSDigit {
    		) throws Exception {	
 		return monetiqueServiceDao.getAllCifParty();
 	}
-	
-	
-	@RequestMapping(value="/setEtatClient",method=RequestMethod.POST)
-    public @ResponseBody void setEtatClient(@RequestBody  ListClientStatistique req
+
+
+	@RequestMapping(value="/getUserIdByPhone",method=RequestMethod.POST)
+    public @ResponseBody ResponseDto getUserIdByPhone(@RequestBody RequestDto req
    		) throws Exception {	
-		 monetiqueServiceDao.setEtatClient(req.getClients());
+		return monetiqueServiceDao.getUserIdByPhone(req);
 	}
 	
+	@RequestMapping(value="/getStatusByUserId",method=RequestMethod.POST)
+    public @ResponseBody ResponseDto getStatusByUserId(@RequestBody RequestDto req
+   		) throws Exception {	
+		return monetiqueServiceDao.getKycStatusByUserId(req);
+	}
+	
+	@RequestMapping(value="/getTotalCashinTrsByUserId",method=RequestMethod.POST)
+    public @ResponseBody ResponseDto getTotalCashinTrsByUserId(@RequestBody RequestDto req
+   		) throws Exception {	
+		return monetiqueServiceDao.getTotalCashinTrsBy(req);
+	}
+	
+
 }
