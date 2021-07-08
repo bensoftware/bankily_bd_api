@@ -22,9 +22,19 @@ public class BankilyResponse implements Serializable {
 	int tentative;
 	int statusUser;
 	boolean blocage=false;
+	String nni;
 	
 	
 	
+	
+	public String getNni() {
+		return nni;
+	}
+
+	public void setNni(String nni) {
+		this.nni = nni;
+	}
+
 	public boolean isBlocage() {
 		return blocage;
 	}

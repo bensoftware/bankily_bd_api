@@ -281,7 +281,10 @@ return out;
 
 
 static public String getUserId( List<Map<String, Object>> params) {
-		
+
+	if(params==null || params.size()==0)
+		return null;
+	
 	for(Map<String, Object> p :params) {
 				
      
@@ -1392,6 +1395,120 @@ static public TrsMobile getTrsMobileAddRef( List<Map<String, Object>> params) {
 		
 	}
 
+
+static public BankilyResponse getVerificationMobile( List<Map<String, Object>> params) throws Exception {	
+	
+	
+	if(params==null || params.size()==0)
+		return null;
+	
+	
+	for(Map<String, Object> p :params) {
+		
+		BankilyResponse m= new BankilyResponse();
+		
+		
+
+		
+		 try {
+
+			 m.setCif(""+p.get("CIF"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {
+
+			 m.setNni(""+p.get("NNI"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		
+		 try {
+			 
+			 m.setTelephone(""+p.get("telephone"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
+		 
+	   return m;
+
+	}
+	
+	 return null;
+		
+	}
+
+
+static public BankilyResponse getVerificationImal( List<Map<String, Object>> params) throws Exception {	
+	
+	
+	if(params==null || params.size()==0)
+		return null;
+	
+	
+	for(Map<String, Object> p :params) {
+		
+		BankilyResponse m= new BankilyResponse();
+		
+		
+		String branch=null;
+		String tel= null;
+		
+		 try {
+
+			 branch= ""+p.get("branch_code");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		
+		
+		 try {
+
+			 m.setCif(""+p.get("CIF"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {
+
+			 m.setNni(""+p.get("NNI"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 if(branch==null)
+			 throw new Exception("branch_code=null, cif= "+m.getCif());
+		 
+		 if(branch.equals("100")) { 
+			 try {
+
+				 tel=   ""+p.get("tel_mobile");
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+			
+			
+		 }else {
+			 try {
+
+			 tel=   ""+p.get("tel_imal");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 }
+		 
+		 m.setTelephone(tel);
+		 
+	   return m;
+
+	}
+	
+	 return null;
+		
+	}
 
 
 static public List<PaiementMerchant> getPaiementMerchant( List<Map<String, Object>> params) {	

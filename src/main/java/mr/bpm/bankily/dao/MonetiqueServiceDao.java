@@ -19,6 +19,9 @@ import mr.bpm.bankily.dot.TrsMobileBus;
 
 public interface MonetiqueServiceDao {
 	
+	public BankilyResponse getVerificationImalByCif(String cif) throws Exception;
+	public BankilyResponse getVerificationMobileByTelephone(String telephone) throws Exception;
+	
 	public String getCIFBANKILY(String mobileNumber);
 	public boolean getPartyIdUserId(String mobileNumber, String cifParticulier, String addRef);
 	public boolean updateDigitalWokspace(String cifParticulier, String userId);
@@ -98,7 +101,7 @@ public interface MonetiqueServiceDao {
 	public List<PaiementMerchant> getAutoSweepMerchantByIntervallDate(List<String> userIds,Date debut,Date fin) throws Exception;
 
 	
-	
+
 	public ClientConsultation getInfoClientByNni(String nni) throws Exception;
 	public ClientConsultation getInfoClientByCif(String cif) throws Exception;
 	public ClientConsultation getInfoClientByTel(String tel) throws Exception;

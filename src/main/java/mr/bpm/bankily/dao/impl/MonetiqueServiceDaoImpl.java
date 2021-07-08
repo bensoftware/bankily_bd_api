@@ -2170,5 +2170,51 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 						}
 						  return MonetiqueCarteHelper.getTrsMobileAddRef(res);
 		}
+
+
+
+		@Override
+		public BankilyResponse getVerificationImalByCif(String cif) throws Exception {
+			List<Map<String,Object>>  res=null;
+
+			
+			String sql ="Select  c.branch_code, c.cif_no as CIF,c.id_no as NNI,c.tel as tel_mobile,c.long_name_eng as NOM,a.branch_code,i.tel as tel_imal " + 
+					"from imal.cif_address@imal i, imal.cif@imal c , imal.amf@imal a " + 
+					"where  c.cif_no = a.cif_sub_no " + 
+					"and  c.cif_no = i.cif_no " + 
+					"and c.cif_no= ?";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateInstr.queryForList(sql, new Object[] {cif });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				  return MonetiqueCarteHelper.getVerificationImal(res);
+		}
+
+
+
+		@Override
+		public BankilyResponse getVerificationMobileByTelephone(String telephone) throws Exception {
+			
+			List<Map<String,Object>>  res=null;
+			
+			String sql ="Select   p.cif as CIF,k.kyc_value as NNI,p.mobilenumber as telephone " + 
+					"from    party.party p,party.party_kyc_details pk,party.kyc_details k " + 
+					"where   p.party_id = pk.party_id " + 
+					"and pk.kyc_id = k.kyc_id " + 
+					"and  p.mobilenumber= ?";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateInstr.queryForList(sql, new Object[] {telephone });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				  return MonetiqueCarteHelper.getVerificationMobile(res);
+		}
 	
 }

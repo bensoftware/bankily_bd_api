@@ -15,9 +15,9 @@ public class RequestDto  implements Serializable{
 	String phone;
 	String amount;
 	String userId;
-	
 	Date beginDate;
 	Date endDate;
+	
 	public String getPhone() {
 		return phone;
 	}
