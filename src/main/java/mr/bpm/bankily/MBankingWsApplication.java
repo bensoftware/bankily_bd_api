@@ -9,6 +9,7 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import mr.bpm.bankily.dao.MonetiqueServiceDao;
+import mr.bpm.bankily.dot.BankilyResponse;
 import mr.bpm.bankily.service.ClientInfoService;
 import mr.bpm.bankily.service.MajBankilyService;
 
@@ -49,8 +50,11 @@ public class MBankingWsApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		monetiqueServiceDao.getVerificationMobileByTelephone("34212133");
+	//BankilyResponse res=	monetiqueServiceDao.getVerificationMobileByTelephone("34212133");
 		
+//	BankilyResponse res=	monetiqueServiceDao.getVerificationImalByCif("453");
+		
+//	System.out.println(res);
 
 //	BankilyResponse res= majBankilyService.verifierBlocage("20510245");
 //	System.err.println(res);

@@ -385,6 +385,16 @@ public class bankilyWSDigit {
    		) throws Exception {	
 		return monetiqueServiceDao.getAllCifParty();
 	}
+	
+
+@RequestMapping(value="/getVerificationImalByCif/{cif}",method=RequestMethod.GET)
+public @ResponseBody BankilyResponse getVerificationImalByCif(@PathVariable String cif) throws Exception {  	
+
+	BankilyResponse res=monetiqueServiceDao.getVerificationImalByCif(cif);
+
+	return res;
+ 
+}
 
 
 	@RequestMapping(value="/getUserIdByPhone",method=RequestMethod.POST)

@@ -2189,6 +2189,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					res =  jdbcTemplateInstr.queryForList(sql, new Object[] {cif });
 
 				} catch (Exception e) {
+					System.out.println(e.getMessage());
 					//status = "ERREUR";
 				}
 				  return MonetiqueCarteHelper.getVerificationImal(res);
@@ -2209,9 +2210,10 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 			   
 				System.out.println(sql);
 				try {
-					res =  jdbcTemplateInstr.queryForList(sql, new Object[] {telephone });
+					res =  jdbcTemplateParty.queryForList(sql, new Object[] {telephone });
 
 				} catch (Exception e) {
+					System.out.println(e.getMessage());
 					//status = "ERREUR";
 				}
 				  return MonetiqueCarteHelper.getVerificationMobile(res);
