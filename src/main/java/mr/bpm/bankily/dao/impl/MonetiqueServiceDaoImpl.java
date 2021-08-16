@@ -509,6 +509,32 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		}
 	
 
+	private String getUserIdByLogin(String login) {
+		
+		String out=null;
+				
+			   List<Map<String,Object>>  res=null;
+			   	
+				String sql ="select user_id from users where login_id = ?";
+				
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateMobiq.queryForList(sql, new Object[] { login });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				
+				Map<String, Object> p=	res.get(0);
+				out=""+p.get("user_id");
+				
+				
+							
+				return out;
+
+			
+
+		}
 	
 	private String getUserIdByPartyId(String party) {
 		
@@ -2217,6 +2243,29 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					//status = "ERREUR";
 				}
 				  return MonetiqueCarteHelper.getVerificationMobile(res);
+		}
+
+
+
+		@Override
+		public BankilyResponse getUserIdClientByTelephone(String telephone) throws Exception {
+			// TODO Auto-generated method stub
+			String userId=getUserIdByTel(telephone);
+			BankilyResponse res= new BankilyResponse();
+			res.setUserId(userId);
+			return res;
+		}
+
+
+
+		@Override
+		public BankilyResponse getUserIdUserByLogin(String login) throws Exception {
+			// TODO Auto-generated method stub
+			
+			String userId=getUserIdByLogin(login);
+			BankilyResponse res= new BankilyResponse();
+			res.setUserId(userId);
+			return res;
 		}
 	
 }

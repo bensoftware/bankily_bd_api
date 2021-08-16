@@ -419,5 +419,17 @@ public @ResponseBody ResponseDto getTotalCashinTrsByUserId(@RequestBody RequestD
 	return monetiqueServiceDao.getTotalCashinTrsBy(req);
 }
 
+@RequestMapping(value="/getUserIdByTelephone/{telephone}",method=RequestMethod.GET)
+public @ResponseBody BankilyResponse getUserIdByTelephone(@PathVariable String telephone) throws Exception {  	
+	BankilyResponse res=monetiqueServiceDao.getUserIdClientByTelephone(telephone);
+	return res;
+}
+
+@RequestMapping(value="/getUserIdByLogin/{login}",method=RequestMethod.GET)
+public @ResponseBody BankilyResponse getUserIdByLogin(@PathVariable String login) throws Exception {  	
+	BankilyResponse res=monetiqueServiceDao.getUserIdUserByLogin(login);
+	return res;
+}
+
 
 }

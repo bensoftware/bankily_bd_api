@@ -22,6 +22,10 @@ public interface MonetiqueServiceDao {
 	public BankilyResponse getVerificationImalByCif(String cif) throws Exception;
 	public BankilyResponse getVerificationMobileByTelephone(String telephone) throws Exception;
 	
+	public BankilyResponse getUserIdClientByTelephone(String telephone) throws Exception;
+	public BankilyResponse getUserIdUserByLogin(String login) throws Exception;
+
+	
 	public String getCIFBANKILY(String mobileNumber);
 	public boolean getPartyIdUserId(String mobileNumber, String cifParticulier, String addRef);
 	public boolean updateDigitalWokspace(String cifParticulier, String userId);
