@@ -1,5 +1,8 @@
 package mr.bpm.bankily;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +12,8 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import mr.bpm.bankily.dao.MonetiqueServiceDao;
+import mr.bpm.bankily.dot.BankilyResponse;
+import mr.bpm.bankily.dot.RequestDto;
 import mr.bpm.bankily.service.ClientInfoService;
 import mr.bpm.bankily.service.MajBankilyService;
 
@@ -49,7 +54,27 @@ public class MBankingWsApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		monetiqueServiceDao.getVerificationMobileByTelephone("34212133");
+//		RequestDto req=new RequestDto();
+//		req.setTelephone("34212133");
+//		req.setCif("453");
+//		req.setNni("1842979922");
+//		List<String> comptes= new ArrayList<>();
+//		comptes.add("00018000012100004530312");
+//		comptes.add("00018000012160004530115");
+//		req.setComptes(comptes);
+//		BankilyResponse res= monetiqueServiceDao.getVerificationMobile(req);
+//		System.out.println(res);
+		
+		RequestDto req=new RequestDto();
+		req.setTelephone("26528000");
+		req.setCif("10116006");
+		req.setNni("7292464657");
+		List<String> comptes= new ArrayList<>();
+		comptes.add("00018000022101160060160");
+		//comptes.add("00018000012160004530115");
+		req.setComptes(comptes);
+		BankilyResponse res= monetiqueServiceDao.getVerificationMobile(req);
+		System.out.println(res);
 		
 
 //	BankilyResponse res= majBankilyService.verifierBlocage("20510245");

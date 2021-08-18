@@ -1,5 +1,6 @@
 package mr.bpm.bankily.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -2217,4 +2218,195 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 				  return MonetiqueCarteHelper.getVerificationMobile(res);
 		}
 	
+		@Override
+		public BankilyResponse getVerificationMobile(RequestDto req) throws Exception {
+			
+			List<Map<String,Object>>  res=null;
+			
+			boolean isIncomplet=false;
+			boolean isExiste=true;
+			
+			long creq1=0;
+			
+			// digital workspace
+	//		String req1="select count(*) as cpt from USER_CREDENTIALS where user_id in (select user_id from user_details where msisdn = ? )";
+	//		String req2="select count(*) as cpt from auth_value where auth_ref_id in (select auth_ref_id from USER_CREDENTIALS where user_id in (select user_id from user_details where msisdn = ? ))";
+			// OK
+			String req3="select count(*) as cpt from host_mapping where user_id in (select user_id from user_details where msisdn = ?)";
+//			String req4="select count(*) as cpt from host_utilities where user_id in (select user_id from user_details where msisdn = ?)";
+//			String req5="select count(*) as cpt from mtx_socialmedia where user_id in (select user_id from user_details where msisdn = ?)";
+//			String req6="select count(*) as cpt from request_money where requester_user_id in (select user_id from user_details where msisdn = ?)";
+			// OK
+			String req7="select count(*) as cpt from user_details where msisdn = ?";
+
+			// party
+			String req8="select count(*) as cpt from KYC_IMAGE_MAPPING where IMAGE_REF_ID in (select IMAGE_REF_ID from KYC_DETAILS where KYC_ID in (select kyc_id from PARTY_KYC_DETAILS where PARTY_ID in (select PARTY_ID from party where mobilenumber = ?)))";
+			String req9="select count(*) as cpt from KYC_DETAILS where KYC_ID in (select kyc_id from PARTY_KYC_DETAILS where PARTY_ID in (select PARTY_ID from party where mobilenumber = ? ))";
+			String req10="select count(*) as cpt from PARTY_KYC_DETAILS where PARTY_ID in (select PARTY_ID from party where mobilenumber = ?)";			
+			String req11="select count(*) as cpt from party where mobilenumber = ?";
+
+			String req14="select count(*) as cpt from kyc_details where kyc_value= ? ";
+			
+			// instr
+			String req12="select count(*) as cpt from cust_accounts where account_no in (";
+			String accounts="";
+			if(req.getComptes()!=null && req.getComptes().size()>0)
+			for(String ac : req.getComptes()) {
+				if(accounts.equals(""))
+				    accounts+="'"+ac+"'";
+				else
+					accounts+=",'"+ac+"'";
+			}
+			req12+=accounts+")";
+			
+			String req13="select count(*) as cpt from cust_accounts where cifid =?";
+			
+			
+			
+					if(req.getTelephone()==null || req.getTelephone().length()!=8) {
+						throw new Exception("telephone invalide");
+					}
+					if(req.getCif()==null || req.getCif().length()<1) {
+						throw new Exception("cif invalide");
+					}
+					if(req.getNni()==null || req.getNni().length()<1) {
+						throw new Exception("NNI invalide");
+					}
+					if(req.getComptes()==null || req.getComptes().size()==0) {
+						throw new Exception("Account invalide");
+					}
+					// digital work
+				/*	res =  jdbcTemplateDigit.queryForList(req1, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					res =  jdbcTemplateDigit.queryForList(req2, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					*/
+					res =  jdbcTemplateDigit.queryForList(req3, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+				/*	res =  jdbcTemplateDigit.queryForList(req4, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					res =  jdbcTemplateDigit.queryForList(req5, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					res =  jdbcTemplateDigit.queryForList(req6, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					*/
+					res =  jdbcTemplateDigit.queryForList(req7, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					
+					// party
+					System.out.println("*** party");
+					
+					res =  jdbcTemplateParty.queryForList(req8, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					res =  jdbcTemplateParty.queryForList(req9, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					res =  jdbcTemplateParty.queryForList(req10, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					res =  jdbcTemplateParty.queryForList(req11, new Object[] {req.getTelephone() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					res =  jdbcTemplateParty.queryForList(req14, new Object[] {req.getNni() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					// intr mngt
+					System.out.println("*** intr mngt");
+
+					res =  jdbcTemplateInstr.queryForList(req12, new Object[] { });		
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					res =  jdbcTemplateInstr.queryForList(req13, new Object[] {req.getCif() });					
+					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+					System.out.println(creq1);
+					if(creq1==0)
+						isExiste=false;
+					else
+						isIncomplet=true;
+					
+					
+			       if(isExiste==true)
+			    	   isIncomplet=false;
+				
+					
+					
+				
+				
+				
+				  return MonetiqueCarteHelper.getVerificationMobile(res);
+		}
+		
+		
+		
 }

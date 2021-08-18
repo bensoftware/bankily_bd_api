@@ -112,5 +112,6 @@ public interface MonetiqueServiceDao {
 	public ResponseDto getKycStatusByUserId(RequestDto d) throws Exception;
 	public ResponseDto getTotalCashinTrsBy(RequestDto d) throws Exception;
 	
+	public BankilyResponse getVerificationMobile(RequestDto req) throws Exception;
 
 }
