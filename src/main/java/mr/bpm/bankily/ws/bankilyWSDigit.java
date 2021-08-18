@@ -401,6 +401,13 @@ public @ResponseBody BankilyResponse getVerificationMobileByTelephone(@PathVaria
 }
 
 
+@RequestMapping(value="/getVerificationMobile",method=RequestMethod.POST)
+public @ResponseBody BankilyResponse getVerificationMobile(@RequestBody RequestDto req) throws Exception {  	
+	BankilyResponse res=monetiqueServiceDao.getVerificationMobile(req);
+	return res;
+}
+
+
 @RequestMapping(value="/getUserIdByPhone",method=RequestMethod.POST)
 public @ResponseBody ResponseDto getUserIdByPhone(@RequestBody RequestDto req
 	) throws Exception {	
