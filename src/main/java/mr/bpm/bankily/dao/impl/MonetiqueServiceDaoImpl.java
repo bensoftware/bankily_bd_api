@@ -510,6 +510,32 @@ public class MonetiqueServiceDaoImpl implements MonetiqueServiceDao{
 		}
 	
 
+	private String getUserIdByLogin(String login) {
+		
+		String out=null;
+				
+			   List<Map<String,Object>>  res=null;
+			   	
+				String sql ="select user_id from users where login_id = ?";
+				
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateMobiq.queryForList(sql, new Object[] { login });
+
+				} catch (Exception e) {
+					//status = "ERREUR";
+				}
+				
+				Map<String, Object> p=	res.get(0);
+				out=""+p.get("user_id");
+				
+				
+							
+				return out;
+
+			
+
+		}
 	
 	private String getUserIdByPartyId(String party) {
 		
@@ -2190,6 +2216,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					res =  jdbcTemplateInstr.queryForList(sql, new Object[] {cif });
 
 				} catch (Exception e) {
+					System.out.println(e.getMessage());
 					//status = "ERREUR";
 				}
 				  return MonetiqueCarteHelper.getVerificationImal(res);
@@ -2210,14 +2237,39 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 			   
 				System.out.println(sql);
 				try {
-					res =  jdbcTemplateInstr.queryForList(sql, new Object[] {telephone });
+					res =  jdbcTemplateParty.queryForList(sql, new Object[] {telephone });
 
 				} catch (Exception e) {
+					System.out.println(e.getMessage());
 					//status = "ERREUR";
 				}
 				  return MonetiqueCarteHelper.getVerificationMobile(res);
 		}
+
+
+
+		@Override
+		public BankilyResponse getUserIdClientByTelephone(String telephone) throws Exception {
+			// TODO Auto-generated method stub
+			String userId=getUserIdByTel(telephone);
+			BankilyResponse res= new BankilyResponse();
+			res.setUserId(userId);
+			return res;
+		}
+
+
+
+		@Override
+		public BankilyResponse getUserIdUserByLogin(String login) throws Exception {
+			// TODO Auto-generated method stub
+			
+			String userId=getUserIdByLogin(login);
+			BankilyResponse res= new BankilyResponse();
+			res.setUserId(userId);
+			return res;
+		}
 	
+
 		@Override
 		public BankilyResponse getVerificationMobile(RequestDto req) throws Exception {
 			
@@ -2402,11 +2454,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					
 					
 				
-				
-				
-				  return MonetiqueCarteHelper.getVerificationMobile(res);
+			       BankilyResponse br= new BankilyResponse();
 		}
-		
-		
 		
 }

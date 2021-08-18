@@ -385,25 +385,58 @@ public class bankilyWSDigit {
    		) throws Exception {	
 		return monetiqueServiceDao.getAllCifParty();
 	}
+	
+
+@RequestMapping(value="/getVerificationImalByCif/{cif}",method=RequestMethod.GET)
+public @ResponseBody BankilyResponse getVerificationImalByCif(@PathVariable String cif) throws Exception {
+	BankilyResponse res=monetiqueServiceDao.getVerificationImalByCif(cif);
+	return res;
+}
 
 
-	@RequestMapping(value="/getUserIdByPhone",method=RequestMethod.POST)
-    public @ResponseBody ResponseDto getUserIdByPhone(@RequestBody RequestDto req
-   		) throws Exception {	
-		return monetiqueServiceDao.getUserIdByPhone(req);
-	}
-	
-	@RequestMapping(value="/getStatusByUserId",method=RequestMethod.POST)
-    public @ResponseBody ResponseDto getStatusByUserId(@RequestBody RequestDto req
-   		) throws Exception {	
-		return monetiqueServiceDao.getKycStatusByUserId(req);
-	}
-	
-	@RequestMapping(value="/getTotalCashinTrsByUserId",method=RequestMethod.POST)
-    public @ResponseBody ResponseDto getTotalCashinTrsByUserId(@RequestBody RequestDto req
-   		) throws Exception {	
-		return monetiqueServiceDao.getTotalCashinTrsBy(req);
-	}
-	
+@RequestMapping(value="/getVerificationMobileByTelephone/{telephone}",method=RequestMethod.GET)
+public @ResponseBody BankilyResponse getVerificationMobileByTelephone(@PathVariable String telephone) throws Exception {  	
+	BankilyResponse res=monetiqueServiceDao.getVerificationMobileByTelephone(telephone);
+	return res;
+}
+
+
+@RequestMapping(value="/getVerificationMobile",method=RequestMethod.POST)
+public @ResponseBody BankilyResponse getVerificationMobile(@RequestBody RequestDto req) throws Exception {  	
+	BankilyResponse res=monetiqueServiceDao.getVerificationMobile(req);
+	return res;
+}
+
+
+@RequestMapping(value="/getUserIdByPhone",method=RequestMethod.POST)
+public @ResponseBody ResponseDto getUserIdByPhone(@RequestBody RequestDto req
+	) throws Exception {	
+	return monetiqueServiceDao.getUserIdByPhone(req);
+}
+
+@RequestMapping(value="/getStatusByUserId",method=RequestMethod.POST)
+public @ResponseBody ResponseDto getStatusByUserId(@RequestBody RequestDto req
+	) throws Exception {	
+	return monetiqueServiceDao.getKycStatusByUserId(req);
+}
+
+@RequestMapping(value="/getTotalCashinTrsByUserId",method=RequestMethod.POST)
+public @ResponseBody ResponseDto getTotalCashinTrsByUserId(@RequestBody RequestDto req
+	) throws Exception {	
+	return monetiqueServiceDao.getTotalCashinTrsBy(req);
+}
+
+@RequestMapping(value="/getUserIdByTelephone/{telephone}",method=RequestMethod.GET)
+public @ResponseBody BankilyResponse getUserIdByTelephone(@PathVariable String telephone) throws Exception {  	
+	BankilyResponse res=monetiqueServiceDao.getUserIdClientByTelephone(telephone);
+	return res;
+}
+
+@RequestMapping(value="/getUserIdByLogin/{login}",method=RequestMethod.GET)
+public @ResponseBody BankilyResponse getUserIdByLogin(@PathVariable String login) throws Exception {  	
+	BankilyResponse res=monetiqueServiceDao.getUserIdUserByLogin(login);
+	return res;
+}
+
 
 }

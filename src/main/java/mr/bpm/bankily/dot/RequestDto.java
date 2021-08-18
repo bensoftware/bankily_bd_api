@@ -1,4 +1,4 @@
-package mr.bpm.bankily.dot;
+		package mr.bpm.bankily.dot;
 
 import java.io.Serializable;
 import java.util.Date;

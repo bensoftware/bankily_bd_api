@@ -24,9 +24,28 @@ public class BankilyResponse implements Serializable {
 	boolean blocage=false;
 	String nni;
 	
+	boolean isExiste;
+	boolean isIncomplet ;
 	
 	
 	
+	
+	public boolean isExiste() {
+		return isExiste;
+	}
+
+	public void setExiste(boolean isExiste) {
+		this.isExiste = isExiste;
+	}
+
+	public boolean isIncomplet() {
+		return isIncomplet;
+	}
+
+	public void setIncomplet(boolean isIncomplet) {
+		this.isIncomplet = isIncomplet;
+	}
+
 	public String getNni() {
 		return nni;
 	}

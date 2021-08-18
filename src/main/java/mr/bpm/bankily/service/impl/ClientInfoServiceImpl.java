@@ -11,15 +11,15 @@ import mr.bpm.bankily.service.EtatCivilService;
 
 @Service
 public class ClientInfoServiceImpl implements ClientInfoService{
-
+    
 	
 	@Autowired
 	MonetiqueServiceDao mobiquityDao;
-
+    
 	
 	@Autowired
 	EtatCivilService etatCivilService;
-
+    
 	@Override
 	public ClientConsultation getInfoClientByNni(String nni) throws Exception {
 	
@@ -27,10 +27,15 @@ public class ClientInfoServiceImpl implements ClientInfoService{
 	
 		String nniC= cl.getNni();
 		
-		ClientNni c= etatCivilService.getInfoNni(nniC);
-		
-		cl.setPicture(c.getImg());
-        c=null;
+		try {
+			ClientNni c= etatCivilService.getInfoNni(nniC);		
+			cl.setPicture(c.getImg());
+			c=null;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+       
 		return cl;
 	}
 
@@ -40,10 +45,13 @@ public class ClientInfoServiceImpl implements ClientInfoService{
 		
 		String nniC= cl.getNni();
 		
-		ClientNni c= etatCivilService.getInfoNni(nniC);
-		
-		cl.setPicture(c.getImg());
-        c=null;
+		try {
+			ClientNni c= etatCivilService.getInfoNni(nniC);		
+			cl.setPicture(c.getImg());
+			c=null;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return cl;
 	}
 
@@ -53,10 +61,13 @@ public class ClientInfoServiceImpl implements ClientInfoService{
 		
 		String nniC= cl.getNni();
 		
-		ClientNni c= etatCivilService.getInfoNni(nniC);
-		
-		cl.setPicture(c.getImg());
-        c=null;
+		try {
+			ClientNni c= etatCivilService.getInfoNni(nniC);		
+			cl.setPicture(c.getImg());
+			c=null;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return cl;
 	}
 	

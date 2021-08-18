@@ -18,9 +18,12 @@ import mr.bpm.bankily.dot.ResponseDto;
 import mr.bpm.bankily.dot.TrsMobileBus;
 
 public interface MonetiqueServiceDao {
-	
 	public BankilyResponse getVerificationImalByCif(String cif) throws Exception;
 	public BankilyResponse getVerificationMobileByTelephone(String telephone) throws Exception;
+	
+	public BankilyResponse getUserIdClientByTelephone(String telephone) throws Exception;
+	public BankilyResponse getUserIdUserByLogin(String login) throws Exception;
+
 	
 	public String getCIFBANKILY(String mobileNumber);
 	public boolean getPartyIdUserId(String mobileNumber, String cifParticulier, String addRef);
@@ -110,8 +113,8 @@ public interface MonetiqueServiceDao {
 	
 	public ResponseDto getUserIdByPhone(RequestDto d) throws Exception;
 	public ResponseDto getKycStatusByUserId(RequestDto d) throws Exception;
-	public ResponseDto getTotalCashinTrsBy(RequestDto d) throws Exception;
-	
+	public ResponseDto getTotalCashinTrsBy(RequestDto d) throws Exception;	
 	public BankilyResponse getVerificationMobile(RequestDto req) throws Exception;
+
 
 }
