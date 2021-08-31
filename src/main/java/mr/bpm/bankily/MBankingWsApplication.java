@@ -53,7 +53,7 @@ public class MBankingWsApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
+	
 //	BankilyResponse res=	monetiqueServiceDao.getVerificationImalByCif("453");
 		
 //	System.out.println(res);

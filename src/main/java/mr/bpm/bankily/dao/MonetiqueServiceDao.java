@@ -114,7 +114,12 @@ public interface MonetiqueServiceDao {
 	public ResponseDto getUserIdByPhone(RequestDto d) throws Exception;
 	public ResponseDto getKycStatusByUserId(RequestDto d) throws Exception;
 	public ResponseDto getTotalCashinTrsBy(RequestDto d) throws Exception;	
+	
 	public BankilyResponse getVerificationMobile(RequestDto req) throws Exception;
+	public void deleteLiaisonIncompleteMobile(RequestDto req) throws Exception;
 
+	public BankilyResponse getNomMerchant(String trsId) throws Exception;
+
+	public ResponseDto getTrsRechargeMobilebyTrsIdIntervall(RequestDto req) throws Exception;
 
 }

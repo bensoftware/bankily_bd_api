@@ -11,6 +11,8 @@ List<Merchant> merchants;
 
 List<PaiementMerchant> paiementMerchants;
 
+String nomMerchant;
+
 public List<Merchant> getMerchants() {
 	return merchants;
 }
@@ -25,6 +27,14 @@ public List<PaiementMerchant> getPaiementMerchants() {
 
 public void setPaiementMerchants(List<PaiementMerchant> paiementMerchants) {
 	this.paiementMerchants = paiementMerchants;
+}
+
+public String getNomMerchant() {
+	return nomMerchant;
+}
+
+public void setNomMerchant(String nomMerchant) {
+	this.nomMerchant = nomMerchant;
 }
 
 

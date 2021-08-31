@@ -1,6 +1,7 @@
 package mr.bpm.bankily.dot;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ResponseDto  implements Serializable{
 
@@ -14,10 +15,15 @@ public class ResponseDto  implements Serializable{
 	String userId;
 	int totalTrs;
 	String kycStatus;
-	int status;
+	int status;	
+	List<String> transactionIds;
 	
-	
-
+	public List<String> getTransactionIds() {
+		return transactionIds;
+	}
+	public void setTransactionIds(List<String> transactionIds) {
+		this.transactionIds = transactionIds;
+	}
 	public int getStatus() {
 		return status;
 	}

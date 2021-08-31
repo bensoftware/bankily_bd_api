@@ -2270,14 +2270,241 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 		}
 	
 
+
+
+
+
+		
+		@Override
+		public void deleteLiaisonIncompleteMobile(RequestDto req) throws Exception {
+            
+			// controle des entrées
+			if(req.getTelephone()==null || req.getTelephone().length()!=8) {
+				throw new Exception("telephone invalide");
+			}
+			if(req.getCif()==null || req.getCif().length()<1) {
+				throw new Exception("cif invalide");
+			}
+			if(req.getNni()==null || req.getNni().length()<1) {
+				throw new Exception("NNI invalide");
+			}
+			if(req.getCompte()==null) {
+				throw new Exception("Account invalide");
+			}
+			
+			// verification incomplete
+			List<String> comptes= new ArrayList<>();
+			comptes.add(req.getCompte());
+			req.setComptes(comptes);
+			BankilyResponse resV=getVerificationMobile(req);
+			
+			boolean isIncomplete=resV.isIncomplet();
+			boolean isFull= resV.isExiste();
+			if(!isIncomplete)
+				throw new Exception("la liaison n'est pas incomplete");
+			else if(isFull)
+				throw new Exception("la liaison est complete et sans exception");
+
+			// voir si l'utilisation a pu se connecté
+			List<Map<String,Object>>  res=null;
+			long creq1=0;
+			
+			String req1="select count(*) as cpt from USER_CREDENTIALS where user_id in (select user_id from user_details where msisdn = ? )";
+
+			res =  jdbcTemplateDigit.queryForList(req1, new Object[] {req.getTelephone() });					
+			creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+			System.out.println(creq1);
+			if(creq1>0)
+				throw new Exception("le client a deja connecté");
+			
+			// voir si add_ref ou cif existe dans cust account et appartienne au numero téléphone
+			// cif
+			String req13_1="select count(*) as cpt from cust_accounts where cifid = ?";
+			
+			res =  jdbcTemplateInstr.queryForList(req13_1, new Object[] {req.getCif() });					
+			creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+			System.out.println(creq1);
+			if(creq1>1)
+				throw new Exception("il existe plusieur enregistrement dans cust_account");
+			
+			
+			String req13="select user_id from cust_accounts where cifid = ?";
+			res =  jdbcTemplateInstr.queryForList(req13, new Object[] {req.getCif() });							   
+			String userId= ""+res.get(0).get("user_id");
+			System.out.println(userId);
+			if(userId!=null) {
+				String req14="select msisdn from user_details where user_id= ?";
+				res =  jdbcTemplateDigit.queryForList(req14, new Object[] {userId });							   
+				String telephone = null;
+				if(res!=null && res.size()!=0) {
+					telephone=""+res.get(0).get("msisdn");
+					if(telephone!=null && !telephone.equals(req.getTelephone()))
+						throw new Exception("le numero telephone dans cust account est difference dans digit workspce");
+				}
+				
+			
+			}
+			
+			
+			
+			
+			// add ref
+            String req13_2="select count(*) as cpt from cust_accounts where account_no = ?";
+			
+			res =  jdbcTemplateInstr.queryForList(req13_2, new Object[] {req.getCompte() });					
+			creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
+			System.out.println(creq1);
+			if(creq1>1)
+				throw new Exception("il existe plusieur enregistrement dans cust_account");
+			
+			
+			String req133="select user_id from cust_accounts where account_no = ?";
+			res =  jdbcTemplateInstr.queryForList(req133, new Object[] {req.getCompte() });			
+			if(res!=null && res.size()!=0) {
+				String userId2= ""+res.get(0).get("user_id");
+				
+				if(userId2!=null) {
+					String req14_1="select msisdn from user_details where user_id= ?";
+					res =  jdbcTemplateDigit.queryForList(req14_1, new Object[] {userId2 });		
+					if(res!=null && res.size()!=0) {
+	                    String telephone2 = ""+res.get(0).get("msisdn");
+						
+						if(telephone2!=null && !telephone2.equals(req.getTelephone()))
+							throw new Exception("le numero telephone dans cust account est difference dans digit workspce");
+			
+						
+					}
+	
+				
+					}
+					
+				}
+			
+			
+			// suppresion de l'utilisateur incomplet
+
+			// digital workspace
+			String req1_1="delete from USER_CREDENTIALS where user_id in (select user_id from user_details where msisdn = ? )";
+			String req2="delete from  auth_value where auth_ref_id in (select auth_ref_id from USER_CREDENTIALS where user_id in (select user_id from user_details where msisdn = ? ))";
+			// OK
+			String req3="delete from  host_mapping where user_id in (select user_id from user_details where msisdn = ?)";
+			String req4="delete from  host_utilities where user_id in (select user_id from user_details where msisdn = ?)";
+			String req5="delete from  mtx_socialmedia where user_id in (select user_id from user_details where msisdn = ?)";
+			String req6="delete from  request_money where requester_user_id in (select user_id from user_details where msisdn = ?)";
+			// OK
+			String req7="delete from  user_details where msisdn = ?";
+
+			// party
+			String req8="delete from  KYC_IMAGE_MAPPING where IMAGE_REF_ID in (select IMAGE_REF_ID from KYC_DETAILS where KYC_ID in (select kyc_id from PARTY_KYC_DETAILS where PARTY_ID in (select PARTY_ID from party where mobilenumber = ?)))";
+			String req9="delete from  KYC_DETAILS where KYC_ID in (select kyc_id from PARTY_KYC_DETAILS where PARTY_ID in (select PARTY_ID from party where mobilenumber = ? ))";
+			String req10="delete from  PARTY_KYC_DETAILS where PARTY_ID in (select PARTY_ID from party where mobilenumber = ?)";			
+			String req11="delete from  party where mobilenumber = ? ";
+			// instr
+			String req12="delete  from cust_accounts where account_no = ?";
+			String req13_3="delete  from cust_accounts where cifid = ? ";
+			
+
+			
+			
+			// digital work
+			try {
+				int e= jdbcTemplateDigit.update(req1_1, new Object[] {req.getTelephone() });
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			
+			try {
+				int e=jdbcTemplateDigit.update(req2, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			
+			try {
+				int e=jdbcTemplateDigit.update(req3, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			
+			try {
+				int e=jdbcTemplateDigit.update(req4, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			
+			try {
+				int e=jdbcTemplateDigit.update(req5, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			
+			try {
+				int e=jdbcTemplateDigit.update(req6, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			try {
+				int e=jdbcTemplateDigit.update(req7, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			// party
+			try {
+				int e=jdbcTemplateParty.update(req8, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			try {
+				int e=jdbcTemplateParty.update(req9, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			try {
+				int e=jdbcTemplateParty.update(req10, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			try {
+				int e=jdbcTemplateParty.update(req11, new Object[] {req.getTelephone() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+
+			// inst mngt
+			try {
+				int e=jdbcTemplateInstr.update(req12, new Object[] {req.getCompte() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}
+			try {
+				int e=jdbcTemplateInstr.update(req13_3, new Object[] {req.getCif() });	
+				System.out.println(e);
+			} catch (Exception e) {
+				throw new Exception("Erreur lors de la suppresion de la liaison incomplete"+e.getMessage());
+			}		
+	
+		}
+		
 		@Override
 		public BankilyResponse getVerificationMobile(RequestDto req) throws Exception {
-			
+	
 			List<Map<String,Object>>  res=null;
 			
 			boolean isIncomplet=false;
-			boolean isExiste=true;
+			boolean isExiste=false;
 			
+			int total=0;
 			long creq1=0;
 			
 			// digital workspace
@@ -2347,10 +2574,8 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					res =  jdbcTemplateDigit.queryForList(req3, new Object[] {req.getTelephone() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
-						isExiste=false;
-					else
-						isIncomplet=true;
+					if(creq1>0)
+						total++;
 					
 				/*	res =  jdbcTemplateDigit.queryForList(req4, new Object[] {req.getTelephone() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
@@ -2379,10 +2604,8 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					res =  jdbcTemplateDigit.queryForList(req7, new Object[] {req.getTelephone() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
-						isExiste=false;
-					else
-						isIncomplet=true;
+					if(creq1>0)
+						total++;
 					
 					
 					// party
@@ -2391,42 +2614,32 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					res =  jdbcTemplateParty.queryForList(req8, new Object[] {req.getTelephone() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
-						isExiste=false;
-					else
-						isIncomplet=true;
+					if(creq1>0)
+						total++;
 					
 					res =  jdbcTemplateParty.queryForList(req9, new Object[] {req.getTelephone() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
-						isExiste=false;
-					else
-						isIncomplet=true;
+					if(creq1>0)
+						total++;
 					
 					res =  jdbcTemplateParty.queryForList(req10, new Object[] {req.getTelephone() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
-						isExiste=false;
-					else
-						isIncomplet=true;
+					if(creq1>0)
+						total++;
 					
 					res =  jdbcTemplateParty.queryForList(req11, new Object[] {req.getTelephone() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
-						isExiste=false;
-					else
-						isIncomplet=true;
+					if(creq1>0)
+						total++;
 					
 					res =  jdbcTemplateParty.queryForList(req14, new Object[] {req.getNni() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
-						isExiste=false;
-					else
-						isIncomplet=true;
+					if(creq1>0)
+						total++;
 					
 					// intr mngt
 					System.out.println("*** intr mngt");
@@ -2434,27 +2647,83 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					res =  jdbcTemplateInstr.queryForList(req12, new Object[] { });		
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
-						isExiste=false;
-					else
-						isIncomplet=true;
+					if(creq1>0)
+						total++;
 					
 					res =  jdbcTemplateInstr.queryForList(req13, new Object[] {req.getCif() });					
 					creq1=	((BigDecimal) res.get(0).get("cpt")).longValueExact();
 					System.out.println(creq1);
-					if(creq1==0)
+					if(creq1>0)
+						total++;
+					
+					
+					if(total==9) {
+						// existe 
+						isExiste=true;
+						isIncomplet=false;
+						
+					}
+					else if(total==0) {
+						// non lié
 						isExiste=false;
-					else
+						isIncomplet=false;
+					}
+					else {
+						// incomplet
+						isExiste=false;
 						isIncomplet=true;
-					
-					
-			       if(isExiste==true)
-			    	   isIncomplet=false;
+					}
 				
-					
 					
 				
 			       BankilyResponse br= new BankilyResponse();
+			       br.setExiste(isExiste);
+			       br.setIncomplet(isIncomplet);
+			       
+			       return br;
 		}
+		
+
+		@Override
+		public ResponseDto getTrsRechargeMobilebyTrsIdIntervall(RequestDto req) throws Exception {
+			List<Map<String,Object>>  res=null;
+			
+			String sql ="select transfer_id  from mtx_transaction_header where transfer_status= 'TS' and service_type = 'RECHRGDIGI' and transfer_id >= ? and transfer_id <= ?";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {req.getTrsIdDebut(),req.getTrsIdFin()});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				List<String> list=MonetiqueCarteHelper.getTransactionIdMobile(res);
+				ResponseDto r=new ResponseDto();
+				r.setTransactionIds(list);
+				return r;
+		}
+
+
+
+		@Override
+		public BankilyResponse getNomMerchant(String trsId) throws Exception {
+	   List<Map<String,Object>>  res=null;
+	 		
+	       String trs= "'"+trsId+"'";
+	
+			String sql ="select user_name from users where  user_id in (select payee_user_id from mtx_transaction_header where transfer_id in ("+trs+"))";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateMobiq.queryForList(sql, new Object[] { });
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				  return MonetiqueCarteHelper.getNomMerchant(res);
+		}
+
 		
 }

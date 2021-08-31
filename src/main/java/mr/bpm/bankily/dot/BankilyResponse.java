@@ -28,8 +28,18 @@ public class BankilyResponse implements Serializable {
 	boolean isIncomplet ;
 	
 	
+	String nomMerchant;
 	
 	
+	
+	public String getNomMerchant() {
+		return nomMerchant;
+	}
+
+	public void setNomMerchant(String nomMerchant) {
+		this.nomMerchant = nomMerchant;
+	}
+
 	public boolean isExiste() {
 		return isExiste;
 	}

@@ -43,6 +43,17 @@ public class bankilyWSDigit {
 	ClientInfoService clientInfoService;
 	
 	
+	@RequestMapping(value="/getNomMerchant/{trsId}",method=RequestMethod.GET)
+    public @ResponseBody BankilyResponse  getNomMerchant( @PathVariable String trsId
+   		) throws Exception {
+		
+
+	
+		BankilyResponse res=monetiqueServiceDao.getNomMerchant(trsId);
+	 
+		return res;
+
+	}
 	
 	@RequestMapping(value="/getAllMerchant",method=RequestMethod.GET)
     public @ResponseBody ResponseMerchant  getAllMerchant(
@@ -407,6 +418,11 @@ public @ResponseBody BankilyResponse getVerificationMobile(@RequestBody RequestD
 	return res;
 }
 
+@RequestMapping(value="/deleteLiaisonIncompleteMobile",method=RequestMethod.POST)
+public @ResponseBody void deleteLiaisonIncompleteMobile(@RequestBody RequestDto req) throws Exception {  	
+	monetiqueServiceDao.deleteLiaisonIncompleteMobile(req);
+}
+
 
 @RequestMapping(value="/getUserIdByPhone",method=RequestMethod.POST)
 public @ResponseBody ResponseDto getUserIdByPhone(@RequestBody RequestDto req
@@ -437,6 +453,14 @@ public @ResponseBody BankilyResponse getUserIdByLogin(@PathVariable String login
 	BankilyResponse res=monetiqueServiceDao.getUserIdUserByLogin(login);
 	return res;
 }
+
+
+@RequestMapping(value="/getTrsRechargeMobilebyTrsIdIntervall",method=RequestMethod.POST)
+public @ResponseBody ResponseDto getTrsRechargeMobilebyTrsIdIntervall(@RequestBody RequestDto req
+	) throws Exception {	
+	return monetiqueServiceDao.getTrsRechargeMobilebyTrsIdIntervall(req);
+}
+
 
 
 }

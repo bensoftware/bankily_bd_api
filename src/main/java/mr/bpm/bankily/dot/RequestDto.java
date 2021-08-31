@@ -15,6 +15,7 @@ public class RequestDto  implements Serializable{
 	String telephone;
 	String nni;
 	String cif;
+	String compte;
 	List<String> comptes;
 	
 	String phone;
@@ -22,9 +23,28 @@ public class RequestDto  implements Serializable{
 	String userId;
 	Date beginDate;
 	Date endDate;
+	String trsIdDebut;
+	String trsIdFin;
 	
 	
-	
+	public String getCompte() {
+		return compte;
+	}
+	public void setCompte(String compte) {
+		this.compte = compte;
+	}
+	public String getTrsIdDebut() {
+		return trsIdDebut;
+	}
+	public void setTrsIdDebut(String trsIdDebut) {
+		this.trsIdDebut = trsIdDebut;
+	}
+	public String getTrsIdFin() {
+		return trsIdFin;
+	}
+	public void setTrsIdFin(String trsIdFin) {
+		this.trsIdFin = trsIdFin;
+	}
 	public List<String> getComptes() {
 		return comptes;
 	}

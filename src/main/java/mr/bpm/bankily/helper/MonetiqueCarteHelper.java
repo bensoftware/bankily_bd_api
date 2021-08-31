@@ -782,6 +782,25 @@ static public String getStatus( List<Map<String, Object>> params) {
 		
 	}
 
+static public List<String> getTransactionIdMobile( List<Map<String, Object>> params) {	
+	
+	if(params==null || params.size()==0)
+		return null;
+	
+	List<String> list=new ArrayList<>();
+
+	for(Map<String, Object> p :params) {
+		 try {
+		      String trsId=  ""+p.get("transfer_id");
+		      list.add(trsId);
+			} catch (Exception e) {
+				System.out.println(e);
+			}	 
+	}
+	return list;
+	
+}
+	
 
 static public List<TrsMobileBus> getListMobile( List<Map<String, Object>> params) {	
 	
@@ -1440,6 +1459,36 @@ static public BankilyResponse getVerificationMobile( List<Map<String, Object>> p
 	 return null;
 		
 	}
+
+
+
+
+
+static public BankilyResponse getNomMerchant( List<Map<String, Object>> params) throws Exception {	
+	
+	
+	if(params==null || params.size()==0)
+		return null;
+	
+	
+	for(Map<String, Object> p :params) {
+		
+		BankilyResponse m= new BankilyResponse();
+		
+		 try {
+			 m.setNomMerchant(""+p.get("user_name"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
+	   return m;
+
+	}
+	
+	 return null;
+		
+	}
+
 
 
 static public BankilyResponse getVerificationImal( List<Map<String, Object>> params) throws Exception {	
