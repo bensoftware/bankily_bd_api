@@ -2205,11 +2205,17 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 			List<Map<String,Object>>  res=null;
 
 			
-			String sql ="Select  c.branch_code, c.cif_no as CIF,c.id_no as NNI,c.tel as tel_mobile,c.long_name_eng as NOM,a.branch_code,i.tel as tel_imal " + 
+/*			String sql ="Select  c.branch_code, c.cif_no as CIF,c.id_no as NNI,c.tel as tel_mobile,c.long_name_eng as NOM,a.branch_code,i.tel as tel_imal " + 
 					"from imal.cif_address@imal i, imal.cif@imal c , imal.amf@imal a " + 
 					"where  c.cif_no = a.cif_sub_no " + 
 					"and  c.cif_no = i.cif_no " + 
 					"and c.cif_no= ?";
+			*/
+			String sql ="Select c.tel as tel_mobile,i.tel as tel_imal,i.mobile,i.home_tel,i.work_tel,i.other_tel,c.branch_code, c.cif_no as CIF,c.id_no as NNI,c.long_name_eng as NOM,a.branch_code " + 
+					"from imal.cif_address@imal i, imal.cif@imal c , imal.amf@imal a " + 
+					"        where  c.cif_no = a.cif_sub_no " + 
+					"        and  c.cif_no = i.cif_no " + 
+					"        and c.cif_no= ?";
 			   
 				System.out.println(sql);
 				try {

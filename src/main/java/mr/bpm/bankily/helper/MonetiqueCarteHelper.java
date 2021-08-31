@@ -1493,7 +1493,6 @@ static public BankilyResponse getNomMerchant( List<Map<String, Object>> params) 
 
 static public BankilyResponse getVerificationImal( List<Map<String, Object>> params) throws Exception {	
 	
-	
 	if(params==null || params.size()==0)
 		return null;
 	
@@ -1504,7 +1503,6 @@ static public BankilyResponse getVerificationImal( List<Map<String, Object>> par
 		
 		
 		String branch=null;
-		String tel= null;
 		
 		 try {
 
@@ -1530,26 +1528,37 @@ static public BankilyResponse getVerificationImal( List<Map<String, Object>> par
 		 
 		 if(branch==null)
 			 throw new Exception("branch_code=null, cif= "+m.getCif());
+		
 		 
-		 if(branch.equals("100")) { 
-			 try {
-
-				 tel=   ""+p.get("tel_mobile");
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-			
-			
-		 }else {
-			 try {
-
-			 tel=   ""+p.get("tel_imal");
+		 try {
+			 m.setTelephoneAgenceMobile(""+p.get("tel_mobile"));
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-		 }
 		 
-		 m.setTelephone(tel);
+		  try {
+				 m.setTelephoneAutreAgence(""+p.get("tel_imal"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		  try {
+				 m.setTelephoneAutre(""+p.get("other_tel"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		  try {
+				 m.setTelephoneTravail(""+p.get("work_tel"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		  try {
+				 m.setTelephoneHome(""+p.get("home_tel"));
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
 		 
 	   return m;
 

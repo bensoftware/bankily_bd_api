@@ -30,8 +30,63 @@ public class BankilyResponse implements Serializable {
 	
 	String nomMerchant;
 	
+	String telephoneAgenceMobile;
+	String telephoneAutreAgence;
+	String telephoneMobile;
+	String telephoneHome;
+	String telephoneTravail;
+	String telephoneAutre;
 	
 	
+	
+	public String getTelephoneAgenceMobile() {
+		return telephoneAgenceMobile;
+	}
+
+	public void setTelephoneAgenceMobile(String telephoneAgenceMobile) {
+		this.telephoneAgenceMobile = telephoneAgenceMobile;
+	}
+
+	public String getTelephoneAutreAgence() {
+		return telephoneAutreAgence;
+	}
+
+	public void setTelephoneAutreAgence(String telephoneAutreAgence) {
+		this.telephoneAutreAgence = telephoneAutreAgence;
+	}
+
+	public String getTelephoneMobile() {
+		return telephoneMobile;
+	}
+
+	public void setTelephoneMobile(String telephoneMobile) {
+		this.telephoneMobile = telephoneMobile;
+	}
+
+	public String getTelephoneHome() {
+		return telephoneHome;
+	}
+
+	public void setTelephoneHome(String telephoneHome) {
+		this.telephoneHome = telephoneHome;
+	}
+
+	public String getTelephoneTravail() {
+		return telephoneTravail;
+	}
+
+	public void setTelephoneTravail(String telephoneTravail) {
+		this.telephoneTravail = telephoneTravail;
+	}
+
+	public String getTelephoneAutre() {
+		return telephoneAutre;
+	}
+
+	public void setTelephoneAutre(String telephoneAutre) {
+		this.telephoneAutre = telephoneAutre;
+	}
+
 	public String getNomMerchant() {
 		return nomMerchant;
 	}
