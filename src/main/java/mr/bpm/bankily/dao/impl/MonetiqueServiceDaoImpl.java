@@ -26,6 +26,7 @@ import mr.bpm.bankily.dot.Merchant;
 import mr.bpm.bankily.dot.PaiementMerchant;
 import mr.bpm.bankily.dot.RequestDto;
 import mr.bpm.bankily.dot.ResponseDto;
+import mr.bpm.bankily.dot.TransImal;
 import mr.bpm.bankily.dot.TrsMobile;
 import mr.bpm.bankily.dot.TrsMobileBus;
 import mr.bpm.bankily.helper.MonetiqueCarteHelper;
@@ -2690,25 +2691,7 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 		}
 		
 
-		@Override
-		public ResponseDto getTrsRechargeMobilebyTrsIdIntervall(RequestDto req) throws Exception {
-			List<Map<String,Object>>  res=null;
-			
-			String sql ="select transfer_id  from mtx_transaction_header where transfer_status= 'TS' and service_type = 'RECHRGDIGI' and transfer_id >= ? and transfer_id <= ?";
-			   
-				System.out.println(sql);
-				try {
-					res =  jdbcTemplateBus.queryForList(sql, new Object[] {req.getTrsIdDebut(),req.getTrsIdFin()});
 
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					//status = "ERREUR";
-				}
-				List<String> list=MonetiqueCarteHelper.getTransactionIdMobile(res);
-				ResponseDto r=new ResponseDto();
-				r.setTransactionIds(list);
-				return r;
-		}
 
 
 
@@ -2729,6 +2712,171 @@ private List<ClientStatistique> getUserIdByNniFragement(List<ClientStatistique> 
 					//status = "ERREUR";
 				}
 				  return MonetiqueCarteHelper.getNomMerchant(res);
+		}
+
+
+		@Override
+		public ResponseDto getTrsRechargeMobilebyTrsIdIntervall(RequestDto req) throws Exception {
+			List<Map<String,Object>>  res=null;
+			
+			String sql ="select transfer_status,transfer_id,(transfer_value/100) as montant  from mtx_transaction_header where transfer_status in ('TS','TA','TF') and service_type = 'RECHRGDIGI' and transfer_id >= ? and transfer_id <= ?";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {req.getTrsIdDebut(),req.getTrsIdFin()});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				List<TransImal> list=MonetiqueCarteHelper.getTransactionIdMobile(res);
+				ResponseDto r=new ResponseDto();
+				r.setTransactionIds(list);
+				return r;
+		}
+		
+
+		@Override
+		public ResponseDto getTrsSndeMobilebyTrsIdIntervall(RequestDto req) throws Exception {
+            List<Map<String,Object>>  res=null;
+			
+			String sql ="select transfer_status,transfer_id,(transfer_value/100) as montant  from mtx_transaction_header where transfer_status in ('TS','TA','TF') and service_type = 'BILLPAYDIG' and payee_user_id = 'MR19070815216560' and transfer_id >= ? and transfer_id <= ?";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {req.getTrsIdDebut(),req.getTrsIdFin()});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				List<TransImal> list=MonetiqueCarteHelper.getTransactionIdMobile(res);
+				ResponseDto r=new ResponseDto();
+				r.setTransactionIds(list);
+				return r;
+		}
+
+
+
+		@Override
+		public ResponseDto getTrsSomelecMobilebyTrsIdIntervall(RequestDto req) throws Exception {
+List<Map<String,Object>>  res=null;
+			
+			String sql ="select transfer_status,transfer_id,(transfer_value/100) as montant  from mtx_transaction_header where transfer_status in ('TS','TA','TF') and service_type = 'BILLPAYDIG' and payee_user_id = 'MR19070815206558' and transfer_id >= ? and transfer_id <= ?";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {req.getTrsIdDebut(),req.getTrsIdFin()});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				List<TransImal> list=MonetiqueCarteHelper.getTransactionIdMobile(res);
+				ResponseDto r=new ResponseDto();
+				r.setTransactionIds(list);
+				return r;
+		}
+
+
+
+		@Override
+		public ResponseDto getTrsMoovMauritelMobilebyTrsIdIntervall(RequestDto req) throws Exception {
+List<Map<String,Object>>  res=null;
+			
+			String sql ="select transfer_status,transfer_id ,(transfer_value/100) as montant from mtx_transaction_header where transfer_status in ('TS','TA','TF') and service_type = 'BILLPAYDIG' and payee_user_id = 'MR210125183820831' and transfer_id >= ? and transfer_id <= ?";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {req.getTrsIdDebut(),req.getTrsIdFin()});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				List<TransImal> list=MonetiqueCarteHelper.getTransactionIdMobile(res);
+				ResponseDto r=new ResponseDto();
+				r.setTransactionIds(list);
+				return r;
+		}
+
+
+
+
+
+		@Override
+		public TrsMobile getLastTrsRechargeMobile() throws Exception {
+	        
+			List<Map<String,Object>>  res=null;
+				
+			String sql ="select transfer_id,transfer_on  from mtx_transaction_header where transfer_status= 'TS' and service_type = 'RECHRGDIGI' order by transfer_on desc FETCH NEXT 1 ROWS ONLY ";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				return MonetiqueCarteHelper.getTrsIdMobile(res);
+		}
+
+
+
+		@Override
+		public TrsMobile getLastTrsSndeMobile() throws Exception {
+			List<Map<String,Object>>  res=null;
+			
+			String sql ="select transfer_id,transfer_on  from mtx_transaction_header where transfer_status= 'TS' and service_type = 'BILLPAYDIG' and payee_user_id = 'MR19070815216560' order by transfer_on desc FETCH NEXT 1 ROWS ONLY ";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				return MonetiqueCarteHelper.getTrsIdMobile(res);
+		}
+
+
+
+		@Override
+		public TrsMobile getLastTrsSomelecMobile() throws Exception {
+List<Map<String,Object>>  res=null;
+			
+			String sql ="select transfer_id,transfer_on  from mtx_transaction_header where transfer_status= 'TS' and service_type = 'BILLPAYDIG' and payee_user_id = 'MR19070815206558' order by transfer_on desc FETCH NEXT 1 ROWS ONLY ";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				return MonetiqueCarteHelper.getTrsIdMobile(res);
+		}
+
+
+
+		@Override
+		public TrsMobile getLastTrsMoovMauritelMobile() throws Exception {
+List<Map<String,Object>>  res=null;
+			
+			String sql ="select transfer_id,transfer_on  from mtx_transaction_header where transfer_status= 'TS' and service_type = 'BILLPAYDIG' and payee_user_id = 'MR210125183820831' and payee_user_id = 'MR19070815216560' order by transfer_on desc FETCH NEXT 1 ROWS ONLY ";
+			   
+				System.out.println(sql);
+				try {
+					res =  jdbcTemplateBus.queryForList(sql, new Object[] {});
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//status = "ERREUR";
+				}
+				return MonetiqueCarteHelper.getTrsIdMobile(res);
 		}
 
 		

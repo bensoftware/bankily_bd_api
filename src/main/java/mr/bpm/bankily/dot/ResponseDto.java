@@ -10,47 +10,54 @@ public class ResponseDto  implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	String userId;
-	int totalTrs;
-	String kycStatus;
-	int status;	
-	List<String> transactionIds;
-	
-	public List<String> getTransactionIds() {
-		return transactionIds;
+
+	List<TransImal> transactionIds;
+    String userId;
+    int totalTrs;
+    String trsIdMobile;
+    int status;
+    
+    
+	public String getTrsIdMobile() {
+		return trsIdMobile;
 	}
-	public void setTransactionIds(List<String> transactionIds) {
-		this.transactionIds = transactionIds;
+
+	public void setTrsIdMobile(String trsIdMobile) {
+		this.trsIdMobile = trsIdMobile;
 	}
+
 	public int getStatus() {
 		return status;
 	}
+
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public List<TransImal> getTransactionIds() {
+		return transactionIds;
+	}
+
+	public void setTransactionIds(List<TransImal> transactionIds) {
+		this.transactionIds = transactionIds;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	public int getTotalTrs() {
 		return totalTrs;
 	}
+
 	public void setTotalTrs(int totalTrs) {
 		this.totalTrs = totalTrs;
 	}
-	public String getKycStatus() {
-		return kycStatus;
-	}
-	public void setKycStatus(String kycStatus) {
-		this.kycStatus = kycStatus;
-	}
-	
-	
-	
+
 	
 	
 }

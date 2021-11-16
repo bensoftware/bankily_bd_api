@@ -461,6 +461,45 @@ public @ResponseBody ResponseDto getTrsRechargeMobilebyTrsIdIntervall(@RequestBo
 	return monetiqueServiceDao.getTrsRechargeMobilebyTrsIdIntervall(req);
 }
 
+@RequestMapping(value="/getTrsSndeMobilebyTrsIdIntervall",method=RequestMethod.POST)
+public @ResponseBody ResponseDto getTrsSndeMobilebyTrsIdIntervall(@RequestBody RequestDto req
+	) throws Exception {	
+	return monetiqueServiceDao.getTrsSndeMobilebyTrsIdIntervall(req);
+}
+@RequestMapping(value="/getTrsSomelecMobilebyTrsIdIntervall",method=RequestMethod.POST)
+public @ResponseBody ResponseDto getTrsSomelecMobilebyTrsIdIntervall(@RequestBody RequestDto req
+	) throws Exception {	
+	return monetiqueServiceDao.getTrsSomelecMobilebyTrsIdIntervall(req);
+}
+@RequestMapping(value="/getTrsMoovMauritelMobilebyTrsIdIntervall",method=RequestMethod.POST)
+public @ResponseBody ResponseDto getTrsMoovMauritelMobilebyTrsIdIntervall(@RequestBody RequestDto req
+	) throws Exception {	
+	return monetiqueServiceDao.getTrsMoovMauritelMobilebyTrsIdIntervall(req);
+}
 
+
+@RequestMapping(value="/getLastTrsRechargeMobile",method=RequestMethod.GET)
+public @ResponseBody TrsMobile getLastTrsRechargeMobile(
+	) throws Exception {	
+	return monetiqueServiceDao.getLastTrsRechargeMobile();
+}
+
+@RequestMapping(value="/getLastTrsSndeMobile",method=RequestMethod.GET)
+public @ResponseBody TrsMobile getLastTrsSndeMobile(
+	) throws Exception {	
+	return monetiqueServiceDao.getLastTrsSndeMobile();
+}
+
+@RequestMapping(value="/getLastTrsSomelecMobile",method=RequestMethod.GET)
+public @ResponseBody TrsMobile getLastTrsSomelecMobile(
+	) throws Exception {	
+	return monetiqueServiceDao.getLastTrsSomelecMobile();
+}
+
+@RequestMapping(value="/getLastTrsMoovMauritelMobile",method=RequestMethod.GET)
+public @ResponseBody TrsMobile getLastTrsMoovMauritelMobile(
+	) throws Exception {	
+	return monetiqueServiceDao.getLastTrsMoovMauritelMobile();
+}
 
 }

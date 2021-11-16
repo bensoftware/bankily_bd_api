@@ -311,7 +311,7 @@ static public ResponseDto getKycStatus( List<Map<String, Object>> params) {
 		try {
 			 
 			String kyc=""+p.get("KYC_STATUS");
-			res.setKycStatus(kyc);
+//			res.setKycStatus(kyc);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -782,22 +782,66 @@ static public String getStatus( List<Map<String, Object>> params) {
 		
 	}
 
-static public List<String> getTransactionIdMobile( List<Map<String, Object>> params) {	
+static public List<TransImal> getTransactionIdMobile( List<Map<String, Object>> params) {	
 	
 	if(params==null || params.size()==0)
 		return null;
 	
-	List<String> list=new ArrayList<>();
+	List<TransImal> list=new ArrayList<>();
+
+	for(Map<String, Object> p :params) {
+		TransImal t=new TransImal();
+		 try {
+		      String trsId=  ""+p.get("transfer_id");
+		      t.setIdTrans(trsId);
+			} catch (Exception e) {
+				System.out.println(e);
+			}	 
+		 try {
+		      double montant= ((BigDecimal)p.get("montant")).doubleValue();
+		      t.setMontant(montant);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 
+		 try {
+		      String status=  ""+p.get("transfer_status");
+		      t.setStatus(status);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		 list.add(t);
+		 
+	}
+	return list;
+	
+}
+
+static public TrsMobile getTrsIdMobile( List<Map<String, Object>> params) {	
+	
+	if(params==null || params.size()==0)
+		return null;
+	
+	TrsMobile res=new TrsMobile();
 
 	for(Map<String, Object> p :params) {
 		 try {
 		      String trsId=  ""+p.get("transfer_id");
-		      list.add(trsId);
+		      res.setTransactionId(trsId);
 			} catch (Exception e) {
 				System.out.println(e);
 			}	 
+		 
+		 try {
+				Date date = (Date)p.get("TRANSFER_ON");
+				res.setDate(date);
+			} catch (Exception e) {
+				System.out.println(e);
+			}	 
+		 
+		 return res;
 	}
-	return list;
+	return null;
 	
 }
 	

@@ -121,5 +121,15 @@ public interface MonetiqueServiceDao {
 	public BankilyResponse getNomMerchant(String trsId) throws Exception;
 
 	public ResponseDto getTrsRechargeMobilebyTrsIdIntervall(RequestDto req) throws Exception;
+	public ResponseDto getTrsSndeMobilebyTrsIdIntervall(RequestDto req) throws Exception;
+	public ResponseDto getTrsSomelecMobilebyTrsIdIntervall(RequestDto req) throws Exception;
+	public ResponseDto getTrsMoovMauritelMobilebyTrsIdIntervall(RequestDto req) throws Exception;
 
+	public TrsMobile getLastTrsRechargeMobile() throws Exception;
+	public TrsMobile getLastTrsSndeMobile() throws Exception;
+	public TrsMobile getLastTrsSomelecMobile() throws Exception;
+	public TrsMobile getLastTrsMoovMauritelMobile() throws Exception;
+
+	
+	
 }

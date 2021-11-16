@@ -16,8 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mr.bpm.bankily.dao.MonetiqueServiceDao;
 import mr.bpm.bankily.dot.BankilyResponse;
-import mr.bpm.bankily.dot.ListTrsMobile;
-import mr.bpm.bankily.dot.TrsMobileBus;
 import mr.bpm.bankily.service.MajBankilyService;
 
 
